@@ -11,8 +11,9 @@ TEST_JSON = Path(r"C:\Users\sqfky\Desktop\Communing with Faye.json")
 
 Character = namedtuple("Character", "name color speaker")
 DialogueFragment = namedtuple(
-    "DialogueFragment", "speaker scene_direction diag_id prev_id next_id"
+    "DialogueFragment", "speaker text stage_directions diag_id links"
 )
+
 
 @dataclass
 class Label:
@@ -22,7 +23,10 @@ class Label:
     links: list[str]
     fragments: list[DialogueFragment] = field(default_factory=list)
 
-def convert_characters(raw_chars: list[dict], target_file: Path = None) -> List[Character]:
+
+def convert_characters(
+    raw_chars: list[dict], target_file: Path = None
+) -> List[Character]:
     if target_file is None:
         target_file = Path(r".\characters.rpy")
     chars = [process_char(raw_char) for raw_char in raw_chars]
@@ -35,22 +39,44 @@ def convert_characters(raw_chars: list[dict], target_file: Path = None) -> List[
     return chars
 
 
-def convert_flow(raw_dialogues: list[dict], raw_fragments: list[dict], chars, target_folder: Path = None) -> None:
-    # Find the Dialogues to form the labels and connections between them
+def convert_flow(
+    raw_dialogues: list[dict],
+    raw_fragments: list[dict],
+    chars,
+    target_folder: Path = None,
+) -> None:
+    def get_links(pin_list: list[dict]) -> list[str]:
+        try:
+            return [link["Connections"][0]["Target"] for link in pin_list]
+        except KeyError:
+            return []
+
+    # Forming labels first to get the higher order connections done
     def form_label(raw_dialogue: dict) -> Label:
         props = raw_dialogue["Properties"]
-        try:
-            links = [link["Connections"][0]["Target"] for link in props["OutputPins"]]
-        except KeyError:
-            links = []
+        links = get_links(props["OutputPins"])
         return Label(props["Text"], props["DisplayName"], props["Id"], links)
 
-    labels = [
-        form_label(d) for d in raw_dialogues
-    ]
+    labels = {d["Properties"]["Id"]: form_label(d) for d in raw_dialogues}
 
-    # Find the DialogueFraments to find the actual text
-    pass
+    # Forming DialogueFraments to put together the actual scenario
+    # "DialogueFragment", "speaker text stage_direction diag_id prev_id next_id"
+    def form_frag(raw_fragment: dict) -> DialogueFragment:
+        props = raw_fragment["Properties"]
+        return DialogueFragment(
+            props["Speaker"],
+            props["Text"],
+            props["StageDirections"],
+            props["Id"],
+            get_links(props["OutputPins"]),
+        )
+
+    for raw_fragment in raw_fragments:
+        labels[raw_fragment["Properties"]["Parent"]].fragments.append(
+            form_frag(raw_fragment)
+        )
+
+    # ToDo: Writing the renpy files
 
 
 def fetch_parts(file: Path) -> (list, list, list):
@@ -59,8 +85,12 @@ def fetch_parts(file: Path) -> (list, list, list):
         chars = [
             c for c in dump["Packages"][0]["Models"] if c["Type"] == CHARACTER_ENTITY
         ]
-        dialogues = [d for d in dump["Packages"][0]["Models"] if d["Type"] == "Dialogue"]
-        diag_fragments = [d for d in dump["Packages"][0]["Models"] if d["Type"] == "DialogueFragment"]
+        dialogues = [
+            d for d in dump["Packages"][0]["Models"] if d["Type"] == "Dialogue"
+        ]
+        diag_fragments = [
+            d for d in dump["Packages"][0]["Models"] if d["Type"] == "DialogueFragment"
+        ]
 
     return chars, dialogues, diag_fragments
 
