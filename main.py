@@ -35,7 +35,7 @@ def convert_characters(raw_chars: list, target_file: Path = None) -> List[Charac
     return chars
 
 
-def convert_flow(raw_dialogues: list, raw_fragments: list, chars, target_file: Path = None) -> None:
+def convert_flow(raw_dialogues: list, raw_fragments: list, chars, target_folder: Path = None) -> None:
     # Find the Dialogues to form the labels and connections between them
     def form_label(raw_dialogue: dict) -> Label:
         props = raw_dialogue["Properties"]
