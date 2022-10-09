@@ -7,7 +7,7 @@ from pathlib import Path
 CHARACTER_ENTITY = "Ren_py_character"
 TEST_JSON = Path(r"C:\Users\sqfky\Desktop\Communing with Faye.json")
 
-Character = namedtuple("Charater", "name color")
+Character = namedtuple("Charater", "name color speaker")
 
 
 def convert_characters(raw_chars: list, target_file: Path = None) -> None:
@@ -38,12 +38,13 @@ def fetch_parts(file: Path) -> (list, list):
 
 def process_char(raw_char: dict) -> Character:
     char_name = raw_char["Properties"]["DisplayName"]
+    char_speaker = raw_char["Properties"]["Id"]
     try:
         char_color = raw_char["Template"]["Ren_py_character_properties"]["Color"]
     except IndexError:
         # No color defined, defaulting to black
         char_color = "000000"
-    return Character(char_name, char_color)
+    return Character(char_name, char_color, char_speaker)
 
 
 def main(json_file):
