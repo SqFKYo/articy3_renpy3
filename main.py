@@ -1,26 +1,51 @@
 # -*- coding: utf-8 -*-
 
+from collections import namedtuple
+import json
 from pathlib import Path
 
+CHARACTER_ENTITY = "Ren_py_character"
 TEST_JSON = Path(r"C:\Users\sqfky\Desktop\Communing with Faye.json")
 
+Character = namedtuple("Charater", "name color")
 
-def convert_characters(chars_json: dict, target_file: Path = None) -> None:
+
+def convert_characters(raw_chars: list, target_file: Path = None) -> None:
+    if target_file is None:
+        target_file = Path(".\characters.rpy")
+    with open(target_file, "w", encoding="utf-8") as f:
+        f.write("# Declarations for game characters and their important values\n\n")
+        for raw_char in raw_chars:
+            char = process_char(raw_char)
+            f.write(
+                f'define {char.name.lower()} = Character("{char.name}", color="{char.color}")\n'
+            )
+
+
+def convert_flow(raw_fragments: list, target_file: Path = None) -> None:
     ...
 
 
-def convert_fragments(fragments_json: dict, target_file: Path = None) -> None:
-    ...
+def fetch_parts(file: Path) -> (list, list):
+    with open(file, "r") as f:
+        dump = json.load(f)
+        chars = [
+            c for c in dump["Packages"][0]["Models"] if c["Type"] == CHARACTER_ENTITY
+        ]
+
+    return chars, []
 
 
-def fetch_parts(file: Path) -> (dict, dict):
-    ...
+def process_char(raw_char: dict) -> Character:
+    char_name = raw_char["Properties"]["DisplayName"]
+    char_color = raw_char["Template"]["Ren_py_character_properties"]["Color"]
+    return Character(char_name, char_color)
 
 
 def main(json_file):
-    chars, fragments = fetch_parts(file=json_file)
-    convert_characters(chars)
-    convert_fragments(fragments)
+    raw_chars, raw_fragments = fetch_parts(file=json_file)
+    convert_characters(raw_chars)
+    convert_flow(raw_fragments)
 
 
 if __name__ == "__main__":
