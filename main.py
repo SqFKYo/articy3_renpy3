@@ -12,7 +12,7 @@ Character = namedtuple("Charater", "name color")
 
 def convert_characters(raw_chars: list, target_file: Path = None) -> None:
     if target_file is None:
-        target_file = Path(".\characters.rpy")
+        target_file = Path(r".\characters.rpy")
     with open(target_file, "w", encoding="utf-8") as f:
         f.write("# Declarations for game characters and their important values\n\n")
         for raw_char in raw_chars:
