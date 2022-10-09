@@ -1,16 +1,26 @@
 # -*- coding: utf-8 -*-
 
 from collections import namedtuple
+from dataclasses import dataclass, field
 import json
 from pathlib import Path
 from typing import List
 
 CHARACTER_ENTITY = "Ren_py_character"
-DIALOGUES = ["Dialogue", "DialogueFrament"]
 TEST_JSON = Path(r"C:\Users\sqfky\Desktop\Communing with Faye.json")
 
-Character = namedtuple("Charater", "name color speaker")
+Character = namedtuple("Character", "name color speaker")
+DialogueFragment = namedtuple(
+    "DialogueFragment", "speaker scene_direction diag_id prev_id next_id"
+)
 
+@dataclass
+class Label:
+    target_file: str
+    label_name: str
+    label_id: str
+    links: list[str]
+    fragments: list[DialogueFragment] = field(default_factory=list)
 
 def convert_characters(raw_chars: list, target_file: Path = None) -> List[Character]:
     if target_file is None:
@@ -25,29 +35,34 @@ def convert_characters(raw_chars: list, target_file: Path = None) -> List[Charac
     return chars
 
 
-def convert_flow(raw_dialogues: list, chars, target_file: Path = None) -> None:
-    # Fetch the Dialogues with .rpy DisplayName to find our filenames
-    pass
-    # target_files = [TargetFile(file_name, file_id) ]
+def convert_flow(raw_dialogues: list, raw_fragments: list, chars, target_file: Path = None) -> None:
+    # Find the Dialogues to form the labels and connections between them
+    def form_label(raw_dialogue: dict) -> Label:
+        props = raw_dialogue["Properties"]
+        try:
+            links = [link["Connections"][0]["Target"] for link in props["OutputPins"]]
+        except KeyError:
+            links = []
+        return Label(props["Text"], props["DisplayName"], props["Id"], links)
 
-    # Find the Dialogues without .rpy DisplayName to find the labels
-    pass
+    labels = [
+        form_label(d) for d in raw_dialogues
+    ]
 
     # Find the DialogueFraments to find the actual text
     pass
 
 
-def fetch_parts(file: Path) -> (list, list):
+def fetch_parts(file: Path) -> (list, list, list):
     with open(file, "r") as f:
         dump = json.load(f)
         chars = [
             c for c in dump["Packages"][0]["Models"] if c["Type"] == CHARACTER_ENTITY
         ]
-        dialogues = [
-            d for d in dump["Packages"][0]["Models"] if d["Type"] in DIALOGUES
-        ]
+        dialogues = [d for d in dump["Packages"][0]["Models"] if d["Type"] == "Dialogue"]
+        diag_fragments = [d for d in dump["Packages"][0]["Models"] if d["Type"] == "DialogueFragment"]
 
-    return chars, dialogues
+    return chars, dialogues, diag_fragments
 
 
 def process_char(raw_char: dict) -> Character:
@@ -62,9 +77,9 @@ def process_char(raw_char: dict) -> Character:
 
 
 def main(json_file):
-    raw_chars, raw_dialogues = fetch_parts(file=json_file)
+    raw_chars, raw_dialogues, raw_fragments = fetch_parts(file=json_file)
     chars = convert_characters(raw_chars)
-    convert_flow(raw_dialogues, chars)
+    convert_flow(raw_dialogues, raw_fragments, chars)
 
 
 if __name__ == "__main__":

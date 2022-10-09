@@ -4,12 +4,8 @@ articy:draft 3 to Ren'Py 3 converter
 ## Flow conversion
 
 Current the tool assumes the following structure:
-1. Main dialogue level named according to the target filenames.
-2. First sublevel of dialogues corresponding to labels
-3. Dialogue fragments corresponding to texts
-
-Any scene commands etc. are assumed to be in "stage direction" 
-portion of the dialogue frament.
+1. Main dialogue level named according to the labels. Target filenames are in text field.
+2. Dialogue fragments have speakers with lines. Any scene commands etc. are assumed to be in "stage direction" portion of the dialogue frament.
 
 
 
