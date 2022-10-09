@@ -22,7 +22,7 @@ class Label:
     links: list[str]
     fragments: list[DialogueFragment] = field(default_factory=list)
 
-def convert_characters(raw_chars: list, target_file: Path = None) -> List[Character]:
+def convert_characters(raw_chars: list[dict], target_file: Path = None) -> List[Character]:
     if target_file is None:
         target_file = Path(r".\characters.rpy")
     chars = [process_char(raw_char) for raw_char in raw_chars]
@@ -35,7 +35,7 @@ def convert_characters(raw_chars: list, target_file: Path = None) -> List[Charac
     return chars
 
 
-def convert_flow(raw_dialogues: list, raw_fragments: list, chars, target_folder: Path = None) -> None:
+def convert_flow(raw_dialogues: list[dict], raw_fragments: list[dict], chars, target_folder: Path = None) -> None:
     # Find the Dialogues to form the labels and connections between them
     def form_label(raw_dialogue: dict) -> Label:
         props = raw_dialogue["Properties"]
