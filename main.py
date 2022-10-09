@@ -38,7 +38,11 @@ def fetch_parts(file: Path) -> (list, list):
 
 def process_char(raw_char: dict) -> Character:
     char_name = raw_char["Properties"]["DisplayName"]
-    char_color = raw_char["Template"]["Ren_py_character_properties"]["Color"]
+    try:
+        char_color = raw_char["Template"]["Ren_py_character_properties"]["Color"]
+    except IndexError:
+        # No color defined, defaulting to black
+        char_color = "000000"
     return Character(char_name, char_color)
 
 
