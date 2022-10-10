@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
 
-from collections import namedtuple
+from collections import defaultdict, namedtuple
 from dataclasses import dataclass, field
 import json
 from pathlib import Path
-from typing import List
+from typing import Iterator
 
 CHARACTER_ENTITY = "Ren_py_character"
 TEST_JSON = Path(r"C:\Users\sqfky\Desktop\Communing with Faye.json")
@@ -23,10 +23,23 @@ class Label:
     links: list[str]
     fragments: list[DialogueFragment] = field(default_factory=list)
 
+    def __iter__(self) -> Iterator[DialogueFragment]:
+        # Currently assuming the order is automatically correct
+        return iter(self.fragments)
+
 
 def convert_characters(
     raw_chars: list[dict], target_file: Path = None
-) -> List[Character]:
+) -> dict[str: str]:
+    def process_char(raw_char: dict) -> Character:
+        char_name = raw_char["Properties"]["DisplayName"]
+        char_speaker = raw_char["Properties"]["Id"]
+        try:
+            char_color = raw_char["Template"]["Ren_py_character_properties"]["Color"]
+        except IndexError:
+            # No color defined, defaulting to black
+            char_color = "000000"
+        return Character(char_name, char_color, char_speaker)
     if target_file is None:
         target_file = Path(r".\characters.rpy")
     chars = [process_char(raw_char) for raw_char in raw_chars]
@@ -36,13 +49,13 @@ def convert_characters(
             f.write(
                 f'define {char.name.lower()} = Character("{char.name}", color="{char.color}")\n'
             )
-    return chars
+    return {char.speaker: char.name for char in chars}
 
 
 def convert_flow(
     raw_dialogues: list[dict],
     raw_fragments: list[dict],
-    chars,
+    chars: dict[str: str],
     target_folder: Path = None,
 ) -> None:
     def get_links(pin_list: list[dict]) -> list[str]:
@@ -60,7 +73,6 @@ def convert_flow(
     labels = {d["Properties"]["Id"]: form_label(d) for d in raw_dialogues}
 
     # Forming DialogueFraments to put together the actual scenario
-    # "DialogueFragment", "speaker text stage_direction diag_id prev_id next_id"
     def form_frag(raw_fragment: dict) -> DialogueFragment:
         props = raw_fragment["Properties"]
         return DialogueFragment(
@@ -71,13 +83,35 @@ def convert_flow(
             get_links(props["OutputPins"]),
         )
 
+    # Add DialogueFragments to correct Dialogues
     for raw_fragment in raw_fragments:
         labels[raw_fragment["Properties"]["Parent"]].fragments.append(
             form_frag(raw_fragment)
         )
 
-    # ToDo: Writing the renpy files
+    # Sort Dialogues by output files
+    label_files = defaultdict(list)
+    for label in labels.values():
+        label_files[label.target_file].append(label)
 
+    if target_folder is None:
+        target_folder = Path(".")
+    for file, writable_labels in label_files.items():
+        with open(target_folder.joinpath(file), 'w', encoding='utf-8') as f:
+            for i, label in enumerate(writable_labels):
+                if i > 0:
+                    # Extra spacing between the labels
+                    f.write('\n')
+                f.write(f"label {label.label_name}:\n")
+                for fragment in label.fragments:
+                    if fragment.stage_directions:
+                        f.write(f"\t{fragment.stage_directions}\n")
+                    f.write(f'\t{chars[fragment.speaker].lower()} "{fragment.text}"\n')
+                try:
+                    f.write(f"\tjump {labels[label.links[0]].label_name}\n")
+                except IndexError:
+                    # Last fragment of the story
+                    pass
 
 def fetch_parts(file: Path) -> (list, list, list):
     with open(file, "r") as f:
@@ -93,17 +127,6 @@ def fetch_parts(file: Path) -> (list, list, list):
         ]
 
     return chars, dialogues, diag_fragments
-
-
-def process_char(raw_char: dict) -> Character:
-    char_name = raw_char["Properties"]["DisplayName"]
-    char_speaker = raw_char["Properties"]["Id"]
-    try:
-        char_color = raw_char["Template"]["Ren_py_character_properties"]["Color"]
-    except IndexError:
-        # No color defined, defaulting to black
-        char_color = "000000"
-    return Character(char_name, char_color, char_speaker)
 
 
 def main(json_file):
