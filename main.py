@@ -110,7 +110,7 @@ def convert_flow(
                     # Extra spacing between the labels
                     f.write("\n")
                 f.write(f"label {label.label_name}:\n")
-                for fragment in label.fragments:
+                for fragment in sort_by_links(label.fragments):
                     if fragment.stage_directions:
                         f.write(f"    {fragment.stage_directions}\n")
                     f.write(
