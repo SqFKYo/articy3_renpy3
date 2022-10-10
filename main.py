@@ -24,8 +24,6 @@ class Label:
     fragments: list[DialogueFragment] = field(default_factory=list)
 
     def __iter__(self) -> Iterator[DialogueFragment]:
-        # Currently assuming the order is automatically correct
-        # ToDo: Sort the fragments
         return iter(self.fragments)
 
 
