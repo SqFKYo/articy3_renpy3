@@ -30,7 +30,7 @@ class Label:
 
 def convert_characters(
     raw_chars: list[dict], target_file: Path = None
-) -> dict[str: str]:
+) -> dict[str:str]:
     def process_char(raw_char: dict) -> Character:
         char_name = raw_char["Properties"]["DisplayName"]
         char_speaker = raw_char["Properties"]["Id"]
@@ -40,6 +40,7 @@ def convert_characters(
             # No color defined, defaulting to black
             char_color = "000000"
         return Character(char_name, char_color, char_speaker)
+
     if target_file is None:
         target_file = Path(r".\characters.rpy")
     chars = [process_char(raw_char) for raw_char in raw_chars]
@@ -55,7 +56,7 @@ def convert_characters(
 def convert_flow(
     raw_dialogues: list[dict],
     raw_fragments: list[dict],
-    chars: dict[str: str],
+    chars: dict[str:str],
     target_folder: Path = None,
 ) -> None:
     def get_links(pin_list: list[dict]) -> list[str]:
@@ -97,11 +98,11 @@ def convert_flow(
     if target_folder is None:
         target_folder = Path(".")
     for file, writable_labels in label_files.items():
-        with open(target_folder.joinpath(file), 'w', encoding='utf-8') as f:
+        with open(target_folder.joinpath(file), "w", encoding="utf-8") as f:
             for i, label in enumerate(writable_labels):
                 if i > 0:
                     # Extra spacing between the labels
-                    f.write('\n')
+                    f.write("\n")
                 f.write(f"label {label.label_name}:\n")
                 for fragment in label.fragments:
                     if fragment.stage_directions:
@@ -112,6 +113,7 @@ def convert_flow(
                 except IndexError:
                     # Last fragment of the story
                     pass
+
 
 def fetch_parts(file: Path) -> (list, list, list):
     with open(file, "r") as f:
