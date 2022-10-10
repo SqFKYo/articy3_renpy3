@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from collections import defaultdict, namedtuple
+from collections import defaultdict, namedtuple, deque
 from dataclasses import dataclass, field
 import json
 from pathlib import Path
@@ -97,9 +97,25 @@ def convert_flow(
         label_files[label.target_file].append(label)
 
     def sort_by_links(linked_objs: List[Union[Label, DialogueFragment]]) -> List[Union[Label, DialogueFragment]]:
-        # ToDo Sort list by the order how the objects are linked
-        # Assumes all the objects are linked at least with a single link
-        return sorted(linked_objs)
+        # If length is under 2, no sorting is needed
+        if len(linked_objs) < 2:
+            return linked_objs
+        # Assumes all the objects are linked with a single link to form a queue
+        sorted_queue = deque([linked_objs.pop()])
+        # Let's find previous and next objects for the queue we already have
+        while len(linked_objs) > 0:
+            first = sorted_queue[0]
+            last = sorted_queue[-1]
+            for possible in linked_objs:
+                if first.obj_id in possible.links:
+                    sorted_queue.appendleft(possible)
+                    linked_objs.remove(possible)
+                    break
+                elif possible.obj_id in last.links:
+                    sorted_queue.append(possible)
+                    linked_objs.remove(possible)
+                    break
+        return list(sorted_queue)
 
     if target_folder is None:
         target_folder = Path(".")
