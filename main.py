@@ -4,14 +4,14 @@ from collections import defaultdict, namedtuple
 from dataclasses import dataclass, field
 import json
 from pathlib import Path
-from typing import Iterator
+from typing import Iterator, List, Union
 
 CHARACTER_ENTITY = "Ren_py_character"
 TEST_JSON = Path(r"C:\Users\sqfky\Desktop\Communing with Faye.json")
 
 Character = namedtuple("Character", "name color speaker")
 DialogueFragment = namedtuple(
-    "DialogueFragment", "speaker text stage_directions diag_id links"
+    "DialogueFragment", "speaker text stage_directions obj_id links"
 )
 
 
@@ -19,12 +19,13 @@ DialogueFragment = namedtuple(
 class Label:
     target_file: str
     label_name: str
-    label_id: str
+    obj_id: str
     links: list[str]
     fragments: list[DialogueFragment] = field(default_factory=list)
 
     def __iter__(self) -> Iterator[DialogueFragment]:
         # Currently assuming the order is automatically correct
+        # ToDo: Sort the fragments
         return iter(self.fragments)
 
 
@@ -95,11 +96,16 @@ def convert_flow(
     for label in labels.values():
         label_files[label.target_file].append(label)
 
+    def sort_by_links(linked_objs: List[Union[Label, DialogueFragment]]) -> List[Union[Label, DialogueFragment]]:
+        # ToDo Sort list by the order how the objects are linked
+        # Assumes all the objects are linked at least with a single link
+        return sorted(linked_objs)
+
     if target_folder is None:
         target_folder = Path(".")
     for file, writable_labels in label_files.items():
         with open(target_folder.joinpath(file), "w", encoding="utf-8") as f:
-            for i, label in enumerate(writable_labels):
+            for i, label in enumerate(sort_by_links(writable_labels)):
                 if i > 0:
                     # Extra spacing between the labels
                     f.write("\n")
