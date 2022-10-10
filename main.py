@@ -64,16 +64,16 @@ def convert_flow(
         except KeyError:
             return []
 
-    # Forming labels first to get the higher order connections done
     def form_label(raw_dialogue: dict) -> Label:
+        # Forming labels first to get the higher order connections done
         props = raw_dialogue["Properties"]
         links = get_links(props["OutputPins"])
         return Label(props["Text"], props["DisplayName"], props["Id"], links)
 
     labels = {d["Properties"]["Id"]: form_label(d) for d in raw_dialogues}
 
-    # Forming DialogueFraments to put together the actual scenario
     def form_frag(raw_fragment: dict) -> DialogueFragment:
+        # Forming DialogueFraments to put together the actual scenario
         props = raw_fragment["Properties"]
         return DialogueFragment(
             props["Speaker"],
@@ -94,7 +94,9 @@ def convert_flow(
     for label in labels.values():
         label_files[label.target_file].append(label)
 
-    def sort_by_links(linked_objs: List[Union[Label, DialogueFragment]]) -> List[Union[Label, DialogueFragment]]:
+    def sort_by_links(
+        linked_objs: List[Union[Label, DialogueFragment]]
+    ) -> List[Union[Label, DialogueFragment]]:
         # If length is under 2, no sorting is needed
         if len(linked_objs) < 2:
             return linked_objs
