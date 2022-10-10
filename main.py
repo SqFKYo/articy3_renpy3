@@ -107,7 +107,9 @@ def convert_flow(
                 for fragment in label.fragments:
                     if fragment.stage_directions:
                         f.write(f"    {fragment.stage_directions}\n")
-                    f.write(f'    {chars[fragment.speaker].lower()} "{fragment.text}"\n')
+                    f.write(
+                        f'    {chars[fragment.speaker].lower()} "{fragment.text}"\n'
+                    )
                 try:
                     f.write(f"    jump {labels[label.links[0]].label_name}\n")
                 except IndexError:
