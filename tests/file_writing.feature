@@ -1,0 +1,26 @@
+Feature: Writing the character definitions
+
+  Background:
+    Given Input json file is .\test_files\articy3_renpy3_tests.json
+    When Converter is created
+    And Input file is read in
+
+  Scenario: We should have two RenCharacters defined
+    When Character file is written to .\test_files\output_folder\characters.rpy
+    Then Written character file is equal to .\test_files\characters.rpy
+
+  Scenario: We should have one variable defined
+    When Variable file is written to .\test_files\output_folder\variables.rpy
+    Then Written variable file is equal to .\test_files\variables.rpy
+
+  Scenario: Simple scene file with one label
+    When Scene file scene2.rpy is written to .\test_files\output_folder\scene2.rpy
+    Then Written scene file is equal to .\test_files\scene2.rpy
+
+  Scenario: More complex scene with single label encapsulating multiple choices and variable changes
+    When Scene file script.rpy is written to .\test_files\output_folder\script.rpy
+    Then Written scene file is equal to .\test_files\script.rpy
+
+  Scenario: More complex scene with multiple labels and possible infinite loop
+    When Scene file scene1.rpy is written to .\test_files\output_folder\scene1.rpy
+    Then Written scene file is equal to .\test_files\scene1.rpy
