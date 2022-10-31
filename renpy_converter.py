@@ -6,6 +6,7 @@ import json
 from pathlib import Path
 from typing import Iterator, List, Union
 
+CHARACTER_CLASS = "RenCharacter"
 CHARACTER_ENTITY = "Ren_py_character"
 TEST_JSON = Path(r"C:\Users\sqfky\Desktop\Communing with Faye.json")
 
@@ -13,6 +14,17 @@ Character = namedtuple("Character", "name color speaker")
 DialogueFragment = namedtuple(
     "DialogueFragment", "speaker text stage_directions obj_id links"
 )
+
+
+class Converter:
+    def __init__(self):
+        pass
+
+    def read_input(self, input_file: Path) -> None:
+        pass
+
+    def write_init_rpy(self, file_type: str, output_path: Path) -> None:
+        pass
 
 
 @dataclass
@@ -47,7 +59,7 @@ def convert_characters(
         f.write("# Declarations for game characters and their important values\n\n")
         for char in chars:
             f.write(
-                f'define {char.name.lower()} = Character("{char.name}", color="{char.color}")\n'
+                f'define {char.name.lower()} = {CHARACTER_CLASS}("{char.name}", color="{char.color}")\n'
             )
     return {char.speaker: char.name for char in chars}
 
