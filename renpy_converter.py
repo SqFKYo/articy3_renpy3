@@ -39,7 +39,13 @@ class Converter:
             return Character(char_name, char_color, char_speaker)
 
         def parse_var(raw_var, name_space) -> Variable:
-            return Variable(name_space, raw_var["Variable"], raw_var["Type"], raw_var["Value"], raw_var["Description"])
+            return Variable(
+                name_space,
+                raw_var["Variable"],
+                raw_var["Type"],
+                raw_var["Value"],
+                raw_var["Description"],
+            )
 
         with open(self._input_file, "r") as f:
             dump = json.load(f)
@@ -70,9 +76,13 @@ class Converter:
             elif file_type.lower() == "variable":
                 f.write("# Declarations of global variables\n\n")
                 for v in self._variables:
-                    f.write(f'default {v.name_space}.{v.name} = {v.value}\n')
+                    f.write(f"default {v.name_space}.{v.name} = {v.value}\n")
             else:
                 raise NotImplementedError("Unknown init rpy write request")
+
+    def write_scene_rpy(self, scene_name: str, output_path: Path) -> None:
+        with open(output_path, "w", encoding="utf-8") as f:
+            ...
 
 
 @dataclass
