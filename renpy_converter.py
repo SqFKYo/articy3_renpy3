@@ -17,14 +17,15 @@ DialogueFragment = namedtuple(
 
 
 class Converter:
-    def __init__(self):
+    def __init__(self, input_file: Path) -> None:
         pass
 
-    def read_input(self, input_file: Path) -> None:
+    def read_input(self) -> None:
         pass
 
     def write_init_rpy(self, file_type: str, output_path: Path) -> None:
-        pass
+        with open(output_path, 'w', encoding='utf-8') as f:
+            pass
 
 
 @dataclass
