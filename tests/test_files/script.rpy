@@ -1,4 +1,4 @@
-﻿label start:
+label start:
     maeve "This is a short test run for the game's integration testing."
     
     menu: 

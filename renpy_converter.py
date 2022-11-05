@@ -23,21 +23,34 @@ class Converter:
         self._variables = []
 
     def read_input(self) -> None:
-        pass
+        def parse_char(raw_char) -> Character:
+            char_name = raw_char["Properties"]["DisplayName"]
+            char_speaker = raw_char["Properties"]["Id"]
+            try:
+                char_color = raw_char["Template"]["Ren_py_character_properties"]["Color"]
+            except IndexError:
+                # No color defined, defaulting to black
+                char_color = "000000"
+            return Character(char_name, char_color, char_speaker)
+
+        with open(self._input_file, "r") as f:
+            dump = json.load(f)
+            self._characters = [
+                parse_char(c) for c in dump["Packages"][0]["Models"] if c["Type"] == CHARACTER_ENTITY
+            ]
 
     def write_init_rpy(self, file_type: str, output_path: Path) -> None:
-        if file_type.lower() == 'character':
-            start_comment = '# Declarations for game characters and their important values\n\n'
-            to_write = self._characters
-        elif file_type.lower() == 'variable':
-            start_comment = '# Declarations of global variables\n\n'
-            to_write = self._variables
-        else:
-            raise NotImplementedError('Unknown init rpy write request')
         with open(output_path, 'w', encoding='utf-8') as f:
-            f.write(start_comment)
-            for e in to_write:
-                f.write(f"{e}\n")
+            if file_type.lower() == 'character':
+                f.write('# Declarations for game characters and their important values\n\n')
+                for c in self._characters:
+                    f.write(f'define {c.name.lower()} = {CHARACTER_CLASS}("{c.name}", color="{c.color}")\n')
+            elif file_type.lower() == 'variable':
+                f.write('# Declarations of global variables\n\n')
+                for v in self._variables:
+                    pass
+            else:
+                raise NotImplementedError('Unknown init rpy write request')
 
 
 @dataclass
