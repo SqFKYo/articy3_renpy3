@@ -18,14 +18,26 @@ DialogueFragment = namedtuple(
 
 class Converter:
     def __init__(self, input_file: Path) -> None:
-        pass
+        self._characters = []
+        self._input_file = input_file
+        self._variables = []
 
     def read_input(self) -> None:
         pass
 
     def write_init_rpy(self, file_type: str, output_path: Path) -> None:
+        if file_type.lower() == 'character':
+            start_comment = '# Declarations for game characters and their important values\n\n'
+            to_write = self._characters
+        elif file_type.lower() == 'variable':
+            start_comment = '# Declarations of global variables\n\n'
+            to_write = self._variables
+        else:
+            raise NotImplementedError('Unknown init rpy write request')
         with open(output_path, 'w', encoding='utf-8') as f:
-            pass
+            f.write(start_comment)
+            for e in to_write:
+                f.write(f"{e}\n")
 
 
 @dataclass
