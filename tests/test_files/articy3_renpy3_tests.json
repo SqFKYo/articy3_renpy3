@@ -2598,6 +2598,134 @@
           }
         },
         {
+          "Type": "Dialogue",
+          "Properties": {
+            "TechnicalName": "Dlg_2D43B18B",
+            "Id": "0x0100000000000939",
+            "Parent": "0x01000000000004BA",
+            "Attachments": [],
+            "DisplayName": "label meet_maeve",
+            "PreviewImage": {
+              "ViewBox": {
+                "x": 0.0,
+                "y": 0.0,
+                "w": 0.0,
+                "h": 0.0
+              },
+              "Mode": "FromAsset",
+              "Asset": "0x0000000000000000"
+            },
+            "Color": {
+              "r": 0.5764706,
+              "g": 0.75686276,
+              "b": 0.8
+            },
+            "Text": "scene1.rpy",
+            "ExternalId": "",
+            "Position": {
+              "x": 1692.0,
+              "y": 25.0
+            },
+            "ZIndex": 5.0,
+            "Size": {
+              "w": 291.0,
+              "h": 200.0
+            },
+            "ShortId": 759411083,
+            "InputPins": [
+              {
+                "Text": "",
+                "Id": "0x010000000000093C",
+                "Owner": "0x0100000000000939",
+                "Connections": [
+                  {
+                    "Color": {
+                      "a": 1.0,
+                      "r": 0.5764706,
+                      "g": 0.75686276,
+                      "b": 0.8
+                    },
+                    "Label": "",
+                    "TargetPin": "0x0100000000000951",
+                    "Target": "0x0100000000000950"
+                  }
+                ]
+              }
+            ],
+            "OutputPins": [
+              {
+                "Text": "",
+                "Id": "0x010000000000093D",
+                "Owner": "0x0100000000000939"
+              }
+            ]
+          }
+        },
+        {
+          "Type": "Dialogue",
+          "Properties": {
+            "TechnicalName": "Dlg_2C2D24A7",
+            "Id": "0x0100000000000947",
+            "Parent": "0x01000000000004BA",
+            "Attachments": [],
+            "DisplayName": "label meet_faye",
+            "PreviewImage": {
+              "ViewBox": {
+                "x": 0.0,
+                "y": 0.0,
+                "w": 0.0,
+                "h": 0.0
+              },
+              "Mode": "FromAsset",
+              "Asset": "0x0000000000000000"
+            },
+            "Color": {
+              "r": 0.5764706,
+              "g": 0.75686276,
+              "b": 0.8
+            },
+            "Text": "scene1.rpy",
+            "ExternalId": "",
+            "Position": {
+              "x": 1692.0,
+              "y": 275.0
+            },
+            "ZIndex": 9.0,
+            "Size": {
+              "w": 291.0,
+              "h": 200.0
+            },
+            "ShortId": 741156007,
+            "InputPins": [
+              {
+                "Text": "",
+                "Id": "0x010000000000094A",
+                "Owner": "0x0100000000000947",
+                "Connections": [
+                  {
+                    "Color": {
+                      "a": 1.0,
+                      "r": 0.5764706,
+                      "g": 0.75686276,
+                      "b": 0.8
+                    },
+                    "Label": "",
+                    "TargetPin": "0x01000000000002A0",
+                    "Target": "0x010000000000029D"
+                  }
+                ]
+              }
+            ],
+            "OutputPins": [
+              {
+                "Text": "",
+                "Id": "0x010000000000094B",
+                "Owner": "0x0100000000000947"
+              }
+            ]
+          }
+        },
+        {
           "Type": "DialogueFragment",
           "Properties": {
             "TechnicalName": "DFr_C298869A",
@@ -3220,9 +3348,9 @@
                   {
                     "Color": {
                       "a": 1.0,
-                      "r": 0.577580452,
-                      "g": 0.7605245,
-                      "b": 0.7991027
+                      "r": 0.5764706,
+                      "g": 0.75686276,
+                      "b": 0.8
                     },
                     "Label": "",
                     "TargetPin": "0x01000000000004BE",
@@ -3624,85 +3752,23 @@
         {
           "Type": "Python_injections",
           "Properties": {
-            "TechnicalName": "DFr_435C3111",
-            "Id": "0x0100000000000294",
-            "Parent": "0x01000000000004BA",
-            "MenuText": "",
-            "StageDirections": "scene meet_maeve",
-            "Speaker": "0x010000000000010F",
-            "SplitHeight": 64.0,
-            "Color": {
-              "r": 0.577580452,
-              "g": 0.7605245,
-              "b": 0.7991027
-            },
-            "Text": "Hey, I'm Maeve, this game's MC!",
-            "ExternalId": "",
-            "Position": {
-              "x": 1650.0,
-              "y": 25.0
-            },
-            "ZIndex": 0.0,
-            "Size": {
-              "w": 225.0,
-              "h": 200.0
-            },
-            "ShortId": 1130115345,
-            "InputPins": [
-              {
-                "Text": "",
-                "Id": "0x0100000000000297",
-                "Owner": "0x0100000000000294"
-              }
-            ],
-            "OutputPins": [
-              {
-                "Text": "setProp(getObj(\"Maeve\"), \"Met_already\", true)",
-                "Id": "0x0100000000000298",
-                "Owner": "0x0100000000000294",
-                "Connections": [
-                  {
-                    "Color": {
-                      "a": 1.0,
-                      "r": 0.577580452,
-                      "g": 0.7605245,
-                      "b": 0.7991027
-                    },
-                    "Label": "",
-                    "TargetPin": "0x0100000000000902",
-                    "Target": "0x01000000000008FF"
-                  }
-                ]
-              }
-            ]
-          },
-          "Template": {
-            "Python_condition": {
-              "python_condition": "",
-              "Python_outcome": "$ maeve.met_already = True"
-            }
-          }
-        },
-        {
-          "Type": "Python_injections",
-          "Properties": {
             "TechnicalName": "DFr_61646464",
             "Id": "0x010000000000029D",
-            "Parent": "0x01000000000004BA",
+            "Parent": "0x0100000000000947",
             "MenuText": "",
             "StageDirections": "scene meet_faye",
             "Speaker": "0x0100000000000113",
             "SplitHeight": 64.0,
             "Color": {
-              "r": 0.577580452,
-              "g": 0.7605245,
-              "b": 0.7991027
+              "r": 0.5764706,
+              "g": 0.75686276,
+              "b": 0.8
             },
             "Text": "Hey I'm Faye, the main LI of this game.",
             "ExternalId": "",
             "Position": {
-              "x": 1650.0,
-              "y": 275.0
+              "x": 900.0,
+              "y": 425.0
             },
             "ZIndex": 0.0,
             "Size": {
@@ -3726,9 +3792,9 @@
                   {
                     "Color": {
                       "a": 1.0,
-                      "r": 0.577580452,
-                      "g": 0.7605245,
-                      "b": 0.7991027
+                      "r": 0.5764706,
+                      "g": 0.75686276,
+                      "b": 0.8
                     },
                     "Label": "",
                     "TargetPin": "0x0100000000000902",
@@ -3788,13 +3854,13 @@
                   {
                     "Color": {
                       "a": 1.0,
-                      "r": 0.577580452,
-                      "g": 0.7605245,
-                      "b": 0.7991027
+                      "r": 0.5764706,
+                      "g": 0.75686276,
+                      "b": 0.8
                     },
                     "Label": "",
-                    "TargetPin": "0x0100000000000297",
-                    "Target": "0x0100000000000294"
+                    "TargetPin": "0x010000000000093C",
+                    "Target": "0x0100000000000939"
                   }
                 ]
               }
@@ -3850,13 +3916,13 @@
                   {
                     "Color": {
                       "a": 1.0,
-                      "r": 0.577580452,
-                      "g": 0.7605245,
-                      "b": 0.7991027
+                      "r": 0.5764706,
+                      "g": 0.75686276,
+                      "b": 0.8
                     },
                     "Label": "",
-                    "TargetPin": "0x01000000000002A0",
-                    "Target": "0x010000000000029D"
+                    "TargetPin": "0x010000000000094A",
+                    "Target": "0x0100000000000947"
                   }
                 ]
               }
@@ -3870,23 +3936,119 @@
           }
         },
         {
+          "Type": "Python_injections",
+          "Properties": {
+            "TechnicalName": "DFr_B51C4C7D",
+            "Id": "0x0100000000000950",
+            "Parent": "0x0100000000000939",
+            "MenuText": "",
+            "StageDirections": "scene meet_maeve",
+            "Speaker": "0x010000000000010F",
+            "SplitHeight": 64.0,
+            "Color": {
+              "r": 0.5764706,
+              "g": 0.75686276,
+              "b": 0.8
+            },
+            "Text": "Hey, I'm Maeve, this game's MC!",
+            "ExternalId": "",
+            "Position": {
+              "x": 875.0,
+              "y": 475.0
+            },
+            "ZIndex": 0.0,
+            "Size": {
+              "w": 225.0,
+              "h": 200.0
+            },
+            "ShortId": 3038530685,
+            "InputPins": [
+              {
+                "Text": "",
+                "Id": "0x0100000000000951",
+                "Owner": "0x0100000000000950"
+              }
+            ],
+            "OutputPins": [
+              {
+                "Text": "setProp(getObj(\"Maeve\"), \"Met_already\", true)",
+                "Id": "0x0100000000000952",
+                "Owner": "0x0100000000000950",
+                "Connections": [
+                  {
+                    "Color": {
+                      "a": 1.0,
+                      "r": 0.5764706,
+                      "g": 0.75686276,
+                      "b": 0.8
+                    },
+                    "Label": "",
+                    "TargetPin": "0x010000000000095A",
+                    "Target": "0x0100000000000959"
+                  }
+                ]
+              }
+            ]
+          },
+          "Template": {
+            "Python_condition": {
+              "python_condition": "",
+              "Python_outcome": "$ maeve.met_already = True"
+            }
+          }
+        },
+        {
           "Type": "Jump",
           "Properties": {
-            "TechnicalName": "Jmp_19E8C528",
-            "Id": "0x01000000000008FF",
-            "Parent": "0x01000000000004BA",
+            "TechnicalName": "Jmp_98697F29",
+            "Id": "0x0100000000000959",
+            "Parent": "0x0100000000000939",
             "Target": "0x01000000000004BA",
             "TargetPin": "0x01000000000004BD",
             "Color": {
-              "r": 0.577580452,
-              "g": 0.7605245,
-              "b": 0.7991027
+              "r": 0.5764706,
+              "g": 0.75686276,
+              "b": 0.8
             },
             "Text": "",
             "ExternalId": "",
             "Position": {
-              "x": 2000.0,
-              "y": 175.0
+              "x": 1200.0,
+              "y": 500.0
+            },
+            "ZIndex": 11.0,
+            "Size": {
+              "w": 175.0,
+              "h": 150.0
+            },
+            "ShortId": 2557050665,
+            "InputPins": [
+              {
+                "Text": "",
+                "Id": "0x010000000000095A",
+                "Owner": "0x0100000000000959"
+              }
+            ]
+          }
+        },
+        {
+          "Type": "Jump",
+          "Properties": {
+            "TechnicalName": "Jmp_19E8C528",
+            "Id": "0x01000000000008FF",
+            "Parent": "0x0100000000000947",
+            "Target": "0x01000000000004BA",
+            "TargetPin": "0x01000000000004BD",
+            "Color": {
+              "r": 0.5764706,
+              "g": 0.75686276,
+              "b": 0.8
+            },
+            "Text": "",
+            "ExternalId": "",
+            "Position": {
+              "x": 1275.0,
+              "y": 450.0
             },
             "ZIndex": 11.0,
             "Size": {
@@ -3937,9 +4099,9 @@
             "Parent": "0x03000000103AA2F0",
             "DisplayName": "Wardrobe",
             "Color": {
-              "r": 0.5764706,
-              "g": 0.75686276,
-              "b": 0.8
+              "r": 0.577580452,
+              "g": 0.7605245,
+              "b": 0.7991027
             },
             "Text": "",
             "ExternalId": "",
@@ -4331,19 +4493,38 @@
                 "Type": "DialogueFragment"
               },
               {
-                "Id": "0x0100000000000294",
-                "TechnicalName": "DFr_435C3111",
-                "Type": "DialogueFragment"
+                "Id": "0x0100000000000939",
+                "TechnicalName": "Dlg_2D43B18B",
+                "Type": "Dialogue",
+                "Children": [
+                  {
+                    "Id": "0x0100000000000950",
+                    "TechnicalName": "DFr_B51C4C7D",
+                    "Type": "DialogueFragment"
+                  },
+                  {
+                    "Id": "0x0100000000000959",
+                    "TechnicalName": "Jmp_98697F29",
+                    "Type": "Jump"
+                  }
+                ]
               },
               {
-                "Id": "0x010000000000029D",
-                "TechnicalName": "DFr_61646464",
-                "Type": "DialogueFragment"
-              },
-              {
-                "Id": "0x01000000000008FF",
-                "TechnicalName": "Jmp_19E8C528",
-                "Type": "Jump"
+                "Id": "0x0100000000000947",
+                "TechnicalName": "Dlg_2C2D24A7",
+                "Type": "Dialogue",
+                "Children": [
+                  {
+                    "Id": "0x010000000000029D",
+                    "TechnicalName": "DFr_61646464",
+                    "Type": "DialogueFragment"
+                  },
+                  {
+                    "Id": "0x01000000000008FF",
+                    "TechnicalName": "Jmp_19E8C528",
+                    "Type": "Jump"
+                  }
+                ]
               },
               {
                 "Id": "0x01000000000004F6",
