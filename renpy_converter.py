@@ -7,21 +7,27 @@ from pathlib import Path
 from typing import Iterator, List, Union
 
 CHARACTER_CLASS = "RenCharacter"
-CHARACTER_ENTITY = "Ren_py_character"
-TEST_JSON = Path(r"C:\Users\sqfky\Desktop\Communing with Faye.json")
+
+# TEST_JSON = Path(r"C:\Users\sqfky\Desktop\Communing with Faye.json")
 
 Character = namedtuple("Character", "name color speaker")
-
-DialogueFragment = namedtuple(
-    "DialogueFragment", "speaker text stage_directions obj_id links"
-)
+Dialogue = namedtuple("Dialogue", "d_id label target_file input_pins output_pins")
+# DialogueFragment = namedtuple(
+#     "DialogueFragment", "speaker text stage_directions obj_id links"
+# )
 
 Variable = namedtuple("Variable", "name_space name type value description")
 
 
+class ParseableTypes:
+    CHARACTER = "Ren_py_character"
+    DIALOGUE = "Dialogue"
+    FRAGMENT = "DialogueFragment"
 class Converter:
     def __init__(self, input_file: Path) -> None:
         self._characters = []
+        self._dialogues = []
+        self._fragments = []
         self._input_file = input_file
         self._variables = []
 
@@ -37,7 +43,9 @@ class Converter:
                 # No color defined, defaulting to black
                 char_color = "000000"
             return Character(char_name, char_color, char_speaker)
+        def parse_dialogue(raw_diag): ...
 
+        def parse_fragment(raw_frag): ...
         def parse_var(raw_var, name_space) -> Variable:
             return Variable(
                 name_space,
@@ -49,11 +57,6 @@ class Converter:
 
         with open(self._input_file, "r") as f:
             dump = json.load(f)
-            self._characters = [
-                parse_char(c)
-                for c in dump["Packages"][0]["Models"]
-                if c["Type"] == CHARACTER_ENTITY
-            ]
             name_spaces = dump["GlobalVariables"]
             for name_space in name_spaces:
                 self._variables.extend(
@@ -62,6 +65,16 @@ class Converter:
                         for v in name_space["Variables"]
                     ]
                 )
+            for obj in dump["Packages"][0]["Models"]:
+                match obj["Type"]:
+                    case ParseableTypes.CHARACTER:
+                        self._characters.append(parse_char(obj))
+                    case ParseableTypes.DIALOGUE:
+                        self._dialogues.append(parse_dialogue(obj))
+                    case ParseableTypes.FRAGMENT:
+                        self._fragments.append(parse_fragment(obj))
+                    case _:
+                        pass
 
     def write_init_rpy(self, file_type: str, output_path: Path) -> None:
         with open(output_path, "w", encoding="utf-8") as f:
@@ -84,7 +97,7 @@ class Converter:
         with open(output_path, "w", encoding="utf-8") as f:
             ...
 
-
+"""
 @dataclass
 class Label:
     target_file: str
@@ -233,3 +246,4 @@ def main(json_file):
 
 if __name__ == "__main__":
     main(json_file=TEST_JSON)
+"""
