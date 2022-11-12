@@ -11,10 +11,8 @@ CHARACTER_CLASS = "RenCharacter"
 # TEST_JSON = Path(r"C:\Users\sqfky\Desktop\Communing with Faye.json")
 
 Character = namedtuple("Character", "name color speaker")
-Dialogue = namedtuple("Dialogue", "d_id label target_file input_pins output_pins")
-# DialogueFragment = namedtuple(
-#     "DialogueFragment", "speaker text stage_directions obj_id links"
-# )
+Dialogue = namedtuple("Dialogue", "obj_id label target_file output_pins")
+Fragment = namedtuple("Fragment", "obj_id parent speaker text stage_directions output_pins")
 
 Variable = namedtuple("Variable", "name_space name type value description")
 
@@ -23,6 +21,8 @@ class ParseableTypes:
     CHARACTER = "Ren_py_character"
     DIALOGUE = "Dialogue"
     FRAGMENT = "DialogueFragment"
+
+
 class Converter:
     def __init__(self, input_file: Path) -> None:
         self._characters = []
@@ -43,9 +43,18 @@ class Converter:
                 # No color defined, defaulting to black
                 char_color = "000000"
             return Character(char_name, char_color, char_speaker)
-        def parse_dialogue(raw_diag): ...
 
-        def parse_fragment(raw_frag): ...
+        def parse_dialogue(raw_diag) -> Dialogue:
+            props = raw_diag["Properties"]
+            try:
+                output_pins = [x["Target"] for x in props["OutputPins"][0]["Connections"]]
+            except KeyError:
+                output_pins = []
+            return Dialogue(props["Id"], props["DisplayName"], props["Text"], output_pins)
+
+        def parse_fragment(raw_frag) -> Fragment:
+            ...
+
         def parse_var(raw_var, name_space) -> Variable:
             return Variable(
                 name_space,
@@ -96,6 +105,7 @@ class Converter:
     def write_scene_rpy(self, scene_name: str, output_path: Path) -> None:
         with open(output_path, "w", encoding="utf-8") as f:
             ...
+
 
 """
 @dataclass
