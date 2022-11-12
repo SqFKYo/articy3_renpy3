@@ -12,7 +12,9 @@ CHARACTER_CLASS = "RenCharacter"
 
 Character = namedtuple("Character", "name color speaker")
 Dialogue = namedtuple("Dialogue", "obj_id label target_file output_pins")
-Fragment = namedtuple("Fragment", "obj_id parent speaker text stage_directions output_pins")
+Fragment = namedtuple(
+    "Fragment", "obj_id parent speaker text stage_directions output_pins"
+)
 
 Variable = namedtuple("Variable", "name_space name type value description")
 
@@ -32,6 +34,13 @@ class Converter:
         self._variables = []
 
     def read_input(self) -> None:
+        def get_outputs(pins: list) -> list:
+            try:
+                output_pins = [x["Target"] for x in pins[0]["Connections"]]
+            except KeyError:
+                output_pins = []
+            return output_pins
+
         def parse_char(raw_char) -> Character:
             char_name = raw_char["Properties"]["DisplayName"]
             char_speaker = raw_char["Properties"]["Id"]
@@ -44,16 +53,23 @@ class Converter:
                 char_color = "000000"
             return Character(char_name, char_color, char_speaker)
 
-        def parse_dialogue(raw_diag) -> Dialogue:
-            props = raw_diag["Properties"]
-            try:
-                output_pins = [x["Target"] for x in props["OutputPins"][0]["Connections"]]
-            except KeyError:
-                output_pins = []
-            return Dialogue(props["Id"], props["DisplayName"], props["Text"], output_pins)
+        def parse_dialogue(props) -> Dialogue:
+            return Dialogue(
+                props["Id"],
+                props["DisplayName"],
+                props["Text"],
+                get_outputs(props["OutputPins"]),
+            )
 
-        def parse_fragment(raw_frag) -> Fragment:
-            ...
+        def parse_fragment(props) -> Fragment:
+            return Fragment(
+                props["Id"],
+                props["Parent"],
+                props["Speaker"],
+                props["Text"],
+                props["StageDirections"],
+                get_outputs(props["OutputPins"]),
+            )
 
         def parse_var(raw_var, name_space) -> Variable:
             return Variable(
@@ -79,9 +95,9 @@ class Converter:
                     case ParseableTypes.CHARACTER:
                         self._characters.append(parse_char(obj))
                     case ParseableTypes.DIALOGUE:
-                        self._dialogues.append(parse_dialogue(obj))
+                        self._dialogues.append(parse_dialogue(obj["Properties"]))
                     case ParseableTypes.FRAGMENT:
-                        self._fragments.append(parse_fragment(obj))
+                        self._fragments.append(parse_fragment(obj["Properties"]))
                     case _:
                         pass
 
