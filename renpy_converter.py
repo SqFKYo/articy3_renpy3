@@ -8,8 +8,6 @@ from typing import TextIO
 
 CHARACTER_CLASS = "RenCharacter"
 
-# TEST_JSON = Path(r"C:\Users\sqfky\Desktop\Communing with Faye.json")
-
 Character = namedtuple("Character", "name color speaker")
 Fragment = namedtuple(
     "Fragment", "obj_id parent speaker text stage_directions output_pins"
@@ -30,7 +28,8 @@ class Dialogue:
     target_file: str
     output_pins: list[str]
 
-    def write_scene(self, f: TextIO) -> None: ...
+    def write_scene(self, f: TextIO) -> None:
+        f.write(f"{self.label}:\n")
 
 class Converter:
     def __init__(self, input_file: Path) -> None:
@@ -128,7 +127,12 @@ class Converter:
     def write_scene_rpy(self, target_file: str, output_path: Path) -> None:
         with open(output_path, "w", encoding="utf-8") as f:
             for dialogue in self._dialogues:
+                first = True
                 if dialogue.target_file == target_file:
+                    if first:
+                        first = False
+                    else:
+                        f.write('\n\n')
                     dialogue.write_scene(f)
 
 
