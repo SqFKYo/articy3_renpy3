@@ -4,14 +4,13 @@ from collections import defaultdict, namedtuple, deque
 from dataclasses import dataclass, field
 import json
 from pathlib import Path
-from typing import Iterator, List, Union
+from typing import TextIO
 
 CHARACTER_CLASS = "RenCharacter"
 
 # TEST_JSON = Path(r"C:\Users\sqfky\Desktop\Communing with Faye.json")
 
 Character = namedtuple("Character", "name color speaker")
-Dialogue = namedtuple("Dialogue", "obj_id label target_file output_pins")
 Fragment = namedtuple(
     "Fragment", "obj_id parent speaker text stage_directions output_pins"
 )
@@ -24,6 +23,14 @@ class ParseableTypes:
     DIALOGUE = "Dialogue"
     FRAGMENT = "DialogueFragment"
 
+@dataclass
+class Dialogue:
+    obj_id: str
+    label: str
+    target_file: str
+    output_pins: list[str]
+
+    def write_scene(self, f: TextIO) -> None: ...
 
 class Converter:
     def __init__(self, input_file: Path) -> None:
@@ -118,9 +125,11 @@ class Converter:
             else:
                 raise NotImplementedError("Unknown init rpy write request")
 
-    def write_scene_rpy(self, scene_name: str, output_path: Path) -> None:
+    def write_scene_rpy(self, target_file: str, output_path: Path) -> None:
         with open(output_path, "w", encoding="utf-8") as f:
-            ...
+            for dialogue in self._dialogues:
+                if dialogue.target_file == target_file:
+                    dialogue.write_scene(f)
 
 
 """
@@ -134,31 +143,6 @@ class Label:
 
     def __iter__(self) -> Iterator[DialogueFragment]:
         return iter(self.fragments)
-
-
-def convert_characters(
-    raw_chars: list[dict], target_file: Path = None
-) -> dict[str:str]:
-    def process_char(raw_char: dict) -> Character:
-        char_name = raw_char["Properties"]["DisplayName"]
-        char_speaker = raw_char["Properties"]["Id"]
-        try:
-            char_color = raw_char["Template"]["Ren_py_character_properties"]["Color"]
-        except IndexError:
-            # No color defined, defaulting to black
-            char_color = "000000"
-        return Character(char_name, char_color, char_speaker)
-
-    if target_file is None:
-        target_file = Path(r".\characters.rpy")
-    chars = [process_char(raw_char) for raw_char in raw_chars]
-    with open(target_file, "w", encoding="utf-8") as f:
-        f.write("# Declarations for game characters and their important values\n\n")
-        for char in chars:
-            f.write(
-                f'define {char.name.lower()} = {CHARACTER_CLASS}("{char.name}", color="{char.color}")\n'
-            )
-    return {char.speaker: char.name for char in chars}
 
 
 def convert_flow(
