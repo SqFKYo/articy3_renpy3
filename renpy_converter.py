@@ -49,6 +49,10 @@ class Converter:
         self._fragments = []
         self._input_file = input_file
         self._variables = []
+        self.char_map = {}
+
+    def _initialize_charmap(self):
+        self.char_map = {char.speaker: char.name.lower() for char in self._characters}
 
     def read_input(self) -> None:
         def get_outputs(pins: list) -> list:
@@ -117,6 +121,7 @@ class Converter:
                         self._fragments.append(parse_fragment(obj["Properties"]))
                     case _:
                         pass
+        self._initialize_charmap()
 
     def write_init_rpy(self, file_type: str, output_path: Path) -> None:
         with open(output_path, "w", encoding="utf-8") as f:
@@ -146,7 +151,7 @@ class Converter:
                         f.write('\n\n')
                     f.write(f"{dialogue.label}:\n")
                     for frag in sorted((frag for frag in self._fragments if dialogue.obj_id == frag.parent), reverse=True):
-                        f.write(f'\t{frag.speaker} "{frag.text}"\n')
+                        f.write(f'    {self.char_map[frag.speaker]} "{frag.text}"\n')
 
 
 """
