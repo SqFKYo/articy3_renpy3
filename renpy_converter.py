@@ -28,8 +28,6 @@ class Dialogue:
     target_file: str
     output_pins: list[str]
 
-    def write_scene(self, f: TextIO) -> None:
-        f.write(f"{self.label}:\n")
 
 class Converter:
     def __init__(self, input_file: Path) -> None:
@@ -133,7 +131,7 @@ class Converter:
                         first = False
                     else:
                         f.write('\n\n')
-                    dialogue.write_scene(f)
+                    f.write(f"{dialogue.label}:\n")
 
 
 """
