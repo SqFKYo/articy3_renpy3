@@ -2,16 +2,14 @@
 
 from collections import defaultdict, namedtuple, deque
 from dataclasses import dataclass, field
+from functools import total_ordering
 import json
 from pathlib import Path
-from typing import TextIO
+from typing import List, TextIO
 
 CHARACTER_CLASS = "RenCharacter"
 
 Character = namedtuple("Character", "name color speaker")
-Fragment = namedtuple(
-    "Fragment", "obj_id parent speaker text stage_directions output_pins"
-)
 
 Variable = namedtuple("Variable", "name_space name type value description")
 
@@ -28,6 +26,21 @@ class Dialogue:
     target_file: str
     output_pins: list[str]
 
+@total_ordering
+@dataclass
+class Fragment:
+    obj_id: str
+    parent: str
+    speaker: str
+    text: str
+    stage_directions: str
+    output_pins: List[str]
+
+    def __eq__(self, other):
+        return self.obj_id == other.obj_id
+
+    def __lt__(self, other):
+        return self.obj_id in other.output_pins
 
 class Converter:
     def __init__(self, input_file: Path) -> None:
@@ -132,6 +145,8 @@ class Converter:
                     else:
                         f.write('\n\n')
                     f.write(f"{dialogue.label}:\n")
+                    for frag in sorted((frag for frag in self._fragments if dialogue.obj_id == frag.parent), reverse=True):
+                        f.write(f'\t{frag.speaker} "{frag.text}"\n')
 
 
 """
@@ -232,30 +247,4 @@ def convert_flow(
                 except IndexError:
                     # Last fragment of the story
                     pass
-
-
-def fetch_parts(file: Path) -> (list, list, list):
-    with open(file, "r") as f:
-        dump = json.load(f)
-        chars = [
-            c for c in dump["Packages"][0]["Models"] if c["Type"] == CHARACTER_ENTITY
-        ]
-        dialogues = [
-            d for d in dump["Packages"][0]["Models"] if d["Type"] == "Dialogue"
-        ]
-        diag_fragments = [
-            d for d in dump["Packages"][0]["Models"] if d["Type"] == "DialogueFragment"
-        ]
-
-    return chars, dialogues, diag_fragments
-
-
-def main(json_file):
-    raw_chars, raw_dialogues, raw_fragments = fetch_parts(file=json_file)
-    chars = convert_characters(raw_chars)
-    convert_flow(raw_dialogues, raw_fragments, chars)
-
-
-if __name__ == "__main__":
-    main(json_file=TEST_JSON)
 """
