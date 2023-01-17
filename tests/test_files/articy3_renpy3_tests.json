@@ -617,7 +617,7 @@
                 "DisplayName": "Python condition"
               },
               {
-                "Property": "Python_outcome",
+                "Property": "python_outcome",
                 "Type": "string",
                 "DisplayName": "Python outcome"
               }
@@ -632,7 +632,7 @@
                 "AllowsLinebreaks": "True"
               },
               {
-                "Property": "Python_outcome",
+                "Property": "python_outcome",
                 "Type": "Text",
                 "MaxLength": "2048",
                 "PlaceholderValue": "",
@@ -3497,7 +3497,7 @@
           "Template": {
             "Python_condition": {
               "python_condition": "",
-              "Python_outcome": "$ flags.meet_again = True"
+              "python_outcome": "$ flags.meet_again = True"
             }
           }
         },
@@ -3559,7 +3559,7 @@
           "Template": {
             "Python_condition": {
               "python_condition": "",
-              "Python_outcome": "$ flags.meet_again = False"
+              "python_outcome": "$ flags.meet_again = False"
             }
           }
         },
@@ -3621,7 +3621,7 @@
           "Template": {
             "Python_condition": {
               "python_condition": "",
-              "Python_outcome": "$ ..."
+              "python_outcome": "$ ..."
             }
           }
         },
@@ -3683,7 +3683,7 @@
           "Template": {
             "Python_condition": {
               "python_condition": "$ flags.meet_again = False",
-              "Python_outcome": "$ flags.meet_again = True"
+              "python_outcome": "$ flags.meet_again = True"
             }
           }
         },
@@ -3745,7 +3745,7 @@
           "Template": {
             "Python_condition": {
               "python_condition": "$ flags.meet_again = True",
-              "Python_outcome": "$ flags.meet_again = False"
+              "python_outcome": "$ flags.meet_again = False"
             }
           }
         },
@@ -3807,7 +3807,7 @@
           "Template": {
             "Python_condition": {
               "python_condition": "$ meet_again or not maeve.met_already",
-              "Python_outcome": ""
+              "python_outcome": ""
             }
           }
         },
@@ -3869,7 +3869,7 @@
           "Template": {
             "Python_condition": {
               "python_condition": "$ meet_again or not faye.met_already",
-              "Python_outcome": ""
+              "python_outcome": ""
             }
           }
         },
@@ -3931,7 +3931,7 @@
           "Template": {
             "Python_condition": {
               "python_condition": "",
-              "Python_outcome": "$ maeve.met_already = True"
+              "python_outcome": "$ maeve.met_already = True"
             }
           }
         },
@@ -3993,7 +3993,7 @@
           "Template": {
             "Python_condition": {
               "python_condition": "",
-              "Python_outcome": "$ faye.met_already = True"
+              "python_outcome": "$ faye.met_already = True"
             }
           }
         },

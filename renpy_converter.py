@@ -18,6 +18,7 @@ class ParseableTypes:
     CHARACTER = "Ren_py_character"
     DIALOGUE = "Dialogue"
     FRAGMENT = "DialogueFragment"
+    INJECTION = "Python_injections"
 
 @dataclass
 class Dialogue:
@@ -92,6 +93,10 @@ class Converter:
                 get_outputs(props["OutputPins"]),
             )
 
+        def parse_injection(props) -> Fragment:
+            # ToDo parse Fragment with Python injections
+            pass
+
         def parse_var(raw_var, name_space) -> Variable:
             return Variable(
                 name_space,
@@ -119,6 +124,8 @@ class Converter:
                         self._dialogues.append(parse_dialogue(obj["Properties"]))
                     case ParseableTypes.FRAGMENT:
                         self._fragments.append(parse_fragment(obj["Properties"]))
+                    case ParseableTypes.INJECTION:
+                        self._fragments.append(parse_injection(obj))
                     case _:
                         pass
         self._initialize_charmap()
