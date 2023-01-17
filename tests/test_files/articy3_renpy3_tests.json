@@ -2616,9 +2616,9 @@
               "Asset": "0x0000000000000000"
             },
             "Color": {
-              "r": 0.5764706,
-              "g": 0.75686276,
-              "b": 0.8
+              "r": 0.577580452,
+              "g": 0.7605245,
+              "b": 0.7991027
             },
             "Text": "scene1.rpy",
             "ExternalId": "",
@@ -2641,9 +2641,9 @@
                   {
                     "Color": {
                       "a": 1.0,
-                      "r": 0.5764706,
-                      "g": 0.75686276,
-                      "b": 0.8
+                      "r": 0.577580452,
+                      "g": 0.7605245,
+                      "b": 0.7991027
                     },
                     "Label": "",
                     "TargetPin": "0x0100000000000951",
@@ -2680,9 +2680,9 @@
               "Asset": "0x0000000000000000"
             },
             "Color": {
-              "r": 0.5764706,
-              "g": 0.75686276,
-              "b": 0.8
+              "r": 0.577580452,
+              "g": 0.7605245,
+              "b": 0.7991027
             },
             "Text": "scene1.rpy",
             "ExternalId": "",
@@ -2705,9 +2705,9 @@
                   {
                     "Color": {
                       "a": 1.0,
-                      "r": 0.5764706,
-                      "g": 0.75686276,
-                      "b": 0.8
+                      "r": 0.577580452,
+                      "g": 0.7605245,
+                      "b": 0.7991027
                     },
                     "Label": "",
                     "TargetPin": "0x01000000000002A0",
@@ -3348,9 +3348,9 @@
                   {
                     "Color": {
                       "a": 1.0,
-                      "r": 0.5764706,
-                      "g": 0.75686276,
-                      "b": 0.8
+                      "r": 0.577580452,
+                      "g": 0.7605245,
+                      "b": 0.7991027
                     },
                     "Label": "",
                     "TargetPin": "0x01000000000004BE",
@@ -3497,7 +3497,7 @@
           "Template": {
             "Python_condition": {
               "python_condition": "",
-              "Python_outcome": "$ meet_again = True"
+              "Python_outcome": "$ flags.meet_again = True"
             }
           }
         },
@@ -3559,7 +3559,7 @@
           "Template": {
             "Python_condition": {
               "python_condition": "",
-              "Python_outcome": "$ meet_again = False"
+              "Python_outcome": "$ flags.meet_again = False"
             }
           }
         },
@@ -3682,8 +3682,8 @@
           },
           "Template": {
             "Python_condition": {
-              "python_condition": "$ meet_again = False",
-              "Python_outcome": "$ meet_again = True"
+              "python_condition": "$ flags.meet_again = False",
+              "Python_outcome": "$ flags.meet_again = True"
             }
           }
         },
@@ -3744,70 +3744,8 @@
           },
           "Template": {
             "Python_condition": {
-              "python_condition": "$ meet_again = True",
-              "Python_outcome": "$ meet_again = False"
-            }
-          }
-        },
-        {
-          "Type": "Python_injections",
-          "Properties": {
-            "TechnicalName": "DFr_61646464",
-            "Id": "0x010000000000029D",
-            "Parent": "0x0100000000000947",
-            "MenuText": "",
-            "StageDirections": "scene meet_faye",
-            "Speaker": "0x0100000000000113",
-            "SplitHeight": 64.0,
-            "Color": {
-              "r": 0.5764706,
-              "g": 0.75686276,
-              "b": 0.8
-            },
-            "Text": "Hey I'm Faye, the main LI of this game.",
-            "ExternalId": "",
-            "Position": {
-              "x": 900.0,
-              "y": 425.0
-            },
-            "ZIndex": 0.0,
-            "Size": {
-              "w": 225.0,
-              "h": 200.0
-            },
-            "ShortId": 1633969252,
-            "InputPins": [
-              {
-                "Text": "",
-                "Id": "0x01000000000002A0",
-                "Owner": "0x010000000000029D"
-              }
-            ],
-            "OutputPins": [
-              {
-                "Text": "setProp(getObj(\"Faye\"), \"Met_already\", true)",
-                "Id": "0x01000000000002A1",
-                "Owner": "0x010000000000029D",
-                "Connections": [
-                  {
-                    "Color": {
-                      "a": 1.0,
-                      "r": 0.5764706,
-                      "g": 0.75686276,
-                      "b": 0.8
-                    },
-                    "Label": "",
-                    "TargetPin": "0x0100000000000902",
-                    "Target": "0x01000000000008FF"
-                  }
-                ]
-              }
-            ]
-          },
-          "Template": {
-            "Python_condition": {
-              "python_condition": "",
-              "Python_outcome": "$ faye.met_already = True"
+              "python_condition": "$ flags.meet_again = True",
+              "Python_outcome": "$ flags.meet_again = False"
             }
           }
         },
@@ -3854,9 +3792,9 @@
                   {
                     "Color": {
                       "a": 1.0,
-                      "r": 0.5764706,
-                      "g": 0.75686276,
-                      "b": 0.8
+                      "r": 0.577580452,
+                      "g": 0.7605245,
+                      "b": 0.7991027
                     },
                     "Label": "",
                     "TargetPin": "0x010000000000093C",
@@ -3916,9 +3854,9 @@
                   {
                     "Color": {
                       "a": 1.0,
-                      "r": 0.5764706,
-                      "g": 0.75686276,
-                      "b": 0.8
+                      "r": 0.577580452,
+                      "g": 0.7605245,
+                      "b": 0.7991027
                     },
                     "Label": "",
                     "TargetPin": "0x010000000000094A",
@@ -3946,9 +3884,9 @@
             "Speaker": "0x010000000000010F",
             "SplitHeight": 64.0,
             "Color": {
-              "r": 0.5764706,
-              "g": 0.75686276,
-              "b": 0.8
+              "r": 0.577580452,
+              "g": 0.7605245,
+              "b": 0.7991027
             },
             "Text": "Hey, I'm Maeve, this game's MC!",
             "ExternalId": "",
@@ -3978,9 +3916,9 @@
                   {
                     "Color": {
                       "a": 1.0,
-                      "r": 0.5764706,
-                      "g": 0.75686276,
-                      "b": 0.8
+                      "r": 0.577580452,
+                      "g": 0.7605245,
+                      "b": 0.7991027
                     },
                     "Label": "",
                     "TargetPin": "0x010000000000095A",
@@ -3998,6 +3936,68 @@
           }
         },
         {
+          "Type": "Python_injections",
+          "Properties": {
+            "TechnicalName": "DFr_61646464",
+            "Id": "0x010000000000029D",
+            "Parent": "0x0100000000000947",
+            "MenuText": "",
+            "StageDirections": "scene meet_faye",
+            "Speaker": "0x0100000000000113",
+            "SplitHeight": 64.0,
+            "Color": {
+              "r": 0.577580452,
+              "g": 0.7605245,
+              "b": 0.7991027
+            },
+            "Text": "Hey I'm Faye, the main LI of this game.",
+            "ExternalId": "",
+            "Position": {
+              "x": 900.0,
+              "y": 425.0
+            },
+            "ZIndex": 0.0,
+            "Size": {
+              "w": 225.0,
+              "h": 200.0
+            },
+            "ShortId": 1633969252,
+            "InputPins": [
+              {
+                "Text": "",
+                "Id": "0x01000000000002A0",
+                "Owner": "0x010000000000029D"
+              }
+            ],
+            "OutputPins": [
+              {
+                "Text": "setProp(getObj(\"Faye\"), \"Met_already\", true)",
+                "Id": "0x01000000000002A1",
+                "Owner": "0x010000000000029D",
+                "Connections": [
+                  {
+                    "Color": {
+                      "a": 1.0,
+                      "r": 0.577580452,
+                      "g": 0.7605245,
+                      "b": 0.7991027
+                    },
+                    "Label": "",
+                    "TargetPin": "0x0100000000000902",
+                    "Target": "0x01000000000008FF"
+                  }
+                ]
+              }
+            ]
+          },
+          "Template": {
+            "Python_condition": {
+              "python_condition": "",
+              "Python_outcome": "$ faye.met_already = True"
+            }
+          }
+        },
+        {
           "Type": "Jump",
           "Properties": {
             "TechnicalName": "Jmp_98697F29",
@@ -4006,9 +4006,9 @@
             "Target": "0x01000000000004BA",
             "TargetPin": "0x01000000000004BD",
             "Color": {
-              "r": 0.5764706,
-              "g": 0.75686276,
-              "b": 0.8
+              "r": 0.577580452,
+              "g": 0.7605245,
+              "b": 0.7991027
             },
             "Text": "",
             "ExternalId": "",
@@ -4040,9 +4040,9 @@
             "Target": "0x01000000000004BA",
             "TargetPin": "0x01000000000004BD",
             "Color": {
-              "r": 0.5764706,
-              "g": 0.75686276,
-              "b": 0.8
+              "r": 0.577580452,
+              "g": 0.7605245,
+              "b": 0.7991027
             },
             "Text": "",
             "ExternalId": "",
