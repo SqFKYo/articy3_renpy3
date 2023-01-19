@@ -19,8 +19,8 @@ Feature: Reading all the different Fragments in
 
   Scenario: Menu elements and injections are read correctly
     Then Fragment with obj_id of 0x010000000000045E has text attribute Do you want to have the chance to meet the characters multiple times?
-    And Fragment with obj_id of 0x0100000000000905 has speaker attribute maeve
-    And Fragment with obj_id of 0x0100000000000905 has output_pins attribute 0x01000000000004A3,0x01000000000004A9
+    And Fragment with obj_id of 0x010000000000045E has speaker attribute maeve
+    And Fragment with obj_id of 0x010000000000045E has output_pins attribute 0x01000000000004A3,0x01000000000004A9
     Then Fragment with obj_id of 0x01000000000004A9 has text attribute No
     And Fragment with obj_id of 0x01000000000004A9 has speaker attribute <None>
     And Fragment with obj_id of 0x01000000000004A9 has python_condition attribute <None>
