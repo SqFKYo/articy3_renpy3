@@ -15,6 +15,7 @@ Feature: Reading all the different Fragments in
     And Fragment with obj_id of 0x01000000000002A7 has parent attribute 0x0100000000000286
     And Fragment with obj_id of 0x01000000000002A7 has speaker attribute maeve
     And Fragment with obj_id of 0x01000000000002A7 has text attribute Game will end now.
+    And Fragment with obj_id of 0x01000000000002A7 has output_pins attribute <None>
 
   Scenario: Menu elements and injections are read correctly
     Then Fragment with obj_id of 0x010000000000045E has text attribute Do you want to have the chance to meet the characters multiple times?

@@ -5,7 +5,7 @@ from dataclasses import dataclass, field
 from functools import total_ordering
 import json
 from pathlib import Path
-from typing import List, TextIO
+from typing import List, Union
 
 CHARACTER_CLASS = "RenCharacter"
 
@@ -35,7 +35,7 @@ class Fragment:
     speaker: str
     text: str
     stage_directions: str
-    output_pins: List[str]
+    output_pins: Union[None, List[str]]
 
     def __eq__(self, other):
         return self.obj_id == other.obj_id
@@ -64,7 +64,7 @@ class Converter:
             try:
                 output_pins = [x["Target"] for x in pins[0]["Connections"]]
             except KeyError:
-                output_pins = []
+                output_pins = None
             return output_pins
 
         def parse_char(raw_char) -> Character:
