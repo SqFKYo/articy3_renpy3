@@ -55,6 +55,10 @@ class Converter:
     def _initialize_charmap(self):
         self.char_map = {char.speaker: char.name.lower() for char in self._characters}
 
+    @property
+    def fragments(self):
+        return {frag.obj_id: frag for frag in self._fragments}
+
     def read_input(self) -> None:
         def get_outputs(pins: list) -> list:
             try:
@@ -124,8 +128,8 @@ class Converter:
                         self._dialogues.append(parse_dialogue(obj["Properties"]))
                     case ParseableTypes.FRAGMENT:
                         self._fragments.append(parse_fragment(obj["Properties"]))
-                    case ParseableTypes.INJECTION:
-                        self._fragments.append(parse_injection(obj))
+                    # case ParseableTypes.INJECTION:
+                    #     self._fragments.append(parse_injection(obj))
                     case _:
                         pass
         self._initialize_charmap()
