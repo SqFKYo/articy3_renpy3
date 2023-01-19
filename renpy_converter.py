@@ -36,6 +36,8 @@ class Fragment:
     text: str
     stage_directions: str
     output_pins: Union[None, List[str]]
+    python_condition: Union[str, None]
+    python_outcome: Union[str, None]
 
     def __eq__(self, other):
         return self.obj_id == other.obj_id
@@ -87,19 +89,30 @@ class Converter:
                 get_outputs(props["OutputPins"]),
             )
 
-        def parse_fragment(props) -> Fragment:
-            return Fragment(
+        def parse_basic_fragment(props) -> List:
+            return [
                 props["Id"],
                 props["Parent"],
                 props["Speaker"],
                 props["Text"],
                 props["StageDirections"],
                 get_outputs(props["OutputPins"]),
+            ]
+        def parse_fragment(props) -> Fragment:
+            return Fragment(
+                *parse_basic_fragment(props),
+                python_condition=None,
+                python_outcome=None,
             )
 
-        def parse_injection(props) -> Fragment:
-            # ToDo parse Fragment with Python injections
-            pass
+        def parse_injection(obj) -> Fragment:
+            cond = cond if (cond := obj["Template"]["Python_condition"]["python_condition"]) else None
+            output = output if (output := obj["Template"]["Python_condition"]["python_outcome"]) else None
+            return Fragment(
+                *parse_basic_fragment(obj["Properties"]),
+                python_condition=cond,
+                python_outcome=output,
+            )
 
         def parse_var(raw_var, name_space) -> Variable:
             return Variable(
@@ -128,8 +141,8 @@ class Converter:
                         self._dialogues.append(parse_dialogue(obj["Properties"]))
                     case ParseableTypes.FRAGMENT:
                         self._fragments.append(parse_fragment(obj["Properties"]))
-                    # case ParseableTypes.INJECTION:
-                    #     self._fragments.append(parse_injection(obj))
+                    case ParseableTypes.INJECTION:
+                        self._fragments.append(parse_injection(obj))
                     case _:
                         pass
         self._initialize_charmap()
