@@ -169,9 +169,13 @@ class Converter:
             for dialogue in self._dialogues:
                 if dialogue.target_file == target_file:
                     f.write(f"{dialogue.label}:\n")
-                    for frag in sorted((frag for frag in self._fragments if dialogue.obj_id == frag.parent), reverse=True):
+                    dumpable_frags = [frag for frag in self._fragments if dialogue.obj_id == frag.parent]
+                    sorted_frags = sort_elements(dumpable_frags)
+                    for frag in sorted_frags:
                         f.write(f'    {self.char_map[frag.speaker]} "{frag.text}"\n')
 
+def sort_elements(sortable_elements):
+    return sorted(sortable_elements, reverse=True)
 
 """
 @dataclass
