@@ -1,11 +1,13 @@
 # -*- coding: utf-8 -*-
 
-from collections import defaultdict, namedtuple, deque
-from dataclasses import dataclass, field
+from collections import defaultdict, namedtuple
+from dataclasses import dataclass
 from functools import total_ordering
 import json
 from pathlib import Path
-from typing import List, Union
+from typing import Iterator, List
+
+import networkx as nx
 
 CHARACTER_CLASS = "RenCharacter"
 
@@ -172,10 +174,18 @@ class Converter:
                     dumpable_frags = [frag for frag in self._fragments if dialogue.obj_id == frag.parent]
                     sorted_frags = sort_elements(dumpable_frags)
                     for frag in sorted_frags:
-                        f.write(f'    {self.char_map[frag.speaker]} "{frag.text}"\n')
+                        f.write(f'    {self.char_map[self.fragments[frag].speaker]} "{self.fragments[frag].text}"\n')
 
-def sort_elements(sortable_elements):
-    return sorted(sortable_elements, reverse=True)
+def sort_elements(sortable_elements: list) -> Iterator:
+    # We're sorting a graph, so let's use NetworkX
+    # The sort should start asssume single in point
+    # In between the order should be that branches should be written in order as the whole branch before moving
+    # to next branch. Branch end is defined as either hitting node with no output pins or with multiple predecessors.
+    # We assume that more complex bracnhing paths will be handled with jumps to other labels.
+    e_graph = nx.DiGraph()
+    for e in sortable_elements:
+        e_graph.add_edges_from([e.obj_id, output_pin] for output_pin in e.output_pins)
+    return nx.topological_sort(e_graph)
 
 """
 @dataclass
