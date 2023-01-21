@@ -15,15 +15,15 @@ Feature: Reading all the different Fragments in
     And Fragment with obj_id of 0x01000000000002A7 has parent attribute 0x0100000000000286
     And Fragment with obj_id of 0x01000000000002A7 has speaker attribute maeve
     And Fragment with obj_id of 0x01000000000002A7 has text attribute Game will end now.
-    And Fragment with obj_id of 0x01000000000002A7 has output_pins attribute <None>
+    And Fragment with obj_id of 0x01000000000002A7 has output_pins attribute <Empty list>
 
   Scenario: Menu elements and injections are read correctly
     Then Fragment with obj_id of 0x010000000000045E has text attribute Do you want to have the chance to meet the characters multiple times?
     And Fragment with obj_id of 0x010000000000045E has speaker attribute maeve
     And Fragment with obj_id of 0x010000000000045E has output_pins attribute 0x01000000000004A3,0x01000000000004A9
     Then Fragment with obj_id of 0x01000000000004A9 has text attribute No
-    And Fragment with obj_id of 0x01000000000004A9 has speaker attribute <None>
-    And Fragment with obj_id of 0x01000000000004A9 has python_condition attribute <None>
+    And Fragment with obj_id of 0x01000000000004A9 has speaker attribute <Empty>
+    And Fragment with obj_id of 0x01000000000004A9 has python_condition attribute <Empty>
     And Fragment with obj_id of 0x01000000000004A9 has python_outcome attribute $ flags.meet_again = False
     Then Fragment with obj_id of 0x01000000000007C3 has text attribute I think I want to have the option to meet the characters multiple times.
     And Fragment with obj_id of 0x01000000000007C3 has python_condition attribute $ flags.meet_again = False

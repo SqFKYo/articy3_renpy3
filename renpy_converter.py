@@ -35,9 +35,9 @@ class Fragment:
     speaker: str
     text: str
     stage_directions: str
-    output_pins: Union[None, List[str]]
-    python_condition: Union[str, None]
-    python_outcome: Union[str, None]
+    output_pins: List[str]
+    python_condition: str
+    python_outcome: str
 
     def __eq__(self, other):
         return self.obj_id == other.obj_id
@@ -52,10 +52,10 @@ class Converter:
         self._fragments = []
         self._input_file = input_file
         self._variables = []
-        self.char_map = {}
+        self.char_map = defaultdict(str)
 
     def _initialize_charmap(self):
-        self.char_map = {char.speaker: char.name.lower() for char in self._characters}
+        self.char_map.update({char.speaker: char.name.lower() for char in self._characters})
 
     @property
     def fragments(self):
@@ -66,7 +66,7 @@ class Converter:
             try:
                 output_pins = [x["Target"] for x in pins[0]["Connections"]]
             except KeyError:
-                output_pins = None
+                output_pins = []
             return output_pins
 
         def parse_char(raw_char) -> Character:
@@ -101,13 +101,13 @@ class Converter:
         def parse_fragment(props) -> Fragment:
             return Fragment(
                 *parse_basic_fragment(props),
-                python_condition=None,
-                python_outcome=None,
+                python_condition="",
+                python_outcome="",
             )
 
         def parse_injection(obj) -> Fragment:
-            cond = cond if (cond := obj["Template"]["Python_condition"]["python_condition"]) else None
-            output = output if (output := obj["Template"]["Python_condition"]["python_outcome"]) else None
+            cond = obj["Template"]["Python_condition"]["python_condition"]
+            output = obj["Template"]["Python_condition"]["python_outcome"]
             return Fragment(
                 *parse_basic_fragment(obj["Properties"]),
                 python_condition=cond,

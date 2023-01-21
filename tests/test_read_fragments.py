@@ -16,13 +16,12 @@ def assert_fragment_exists(context, obj_id):
 )
 def assert_frag_attr_value(context, obj_id, attr, target_value):
     to_test = getattr(context.converter.fragments[obj_id], attr)
-    if target_value == "<None>":
-        target_value = None
+    if target_value == "<Empty>":
+        target_value = ""
+    elif target_value == "<Empty list>":
+        target_value = []
     if attr == 'speaker':
-        try:
-            to_test = context.converter.char_map[to_test]
-        except KeyError:
-            to_test = None
+        to_test = context.converter.char_map[to_test]
     elif attr == 'output_pins':
         try:
             target_value = target_value.split(',')
