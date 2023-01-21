@@ -167,12 +167,7 @@ class Converter:
     def write_scene_rpy(self, target_file: str, output_path: Path) -> None:
         with open(output_path, "w", encoding="utf-8") as f:
             for dialogue in self._dialogues:
-                first = True
                 if dialogue.target_file == target_file:
-                    if first:
-                        first = False
-                    else:
-                        f.write('\n\n')
                     f.write(f"{dialogue.label}:\n")
                     for frag in sorted((frag for frag in self._fragments if dialogue.obj_id == frag.parent), reverse=True):
                         f.write(f'    {self.char_map[frag.speaker]} "{frag.text}"\n')
