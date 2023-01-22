@@ -21,7 +21,7 @@ class ParseableTypes:
     DIALOGUE = "Dialogue"
     FRAGMENT = "DialogueFragment"
     MENU_ITEM = "Menu_option"
-    MENU = "Menu_dialogue_fragment"
+    MENU = "Menu"
 
 @dataclass
 class Dialogue:

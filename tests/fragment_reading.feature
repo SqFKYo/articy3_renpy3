@@ -25,7 +25,7 @@ Feature: Reading all the different Fragments in
     And Fragment with obj_id of 0x01000000000004A9 has speaker attribute maeve
     And Fragment with obj_id of 0x01000000000004A9 has python_condition attribute <Empty>
     And Fragment with obj_id of 0x01000000000004A9 has python_outcome attribute $ flags.meet_again = False
-    And Fragment with obj_id of 0x01000000000004A9 has option_selected_text attribute You have selected that you do not want to have the option to meet characters multiple times.
+    And Fragment with obj_id of 0x01000000000004A9 has selected_text attribute You have selected that you do not want to have the option to meet characters multiple times.
     Then Fragment with obj_id of 0x01000000000007C3 has speaker attribute <Empty>
     Then Fragment with obj_id of 0x01000000000007C3 has text attribute I think I want to have the option to meet the characters multiple times.
     And Fragment with obj_id of 0x01000000000007C3 has python_condition attribute $ flags.meet_again = False
