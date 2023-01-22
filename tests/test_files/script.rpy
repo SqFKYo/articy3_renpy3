@@ -6,7 +6,7 @@ label start:
 
         "Yes":
             $ flags.meet_again = True
-            "You have selected that you want to have the option to meet characters multiple times."
+            maeve "You have selected that you want to have the option to meet characters multiple times."
 
         "No":
             $ flags.meet_again = False
