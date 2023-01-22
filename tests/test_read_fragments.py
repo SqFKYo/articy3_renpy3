@@ -28,4 +28,6 @@ def assert_frag_attr_value(context, obj_id, attr, target_value):
         except AttributeError:
             # None trying to get split
             pass
+    elif attr == 'ordinal':
+        target_value = int(target_value)
     assert to_test == target_value
