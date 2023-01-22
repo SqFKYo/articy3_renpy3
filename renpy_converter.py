@@ -190,14 +190,11 @@ class Converter:
 
 def sort_elements(sortable_elements: list) -> Iterator:
     # We're sorting a graph, so let's use NetworkX
-    # The sort should start asssume single in point
-    # In between the order should be that branches should be written in order as the whole branch before moving
-    # to next branch. Branch end is defined as either hitting node with no output pins or with multiple predecessors.
-    # We assume that more complex bracnhing paths will be handled with jumps to other labels.
+    # We assume that more complex returning paths will be handled with jumps to other labels, so graph is acyclic.
     e_graph = nx.DiGraph()
     for e in sortable_elements:
         e_graph.add_edges_from([e.obj_id, output_pin] for output_pin in e.output_pins)
-    return nx.topological_sort(e_graph)
+    return nx.lexicographical_topological_sort(e_graph, key=None)
 
 """
 @dataclass
