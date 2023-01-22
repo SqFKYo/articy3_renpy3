@@ -62,11 +62,15 @@ class Converter:
         self._input_file = input_file
         self._variables = []
         self.char_map = defaultdict(str)
+        self.ordinals = defaultdict(int)
 
     def _initialize_charmap(self):
         self.char_map.update(
             {char.speaker: char.name.lower() for char in self._characters}
         )
+
+    def _initialize_ordinals(self):
+        self.ordinals.update({f.obj_id: getattr(f, 'ordinal', 0) for f in self._fragments})
 
     @property
     def fragments(self):
@@ -167,6 +171,7 @@ class Converter:
                     case _:
                         pass
         self._initialize_charmap()
+        self._initialize_ordinals()
 
     def write_init_rpy(self, file_type: str, output_path: Path) -> None:
         with open(output_path, "w", encoding="utf-8") as f:
@@ -195,18 +200,19 @@ class Converter:
                         for frag in self._fragments
                         if dialogue.obj_id == frag.parent
                     ]
-                    sorted_frags = sort_elements(dumpable_frags)
+                    sorted_frags = self.sort_elements(dumpable_frags)
                     for frag in sorted_frags:
                         f.write(
                             f'    {self.char_map[self.fragments[frag].speaker]} "{self.fragments[frag].text}"\n'
                         )
 
 
-def sort_elements(sortable_elements: list) -> Iterator:
-    # We're sorting a graph, so let's use NetworkX
-    # We assume that more complex returning paths will be handled with jumps to other labels, so graph is acyclic.
-    # key helps to sort e.g. menu items in a way that we get constant results when writing files.
-    e_graph = nx.DiGraph()
-    for e in sortable_elements:
-        e_graph.add_edges_from([e.obj_id, output_pin] for output_pin in e.output_pins)
-    return nx.lexicographical_topological_sort(e_graph, key=None)
+    def sort_elements(self, sortable_elements: list) -> Iterator:
+        # We're sorting a graph, so let's use NetworkX
+        # We assume that more complex returning paths will be handled with jumps to other labels, so graph is acyclic.
+        # key helps to sort e.g. menu items in a way that we get constant results when writing files.
+        e_graph = nx.DiGraph()
+
+        for e in sortable_elements:
+            e_graph.add_edges_from([e.obj_id, output_pin] for output_pin in e.output_pins)
+        return nx.lexicographical_topological_sort(e_graph, key=self.ordinals.get)
