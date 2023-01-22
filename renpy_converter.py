@@ -49,7 +49,7 @@ class Fragment:
 class Menu(Fragment):
     def __repr__(self):
         return f'    menu:\n' \
-               f'        {self.speaker} "{self.text}"\n'
+               f'        {self.speaker} "{self.text}"\n\n'
 
 
 @dataclass
@@ -58,6 +58,23 @@ class MenuItem(Fragment):
     python_condition: str = ""
     python_outcome: str = ""
     selected_text: str = ""
+
+    def __repr__(self):
+        returnable = f'        "{self.text}"'
+        if self.python_condition:
+            returnable += f' {self.python_condition}'
+        returnable += ':\n'
+        if self.python_outcome:
+            returnable += f'            {self.python_outcome}\n'
+        if self.selected_text:
+            returnable += '            '
+            if self.speaker:
+                returnable += f'{self.speaker} '
+            returnable += f'"{self.selected_text}"\n'
+        returnable += f'\n'
+        return  returnable
+
+
 
 
 class Converter:
