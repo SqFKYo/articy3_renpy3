@@ -20,7 +20,8 @@ class ParseableTypes:
     CHARACTER = "Ren_py_character"
     DIALOGUE = "Dialogue"
     FRAGMENT = "DialogueFragment"
-    INJECTION = "Python_injections"
+    MENU_ITEM = "Menu_option"
+    MENU = "Menu_dialogue_fragment"
 
 @dataclass
 class Dialogue:
@@ -38,8 +39,10 @@ class Fragment:
     text: str
     stage_directions: str
     output_pins: List[str]
+    menu: bool
     python_condition: str
     python_outcome: str
+    selected_text: str
 
     def __eq__(self, other):
         return self.obj_id == other.obj_id
@@ -103,17 +106,31 @@ class Converter:
         def parse_fragment(props) -> Fragment:
             return Fragment(
                 *parse_basic_fragment(props),
+                menu=False,
                 python_condition="",
                 python_outcome="",
+                selected_text="",
             )
 
-        def parse_injection(obj) -> Fragment:
-            cond = obj["Template"]["Python_condition"]["python_condition"]
-            output = obj["Template"]["Python_condition"]["python_outcome"]
+        def parse_menu(props) -> Fragment:
+            return Fragment(
+                *parse_basic_fragment(props),
+                menu=True,
+                python_condition="",
+                python_outcome="",
+                selected_text="",
+            )
+
+        def parse_menu_item(obj) -> Fragment:
+            cond = obj["Template"]["Menu_option"]["python_condition"]
+            output = obj["Template"]["Menu_option"]["python_outcome"]
+            selected_text = obj["Template"]["Menu_option"]["option_selected_text"]
             return Fragment(
                 *parse_basic_fragment(obj["Properties"]),
+                menu=False,
                 python_condition=cond,
                 python_outcome=output,
+                selected_text=selected_text,
             )
 
         def parse_var(raw_var, name_space) -> Variable:
@@ -143,8 +160,10 @@ class Converter:
                         self._dialogues.append(parse_dialogue(obj["Properties"]))
                     case ParseableTypes.FRAGMENT:
                         self._fragments.append(parse_fragment(obj["Properties"]))
-                    case ParseableTypes.INJECTION:
-                        self._fragments.append(parse_injection(obj))
+                    case ParseableTypes.MENU:
+                        self._fragments.append(parse_menu(obj["Properties"]))
+                    case ParseableTypes.MENU_ITEM:
+                        self._fragments.append(parse_menu_item(obj))
                     case _:
                         pass
         self._initialize_charmap()

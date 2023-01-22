@@ -632,7 +632,7 @@
                 "DisplayName": "Python outcome"
               },
               {
-                "Property": "Option_selected_text",
+                "Property": "option_selected_text",
                 "Type": "string",
                 "DisplayName": "Option selected text"
               }
@@ -655,7 +655,7 @@
                 "AllowsLinebreaks": "True"
               },
               {
-                "Property": "Option_selected_text",
+                "Property": "option_selected_text",
                 "Type": "Text",
                 "MaxLength": "2048",
                 "PlaceholderValue": "",
@@ -3411,7 +3411,7 @@
             "Menu_option": {
               "python_condition": "",
               "python_outcome": "$ flags.meet_again = True",
-              "Option_selected_text": "You have selected that you want to have the option to meet characters multiple times."
+              "option_selected_text": "You have selected that you want to have the option to meet characters multiple times."
             }
           }
         },
@@ -3474,7 +3474,7 @@
             "Menu_option": {
               "python_condition": "",
               "python_outcome": "$ flags.meet_again = False",
-              "Option_selected_text": "You have selected that you do not want to have the option to meet characters multiple times."
+              "option_selected_text": "You have selected that you do not want to have the option to meet characters multiple times."
             }
           }
         },
@@ -3537,7 +3537,7 @@
             "Menu_option": {
               "python_condition": "",
               "python_outcome": "$ ...",
-              "Option_selected_text": ""
+              "option_selected_text": ""
             }
           }
         },
@@ -3600,7 +3600,7 @@
             "Menu_option": {
               "python_condition": "$ flags.meet_again = False",
               "python_outcome": "$ flags.meet_again = True",
-              "Option_selected_text": ""
+              "option_selected_text": ""
             }
           }
         },
@@ -3663,7 +3663,7 @@
             "Menu_option": {
               "python_condition": "$ flags.meet_again = True",
               "python_outcome": "$ flags.meet_again = False",
-              "Option_selected_text": ""
+              "option_selected_text": ""
             }
           }
         },
@@ -3726,7 +3726,7 @@
             "Menu_option": {
               "python_condition": "$ meet_again or not maeve.met_already",
               "python_outcome": "",
-              "Option_selected_text": ""
+              "option_selected_text": ""
             }
           }
         },
@@ -3789,7 +3789,7 @@
             "Menu_option": {
               "python_condition": "$ meet_again or not faye.met_already",
               "python_outcome": "",
-              "Option_selected_text": ""
+              "option_selected_text": ""
             }
           }
         },
@@ -3852,7 +3852,7 @@
             "Menu_option": {
               "python_condition": "",
               "python_outcome": "$ maeve.met_already = True",
-              "Option_selected_text": ""
+              "option_selected_text": ""
             }
           }
         },
@@ -3915,7 +3915,7 @@
             "Menu_option": {
               "python_condition": "",
               "python_outcome": "$ faye.met_already = True",
-              "Option_selected_text": ""
+              "option_selected_text": ""
             }
           }
         },
