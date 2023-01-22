@@ -600,16 +600,6 @@
       ]
     },
     {
-      "Type": "Menu",
-      "Class": "DialogueFragment",
-      "InheritsFrom": "DialogueFragment",
-      "Template": {
-        "TechnicalName": "Menu",
-        "DisplayName": "Menu",
-        "Features": []
-      }
-    },
-    {
       "Type": "Menu_option",
       "Class": "DialogueFragment",
       "InheritsFrom": "DialogueFragment",
@@ -635,6 +625,11 @@
                 "Property": "option_selected_text",
                 "Type": "string",
                 "DisplayName": "Option selected text"
+              },
+              {
+                "Property": "ordinal_number",
+                "Type": "Float",
+                "DisplayName": "Ordinal number"
               }
             ],
             "Constraints": [
@@ -661,10 +656,30 @@
                 "PlaceholderValue": "",
                 "IsLocalized": "False",
                 "AllowsLinebreaks": "True"
+              },
+              {
+                "Property": "ordinal_number",
+                "Type": "Number",
+                "MinValue": "-3.40282346638529E+38",
+                "MaxValue": "3.40282346638529E+38",
+                "Precision": "0",
+                "MinPrecision": "0",
+                "MaxPrecision": "0",
+                "Unit": null
               }
             ]
           }
         ]
+      }
+    },
+    {
+      "Type": "Menu",
+      "Class": "DialogueFragment",
+      "InheritsFrom": "DialogueFragment",
+      "Template": {
+        "TechnicalName": "Menu",
+        "DisplayName": "Menu",
+        "Features": []
       }
     },
     {
@@ -3395,9 +3410,9 @@
                   {
                     "Color": {
                       "a": 1.0,
-                      "r": 0.5764706,
-                      "g": 0.75686276,
-                      "b": 0.8
+                      "r": 0.577580452,
+                      "g": 0.7605245,
+                      "b": 0.7991027
                     },
                     "Label": "",
                     "TargetPin": "0x01000000000007B3",
@@ -3411,7 +3426,8 @@
             "Menu_option": {
               "python_condition": "",
               "python_outcome": "$ flags.meet_again = True",
-              "option_selected_text": "You have selected that you want to have the option to meet characters multiple times."
+              "option_selected_text": "You have selected that you want to have the option to meet characters multiple times.",
+              "ordinal_number": 1.0
             }
           }
         },
@@ -3458,9 +3474,9 @@
                   {
                     "Color": {
                       "a": 1.0,
-                      "r": 0.5764706,
-                      "g": 0.75686276,
-                      "b": 0.8
+                      "r": 0.577580452,
+                      "g": 0.7605245,
+                      "b": 0.7991027
                     },
                     "Label": "",
                     "TargetPin": "0x01000000000007B3",
@@ -3474,7 +3490,8 @@
             "Menu_option": {
               "python_condition": "",
               "python_outcome": "$ flags.meet_again = False",
-              "option_selected_text": "You have selected that you do not want to have the option to meet characters multiple times."
+              "option_selected_text": "You have selected that you do not want to have the option to meet characters multiple times.",
+              "ordinal_number": 2.0
             }
           }
         },
@@ -3537,7 +3554,8 @@
             "Menu_option": {
               "python_condition": "",
               "python_outcome": "$ ...",
-              "option_selected_text": ""
+              "option_selected_text": "",
+              "ordinal_number": 3.0
             }
           }
         },
@@ -3600,7 +3618,8 @@
             "Menu_option": {
               "python_condition": "$ flags.meet_again = False",
               "python_outcome": "$ flags.meet_again = True",
-              "option_selected_text": ""
+              "option_selected_text": "",
+              "ordinal_number": 1.0
             }
           }
         },
@@ -3663,7 +3682,8 @@
             "Menu_option": {
               "python_condition": "$ flags.meet_again = True",
               "python_outcome": "$ flags.meet_again = False",
-              "option_selected_text": ""
+              "option_selected_text": "",
+              "ordinal_number": 2.0
             }
           }
         },
@@ -3726,7 +3746,8 @@
             "Menu_option": {
               "python_condition": "$ meet_again or not maeve.met_already",
               "python_outcome": "",
-              "option_selected_text": ""
+              "option_selected_text": "",
+              "ordinal_number": null
             }
           }
         },
@@ -3789,7 +3810,8 @@
             "Menu_option": {
               "python_condition": "$ meet_again or not faye.met_already",
               "python_outcome": "",
-              "option_selected_text": ""
+              "option_selected_text": "",
+              "ordinal_number": null
             }
           }
         },
@@ -3852,7 +3874,8 @@
             "Menu_option": {
               "python_condition": "",
               "python_outcome": "$ maeve.met_already = True",
-              "option_selected_text": ""
+              "option_selected_text": "",
+              "ordinal_number": null
             }
           }
         },
@@ -3915,7 +3938,8 @@
             "Menu_option": {
               "python_condition": "",
               "python_outcome": "$ faye.met_already = True",
-              "option_selected_text": ""
+              "option_selected_text": "",
+              "ordinal_number": null
             }
           }
         },
