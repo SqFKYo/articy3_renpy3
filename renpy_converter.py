@@ -99,6 +99,9 @@ class Converter:
             f.speaker = self.char_map[f.speaker_id]
 
     @property
+    def dialogues(self):
+        return {diag.obj_id: diag for diag in self._dialogues}
+    @property
     def fragments(self):
         return {frag.obj_id: frag for frag in self._fragments}
 
@@ -228,8 +231,22 @@ class Converter:
                         if dialogue.obj_id == frag.parent
                     ]
                     sorted_frags = self.sort_elements(dumpable_frags)
+                    # Need to keep tabs on what was the last written, so we can check parent if needed
+                    previous = None
                     for frag in sorted_frags:
-                        f.write(str(self.fragments[frag]))
+                        try:
+                            f.write(str(self.fragments[frag]))
+                            previous = self.fragments[frag]
+                        except KeyError:
+                            # Fragment leads to Dialogue instead
+                            # Since this Fragment leads either to next dialogue *or* parent, jump is to target Dialogue
+                            # or to the next dialogue instead.
+                            leads_to = self.dialogues[frag]
+                            if leads_to == self.dialogues[previous.parent]:
+                                leads_to = self.dialogues[leads_to.output_pins[0]]
+                            # Dialogue has label or menu prefix, we need to change it to jump
+                            jump_text = leads_to.label.replace('label', 'jump').replace('menu', 'jump')
+                            f.write(f"\n    {jump_text}\n")
 
     def sort_elements(self, sortable_elements: list) -> Iterator:
         # We're sorting a graph, so let's use NetworkX
