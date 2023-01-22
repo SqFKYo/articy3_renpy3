@@ -47,7 +47,7 @@ class Fragment:
 
 @dataclass
 class Menu(Fragment):
-    menu: bool = True
+    pass
 
 
 @dataclass
