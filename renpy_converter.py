@@ -35,10 +35,11 @@ class Dialogue:
 class Fragment:
     obj_id: str
     parent: str
-    speaker: str
+    speaker_id: str
     text: str
     stage_directions: str
     output_pins: List[str]
+    speaker: str = ""
 
 
 @dataclass
@@ -48,10 +49,10 @@ class Menu(Fragment):
 
 @dataclass
 class MenuItem(Fragment):
-    ordinal: int
-    python_condition: str
-    python_outcome: str
-    selected_text: str
+    ordinal: int = 0
+    python_condition: str = ""
+    python_outcome: str = ""
+    selected_text: str = ""
 
 
 class Converter:
@@ -71,6 +72,10 @@ class Converter:
 
     def _initialize_ordinals(self):
         self.ordinals.update({f.obj_id: getattr(f, 'ordinal', 0) for f in self._fragments})
+
+    def _initialize_speakers(self):
+        for f in self._fragments:
+            f.speaker = self.char_map[f.speaker_id]
 
     @property
     def fragments(self):
@@ -172,6 +177,7 @@ class Converter:
                         pass
         self._initialize_charmap()
         self._initialize_ordinals()
+        self._initialize_speakers()
 
     def write_init_rpy(self, file_type: str, output_path: Path) -> None:
         with open(output_path, "w", encoding="utf-8") as f:

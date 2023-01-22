@@ -20,9 +20,7 @@ def assert_frag_attr_value(context, obj_id, attr, target_value):
         target_value = ""
     elif target_value == "<Empty list>":
         target_value = []
-    if attr == 'speaker':
-        to_test = context.converter.char_map[to_test]
-    elif attr == 'output_pins':
+    if attr == 'output_pins':
         try:
             target_value = target_value.split(',')
         except AttributeError:
