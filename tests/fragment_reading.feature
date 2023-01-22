@@ -17,7 +17,7 @@ Feature: Reading all the different Fragments in
     And Fragment with obj_id of 0x01000000000002A7 has text attribute Game will end now.
     And Fragment with obj_id of 0x01000000000002A7 has output_pins attribute <Empty list>
 
-  Scenario: Menu elements and injections are read correctly
+  Scenario: Menus and their items are read correctly
     Then Fragment with obj_id of 0x010000000000045E has text attribute Do you want to have the chance to meet the characters multiple times?
     And Fragment with obj_id of 0x010000000000045E has speaker attribute maeve
     And Fragment with obj_id of 0x010000000000045E has output_pins attribute 0x01000000000004A3,0x01000000000004A9

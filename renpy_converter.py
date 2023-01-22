@@ -22,12 +22,14 @@ class ParseableTypes:
     MENU_ITEM = "Menu_option"
     MENU = "Menu"
 
+
 @dataclass
 class Dialogue:
     obj_id: str
     label: str
     target_file: str
     output_pins: list[str]
+
 
 @dataclass
 class Fragment:
@@ -37,7 +39,15 @@ class Fragment:
     text: str
     stage_directions: str
     output_pins: List[str]
-    menu: bool
+
+
+@dataclass
+class Menu(Fragment):
+    menu: bool = True
+
+
+@dataclass
+class MenuItem(Fragment):
     python_condition: str
     python_outcome: str
     selected_text: str
@@ -53,7 +63,9 @@ class Converter:
         self.char_map = defaultdict(str)
 
     def _initialize_charmap(self):
-        self.char_map.update({char.speaker: char.name.lower() for char in self._characters})
+        self.char_map.update(
+            {char.speaker: char.name.lower() for char in self._characters}
+        )
 
     @property
     def fragments(self):
@@ -96,31 +108,23 @@ class Converter:
                 props["StageDirections"],
                 get_outputs(props["OutputPins"]),
             ]
+
         def parse_fragment(props) -> Fragment:
             return Fragment(
                 *parse_basic_fragment(props),
-                menu=False,
-                python_condition="",
-                python_outcome="",
-                selected_text="",
             )
 
-        def parse_menu(props) -> Fragment:
-            return Fragment(
+        def parse_menu(props) -> Menu:
+            return Menu(
                 *parse_basic_fragment(props),
-                menu=True,
-                python_condition="",
-                python_outcome="",
-                selected_text="",
             )
 
-        def parse_menu_item(obj) -> Fragment:
+        def parse_menu_item(obj) -> MenuItem:
             cond = obj["Template"]["Menu_option"]["python_condition"]
             output = obj["Template"]["Menu_option"]["python_outcome"]
             selected_text = obj["Template"]["Menu_option"]["option_selected_text"]
-            return Fragment(
+            return MenuItem(
                 *parse_basic_fragment(obj["Properties"]),
-                menu=False,
                 python_condition=cond,
                 python_outcome=output,
                 selected_text=selected_text,
@@ -183,10 +187,17 @@ class Converter:
             for dialogue in self._dialogues:
                 if dialogue.target_file == target_file:
                     f.write(f"{dialogue.label}:\n")
-                    dumpable_frags = [frag for frag in self._fragments if dialogue.obj_id == frag.parent]
+                    dumpable_frags = [
+                        frag
+                        for frag in self._fragments
+                        if dialogue.obj_id == frag.parent
+                    ]
                     sorted_frags = sort_elements(dumpable_frags)
                     for frag in sorted_frags:
-                        f.write(f'    {self.char_map[self.fragments[frag].speaker]} "{self.fragments[frag].text}"\n')
+                        f.write(
+                            f'    {self.char_map[self.fragments[frag].speaker]} "{self.fragments[frag].text}"\n'
+                        )
+
 
 def sort_elements(sortable_elements: list) -> Iterator:
     # We're sorting a graph, so let's use NetworkX
@@ -196,6 +207,7 @@ def sort_elements(sortable_elements: list) -> Iterator:
     for e in sortable_elements:
         e_graph.add_edges_from([e.obj_id, output_pin] for output_pin in e.output_pins)
     return nx.lexicographical_topological_sort(e_graph, key=None)
+
 
 """
 @dataclass
