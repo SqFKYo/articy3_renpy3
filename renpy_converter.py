@@ -191,6 +191,7 @@ class Converter:
 def sort_elements(sortable_elements: list) -> Iterator:
     # We're sorting a graph, so let's use NetworkX
     # We assume that more complex returning paths will be handled with jumps to other labels, so graph is acyclic.
+    # key helps to sort e.g. menu items in a way that we get constant results when writing files.
     e_graph = nx.DiGraph()
     for e in sortable_elements:
         e_graph.add_edges_from([e.obj_id, output_pin] for output_pin in e.output_pins)
