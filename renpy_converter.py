@@ -47,7 +47,9 @@ class Fragment:
 
 @dataclass
 class Menu(Fragment):
-    pass
+    def __repr__(self):
+        return f'    menu:\n' \
+               f'        {self.speaker} "{self.text}"\n'
 
 
 @dataclass
