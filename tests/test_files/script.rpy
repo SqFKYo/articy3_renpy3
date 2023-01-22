@@ -4,11 +4,11 @@ label start:
     menu: 
         maeve "Do you want to have the chance to meet the characters multiple times?"
 
-        "Yes.":
+        "Yes":
             $ flags.meet_again = True
             "You have selected that you want to have the option to meet characters multiple times."
 
-        "No.":
+        "No":
             $ flags.meet_again = False
             maeve "You have selected that you do not want to have the option to meet characters multiple times."
 
