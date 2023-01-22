@@ -2,7 +2,6 @@
 
 from collections import defaultdict, namedtuple
 from dataclasses import dataclass
-from functools import total_ordering
 import json
 from pathlib import Path
 from typing import Iterator, List
@@ -30,7 +29,6 @@ class Dialogue:
     target_file: str
     output_pins: list[str]
 
-@total_ordering
 @dataclass
 class Fragment:
     obj_id: str
@@ -44,11 +42,6 @@ class Fragment:
     python_outcome: str
     selected_text: str
 
-    def __eq__(self, other):
-        return self.obj_id == other.obj_id
-
-    def __lt__(self, other):
-        return self.obj_id in other.output_pins
 
 class Converter:
     def __init__(self, input_file: Path) -> None:
