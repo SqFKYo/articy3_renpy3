@@ -3561,7 +3561,7 @@
           },
           "Template": {
             "Menu_option": {
-              "python_condition": "$ flags.meet_again = False",
+              "python_condition": "if not flags.meet_again",
               "python_outcome": "$ flags.meet_again = True",
               "option_selected_text": "",
               "ordinal_number": 1.0
@@ -3625,7 +3625,7 @@
           },
           "Template": {
             "Menu_option": {
-              "python_condition": "$ flags.meet_again = True",
+              "python_condition": "if flags.meet_again",
               "python_outcome": "$ flags.meet_again = False",
               "option_selected_text": "",
               "ordinal_number": 2.0
