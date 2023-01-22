@@ -1,6 +1,5 @@
 label start:
     maeve "This is a short test run for the game's integration testing."
-
     menu: 
         maeve "Do you want to have the chance to meet the characters multiple times?"
 
