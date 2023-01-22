@@ -48,8 +48,7 @@ class Fragment:
 @dataclass
 class Menu(Fragment):
     def __repr__(self):
-        return f'    menu:\n' \
-               f'        {self.speaker} "{self.text}"\n\n'
+        return f"    menu:\n" f'        {self.speaker} "{self.text}"\n\n'
 
 
 @dataclass
@@ -62,19 +61,17 @@ class MenuItem(Fragment):
     def __repr__(self):
         returnable = f'        "{self.text}"'
         if self.python_condition:
-            returnable += f' {self.python_condition}'
-        returnable += ':\n'
+            returnable += f" {self.python_condition}"
+        returnable += ":\n"
         if self.python_outcome:
-            returnable += f'            {self.python_outcome}\n'
+            returnable += f"            {self.python_outcome}\n"
         if self.selected_text:
-            returnable += '            '
+            returnable += "            "
             if self.speaker:
-                returnable += f'{self.speaker} '
+                returnable += f"{self.speaker} "
             returnable += f'"{self.selected_text}"\n'
-        returnable += f'\n'
-        return  returnable
-
-
+        returnable += f"\n"
+        return returnable
 
 
 class Converter:
@@ -93,7 +90,9 @@ class Converter:
         )
 
     def _initialize_ordinals(self):
-        self.ordinals.update({f.obj_id: getattr(f, 'ordinal', 0) for f in self._fragments})
+        self.ordinals.update(
+            {f.obj_id: getattr(f, "ordinal", 0) for f in self._fragments}
+        )
 
     def _initialize_speakers(self):
         for f in self._fragments:
@@ -232,7 +231,6 @@ class Converter:
                     for frag in sorted_frags:
                         f.write(str(self.fragments[frag]))
 
-
     def sort_elements(self, sortable_elements: list) -> Iterator:
         # We're sorting a graph, so let's use NetworkX
         # We assume that more complex returning paths will be handled with jumps to other labels, so graph is acyclic.
@@ -240,5 +238,7 @@ class Converter:
         e_graph = nx.DiGraph()
 
         for e in sortable_elements:
-            e_graph.add_edges_from([e.obj_id, output_pin] for output_pin in e.output_pins)
+            e_graph.add_edges_from(
+                [e.obj_id, output_pin] for output_pin in e.output_pins
+            )
         return nx.lexicographical_topological_sort(e_graph, key=self.ordinals.get)
