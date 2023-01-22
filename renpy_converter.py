@@ -41,8 +41,8 @@ class Fragment:
     output_pins: List[str]
     speaker: str = ""
 
-    def __str__(self):
-        return f'    {self.speaker} {self.text}\n'
+    def __repr__(self):
+        return f'    {self.speaker} "{self.text}"\n'
 
 
 @dataclass
@@ -211,7 +211,7 @@ class Converter:
                     ]
                     sorted_frags = self.sort_elements(dumpable_frags)
                     for frag in sorted_frags:
-                        f.write(str(frag))
+                        f.write(str(self.fragments[frag]))
 
 
     def sort_elements(self, sortable_elements: list) -> Iterator:
