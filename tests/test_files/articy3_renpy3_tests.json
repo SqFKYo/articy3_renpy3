@@ -3033,62 +3033,6 @@
         {
           "Type": "DialogueFragment",
           "Properties": {
-            "TechnicalName": "DFr_A9030A08",
-            "Id": "0x01000000000004EF",
-            "Parent": "0x01000000000004BA",
-            "MenuText": "",
-            "StageDirections": "",
-            "Speaker": "0x010000000000049F",
-            "SplitHeight": 64.0,
-            "Color": {
-              "r": 0.577580452,
-              "g": 0.7605245,
-              "b": 0.7991027
-            },
-            "Text": "I'm done with meeting characters.",
-            "ExternalId": "",
-            "Position": {
-              "x": 1325.0,
-              "y": 525.0
-            },
-            "ZIndex": 3.0,
-            "Size": {
-              "w": 225.0,
-              "h": 200.0
-            },
-            "ShortId": 2835548680,
-            "InputPins": [
-              {
-                "Text": "",
-                "Id": "0x01000000000004F2",
-                "Owner": "0x01000000000004EF"
-              }
-            ],
-            "OutputPins": [
-              {
-                "Text": "",
-                "Id": "0x01000000000004F3",
-                "Owner": "0x01000000000004EF",
-                "Connections": [
-                  {
-                    "Color": {
-                      "a": 1.0,
-                      "r": 0.577580452,
-                      "g": 0.7605245,
-                      "b": 0.7991027
-                    },
-                    "Label": "",
-                    "TargetPin": "0x01000000000004F9",
-                    "Target": "0x01000000000004F6"
-                  }
-                ]
-              }
-            ]
-          }
-        },
-        {
-          "Type": "DialogueFragment",
-          "Properties": {
             "TechnicalName": "DFr_4458BD2C",
             "Id": "0x01000000000004F6",
             "Parent": "0x01000000000004BA",
@@ -3136,84 +3080,6 @@
                     "Label": "",
                     "TargetPin": "0x01000000000004BE",
                     "Target": "0x01000000000004BA"
-                  }
-                ]
-              }
-            ]
-          }
-        },
-        {
-          "Type": "DialogueFragment",
-          "Properties": {
-            "TechnicalName": "DFr_D6CA823F",
-            "Id": "0x0100000000000905",
-            "Parent": "0x01000000000004BA",
-            "MenuText": "",
-            "StageDirections": "",
-            "Speaker": "0x010000000000049F",
-            "SplitHeight": 64.0,
-            "Color": {
-              "r": 0.577580452,
-              "g": 0.7605245,
-              "b": 0.7991027
-            },
-            "Text": "Who would you like to meet?",
-            "ExternalId": "",
-            "Position": {
-              "x": 950.0,
-              "y": 275.0
-            },
-            "ZIndex": 9.0,
-            "Size": {
-              "w": 225.0,
-              "h": 200.0
-            },
-            "ShortId": 3603595839,
-            "InputPins": [
-              {
-                "Text": "",
-                "Id": "0x0100000000000908",
-                "Owner": "0x0100000000000905"
-              }
-            ],
-            "OutputPins": [
-              {
-                "Text": "",
-                "Id": "0x0100000000000909",
-                "Owner": "0x0100000000000905",
-                "Connections": [
-                  {
-                    "Color": {
-                      "a": 1.0,
-                      "r": 0.577580452,
-                      "g": 0.7605245,
-                      "b": 0.7991027
-                    },
-                    "Label": "",
-                    "TargetPin": "0x01000000000004F2",
-                    "Target": "0x01000000000004EF"
-                  },
-                  {
-                    "Color": {
-                      "a": 1.0,
-                      "r": 0.577580452,
-                      "g": 0.7605245,
-                      "b": 0.7991027
-                    },
-                    "Label": "",
-                    "TargetPin": "0x010000000000091B",
-                    "Target": "0x010000000000091A"
-                  },
-                  {
-                    "Color": {
-                      "a": 1.0,
-                      "r": 0.577580452,
-                      "g": 0.7605245,
-                      "b": 0.7991027
-                    },
-                    "Label": "",
-                    "TargetPin": "0x0100000000000917",
-                    "Target": "0x0100000000000914"
                   }
                 ]
               }
@@ -3360,6 +3226,85 @@
                     "Label": "",
                     "TargetPin": "0x01000000000007BB",
                     "Target": "0x01000000000007B8"
+                  }
+                ]
+              }
+            ]
+          },
+          "Template": {}
+        },
+        {
+          "Type": "Menu",
+          "Properties": {
+            "TechnicalName": "DFr_D6CA823F",
+            "Id": "0x0100000000000905",
+            "Parent": "0x01000000000004BA",
+            "MenuText": "",
+            "StageDirections": "",
+            "Speaker": "0x010000000000049F",
+            "SplitHeight": 64.0,
+            "Color": {
+              "r": 0.577580452,
+              "g": 0.7605245,
+              "b": 0.7991027
+            },
+            "Text": "Who would you like to meet?",
+            "ExternalId": "",
+            "Position": {
+              "x": 950.0,
+              "y": 275.0
+            },
+            "ZIndex": 9.0,
+            "Size": {
+              "w": 225.0,
+              "h": 200.0
+            },
+            "ShortId": 3603595839,
+            "InputPins": [
+              {
+                "Text": "",
+                "Id": "0x0100000000000908",
+                "Owner": "0x0100000000000905"
+              }
+            ],
+            "OutputPins": [
+              {
+                "Text": "",
+                "Id": "0x0100000000000909",
+                "Owner": "0x0100000000000905",
+                "Connections": [
+                  {
+                    "Color": {
+                      "a": 1.0,
+                      "r": 0.577580452,
+                      "g": 0.7605245,
+                      "b": 0.7991027
+                    },
+                    "Label": "",
+                    "TargetPin": "0x01000000000004F2",
+                    "Target": "0x01000000000004EF"
+                  },
+                  {
+                    "Color": {
+                      "a": 1.0,
+                      "r": 0.577580452,
+                      "g": 0.7605245,
+                      "b": 0.7991027
+                    },
+                    "Label": "",
+                    "TargetPin": "0x010000000000091B",
+                    "Target": "0x010000000000091A"
+                  },
+                  {
+                    "Color": {
+                      "a": 1.0,
+                      "r": 0.577580452,
+                      "g": 0.7605245,
+                      "b": 0.7991027
+                    },
+                    "Label": "",
+                    "TargetPin": "0x0100000000000917",
+                    "Target": "0x0100000000000914"
                   }
                 ]
               }
@@ -3690,6 +3635,70 @@
         {
           "Type": "Menu_option",
           "Properties": {
+            "TechnicalName": "DFr_A9030A08",
+            "Id": "0x01000000000004EF",
+            "Parent": "0x01000000000004BA",
+            "MenuText": "",
+            "StageDirections": "",
+            "Speaker": "0x010000000000049F",
+            "SplitHeight": 64.0,
+            "Color": {
+              "r": 0.577580452,
+              "g": 0.7605245,
+              "b": 0.7991027
+            },
+            "Text": "I'm done with meeting characters.",
+            "ExternalId": "",
+            "Position": {
+              "x": 1325.0,
+              "y": 525.0
+            },
+            "ZIndex": 3.0,
+            "Size": {
+              "w": 225.0,
+              "h": 200.0
+            },
+            "ShortId": 2835548680,
+            "InputPins": [
+              {
+                "Text": "",
+                "Id": "0x01000000000004F2",
+                "Owner": "0x01000000000004EF"
+              }
+            ],
+            "OutputPins": [
+              {
+                "Text": "",
+                "Id": "0x01000000000004F3",
+                "Owner": "0x01000000000004EF",
+                "Connections": [
+                  {
+                    "Color": {
+                      "a": 1.0,
+                      "r": 0.577580452,
+                      "g": 0.7605245,
+                      "b": 0.7991027
+                    },
+                    "Label": "",
+                    "TargetPin": "0x01000000000004F9",
+                    "Target": "0x01000000000004F6"
+                  }
+                ]
+              }
+            ]
+          },
+          "Template": {
+            "Menu_option": {
+              "python_condition": "",
+              "python_outcome": "",
+              "option_selected_text": "",
+              "ordinal_number": 3.0
+            }
+          }
+        },
+        {
+          "Type": "Menu_option",
+          "Properties": {
             "TechnicalName": "DFr_F7586E41",
             "Id": "0x0100000000000914",
             "Parent": "0x01000000000004BA",
@@ -3747,7 +3756,7 @@
               "python_condition": "$ meet_again or not maeve.met_already",
               "python_outcome": "",
               "option_selected_text": "",
-              "ordinal_number": null
+              "ordinal_number": 1.0
             }
           }
         },
@@ -3811,7 +3820,7 @@
               "python_condition": "$ meet_again or not faye.met_already",
               "python_outcome": "",
               "option_selected_text": "",
-              "ordinal_number": null
+              "ordinal_number": 2.0
             }
           }
         },
@@ -3875,7 +3884,7 @@
               "python_condition": "",
               "python_outcome": "$ maeve.met_already = True",
               "option_selected_text": "",
-              "ordinal_number": null
+              "ordinal_number": 1.0
             }
           }
         },
@@ -3939,7 +3948,7 @@
               "python_condition": "",
               "python_outcome": "$ faye.met_already = True",
               "option_selected_text": "",
-              "ordinal_number": null
+              "ordinal_number": 1.0
             }
           }
         },
