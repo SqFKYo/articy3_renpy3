@@ -48,6 +48,7 @@ class Menu(Fragment):
 
 @dataclass
 class MenuItem(Fragment):
+    ordinal: int
     python_condition: str
     python_outcome: str
     selected_text: str
@@ -123,8 +124,10 @@ class Converter:
             cond = obj["Template"]["Menu_option"]["python_condition"]
             output = obj["Template"]["Menu_option"]["python_outcome"]
             selected_text = obj["Template"]["Menu_option"]["option_selected_text"]
+            ordinal = int(obj["Template"]["Menu_option"]["ordinal_number"])
             return MenuItem(
                 *parse_basic_fragment(obj["Properties"]),
+                ordinal=ordinal,
                 python_condition=cond,
                 python_outcome=output,
                 selected_text=selected_text,
