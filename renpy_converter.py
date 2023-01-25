@@ -271,6 +271,7 @@ class Converter:
 
         while d:
             next_out = d.popleft()
-            children = list(e_graph.successors(next_out))
+            # Branching back produces duplicates, need to not add the nodes already in deque
+            children = list(n for n in e_graph.successors(next_out) if n not in d)
             d.extend(sorted((c for c in children), key=self.ordinals.get))
             yield next_out
