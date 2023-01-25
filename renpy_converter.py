@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from collections import defaultdict, namedtuple
+from collections import defaultdict, deque, namedtuple
 from dataclasses import dataclass
 import json
 from pathlib import Path
@@ -248,13 +248,29 @@ class Converter:
                         f.write(f"\n    jump {leads_to.label}\n")
 
     def sort_elements(self, sortable_elements: list) -> Iterator:
-        # We're sorting a graph, so let's use NetworkX
-        # We assume that more complex returning paths will be handled with jumps to other labels, so graph is acyclic.
-        # key helps to sort e.g. menu items in a way that we get constant results when writing files.
+        """
+        We're sorting a graph, so let's use NetworkX to create the graph
+        We assume that more complex returning paths will be handled with jumps to other labels, so graph is acyclic.
+        If there's no menu, there is no branching
+        If there's menu, ordinal decides the order
+        The choices either point to a jump or get all back to the same new Fragmentg files.
+        """
+        # Making sure we don't end up crashing on accident
+        if len(sortable_elements) == 1:
+            return sortable_elements
+
         e_graph = nx.DiGraph()
 
         for e in sortable_elements:
             e_graph.add_edges_from(
                 [e.obj_id, output_pin] for output_pin in e.output_pins
             )
-        return nx.lexicographical_topological_sort(e_graph, key=self.ordinals.get)
+        root = next(n for n in e_graph.nodes if not set(e_graph.predecessors(n)))
+
+        d = deque([root])
+
+        while d:
+            next_out = d.popleft()
+            children = list(e_graph.successors(next_out))
+            d.extend(sorted((c for c in children), key=self.ordinals.get))
+            yield next_out
