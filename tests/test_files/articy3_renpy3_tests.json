@@ -683,6 +683,51 @@
       }
     },
     {
+      "Type": "Injected_Fragment",
+      "Class": "DialogueFragment",
+      "InheritsFrom": "DialogueFragment",
+      "Template": {
+        "TechnicalName": "Injected_Fragment",
+        "DisplayName": "Injected Fragment",
+        "Features": [
+          {
+            "TechnicalName": "Python_injections",
+            "DisplayName": "Python injections",
+            "Properties": [
+              {
+                "Property": "python_condition",
+                "Type": "string",
+                "DisplayName": "Python condition"
+              },
+              {
+                "Property": "python_outcome",
+                "Type": "string",
+                "DisplayName": "Python outcome"
+              }
+            ],
+            "Constraints": [
+              {
+                "Property": "python_condition",
+                "Type": "Text",
+                "MaxLength": "2048",
+                "PlaceholderValue": "",
+                "IsLocalized": "False",
+                "AllowsLinebreaks": "True"
+              },
+              {
+                "Property": "python_outcome",
+                "Type": "Text",
+                "MaxLength": "2048",
+                "PlaceholderValue": "",
+                "IsLocalized": "False",
+                "AllowsLinebreaks": "True"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
       "Type": "Hub",
       "Class": "Hub",
       "DisplayName": "Hub",
@@ -2424,7 +2469,7 @@
             "Id": "0x010000000000026F",
             "Parent": "0x0300000043CE43F7",
             "Attachments": [],
-            "DisplayName": "label start",
+            "DisplayName": "start",
             "PreviewImage": {
               "ViewBox": {
                 "x": 0.0,
@@ -2501,7 +2546,7 @@
             "Id": "0x0100000000000286",
             "Parent": "0x0300000043CE43F7",
             "Attachments": [],
-            "DisplayName": "label game_end",
+            "DisplayName": "game_end",
             "PreviewImage": {
               "ViewBox": {
                 "x": 0.0,
@@ -2565,7 +2610,7 @@
             "Id": "0x01000000000004BA",
             "Parent": "0x0300000043CE43F7",
             "Attachments": [],
-            "DisplayName": "menu meet_select",
+            "DisplayName": "meet_select",
             "PreviewImage": {
               "ViewBox": {
                 "x": 0.0,
@@ -3825,7 +3870,7 @@
           }
         },
         {
-          "Type": "Menu_option",
+          "Type": "Injected_Fragment",
           "Properties": {
             "TechnicalName": "DFr_B51C4C7D",
             "Id": "0x0100000000000950",
@@ -3880,16 +3925,14 @@
             ]
           },
           "Template": {
-            "Menu_option": {
+            "Python_injections": {
               "python_condition": "",
-              "python_outcome": "$ maeve.met_already = True",
-              "option_selected_text": "",
-              "ordinal_number": 1.0
+              "python_outcome": "$ maeve.met_already = True"
             }
           }
         },
         {
-          "Type": "Menu_option",
+          "Type": "Injected_Fragment",
           "Properties": {
             "TechnicalName": "DFr_61646464",
             "Id": "0x010000000000029D",
@@ -3944,11 +3987,9 @@
             ]
           },
           "Template": {
-            "Menu_option": {
+            "Python_injections": {
               "python_condition": "",
-              "python_outcome": "$ faye.met_already = True",
-              "option_selected_text": "",
-              "ordinal_number": 1.0
+              "python_outcome": "$ faye.met_already = True"
             }
           }
         },
@@ -4584,6 +4625,11 @@
                 "Type": "Feature"
               },
               {
+                "Id": "0x0100000000000A94",
+                "TechnicalName": "Python_injections",
+                "Type": "Feature"
+              },
+              {
                 "Id": "0x0100000000000164",
                 "TechnicalName": "Ren_py_character_properties",
                 "Type": "Feature"
@@ -4647,6 +4693,11 @@
                 "TechnicalName": "",
                 "Type": "TemplateTypeFolder",
                 "Children": [
+                  {
+                    "Id": "0x0100000000000AC0",
+                    "TechnicalName": "Injected_Fragment",
+                    "Type": "Template"
+                  },
                   {
                     "Id": "0x01000000000009A7",
                     "TechnicalName": "Menu",
