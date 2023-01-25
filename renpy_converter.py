@@ -235,6 +235,7 @@ class Converter:
                 # Need to keep tabs on what was the last written, so we can check parent if needed
                 previous = None
                 for frag in sorted_frags:
+                    # ToDo: Check if output is a Dialogue instead of waiting for KeyError!
                     try:
                         f.write(str(self.fragments[frag]))
                         previous = self.fragments[frag]
@@ -271,7 +272,11 @@ class Converter:
 
         while d:
             next_out = d.popleft()
+            raw_children = (n for n in e_graph.successors(next_out))
             # Branching back produces duplicates, need to not add the nodes already in deque
-            children = list(n for n in e_graph.successors(next_out) if n not in d)
+            children = [c for c in raw_children if c not in d]
+            # We're only interested in connections to other fragments
+            children = [c for c in children if c not in self.dialogues]
+            # children = (c for c in children if c in self.fragments)
             d.extend(sorted((c for c in children), key=self.ordinals.get))
             yield next_out
