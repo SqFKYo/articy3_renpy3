@@ -224,7 +224,7 @@ class Converter:
         with open(output_path, "w", encoding="utf-8") as f:
             for dialogue in self._dialogues:
                 if dialogue.target_file == target_file:
-                    f.write(f"{dialogue.label}:\n")
+                    f.write(f"label {dialogue.label}:\n")
                     dumpable_frags = [
                         frag
                         for frag in self._fragments
@@ -244,9 +244,7 @@ class Converter:
                             leads_to = self.dialogues[frag]
                             if leads_to == self.dialogues[previous.parent]:
                                 leads_to = self.dialogues[leads_to.output_pins[0]]
-                            # Dialogue has label or menu prefix, we need to change it to jump
-                            jump_text = leads_to.label.replace('label', 'jump').replace('menu', 'jump')
-                            f.write(f"\n    {jump_text}\n")
+                            f.write(f"\n    jump {leads_to.label}\n")
 
     def sort_elements(self, sortable_elements: list) -> Iterator:
         # We're sorting a graph, so let's use NetworkX
