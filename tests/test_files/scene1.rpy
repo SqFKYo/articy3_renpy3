@@ -1,15 +1,16 @@
-menu meet_select:
-    "Who would you like to meet?"
-        
-    "Maeve" if flags.meet_again or not maeve.met_already:
-        jump meet_maeve
+label meet_select:
+    menu:
+        "Who would you like to meet?"
 
-    "Faye" if flags.meet_again or not faye.met_already:
-        jump meet_faye
+        "Maeve" if flags.meet_again or not maeve.met_already:
+            jump meet_maeve
 
-    "I'm done with meeting characters.":
-        "Meeting testing is over, let's wrap this up!"
-        jump game_end
+        "Faye" if flags.meet_again or not faye.met_already:
+            jump meet_faye
+
+        "I'm done with meeting characters.":
+            "Meeting testing is over, let's wrap this up!"
+            jump game_end
 
 label meet_maeve:
     scene meet_maeve
