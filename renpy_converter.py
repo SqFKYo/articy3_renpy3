@@ -223,28 +223,29 @@ class Converter:
     def write_scene_rpy(self, target_file: str, output_path: Path) -> None:
         with open(output_path, "w", encoding="utf-8") as f:
             for dialogue in self._dialogues:
-                if dialogue.target_file == target_file:
-                    f.write(f"label {dialogue.label}:\n")
-                    dumpable_frags = [
-                        frag
-                        for frag in self._fragments
-                        if dialogue.obj_id == frag.parent
-                    ]
-                    sorted_frags = self.sort_elements(dumpable_frags)
-                    # Need to keep tabs on what was the last written, so we can check parent if needed
-                    previous = None
-                    for frag in sorted_frags:
-                        try:
-                            f.write(str(self.fragments[frag]))
-                            previous = self.fragments[frag]
-                        except KeyError:
-                            # Fragment leads to Dialogue instead
-                            # Since this Fragment leads either to next dialogue *or* parent, jump is to target Dialogue
-                            # or to the next dialogue instead.
-                            leads_to = self.dialogues[frag]
-                            if leads_to == self.dialogues[previous.parent]:
-                                leads_to = self.dialogues[leads_to.output_pins[0]]
-                            f.write(f"\n    jump {leads_to.label}\n")
+                if dialogue.target_file != target_file:
+                    continue
+                f.write(f"label {dialogue.label}:\n")
+                dumpable_frags = [
+                    frag
+                    for frag in self._fragments
+                    if dialogue.obj_id == frag.parent
+                ]
+                sorted_frags = self.sort_elements(dumpable_frags)
+                # Need to keep tabs on what was the last written, so we can check parent if needed
+                previous = None
+                for frag in sorted_frags:
+                    try:
+                        f.write(str(self.fragments[frag]))
+                        previous = self.fragments[frag]
+                    except KeyError:
+                        # Fragment leads to Dialogue instead
+                        # Since this Fragment leads either to next dialogue *or* parent, jump is to target Dialogue
+                        # or to the next dialogue instead.
+                        leads_to = self.dialogues[frag]
+                        if leads_to == self.dialogues[previous.parent]:
+                            leads_to = self.dialogues[leads_to.output_pins[0]]
+                        f.write(f"\n    jump {leads_to.label}\n")
 
     def sort_elements(self, sortable_elements: list) -> Iterator:
         # We're sorting a graph, so let's use NetworkX
