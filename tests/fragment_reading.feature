@@ -32,7 +32,7 @@ Feature: Reading all the different Fragments in
     And Fragment with obj_id of 0x01000000000007C3 has python_condition attribute if not flags.meet_again
     And Fragment with obj_id of 0x01000000000007C3 has python_outcome attribute $ flags.meet_again = True
     And Fragment with obj_id of 0x01000000000007C3 has ordinal attribute 1
-    And Fragment with obj_id of 0x0100000000000950 has text attribute I'm Maeve, this game's MC!
-    And Fragment with obj_id of 0x0100000000000950 has scene attribute I'm Maeve, this game's MC!
+    And Fragment with obj_id of 0x0100000000000950 has text attribute Hey, I'm Maeve, this game's MC!
+    And Fragment with obj_id of 0x0100000000000950 has scene attribute meet_maeve
     And Fragment with obj_id of 0x0100000000000950 has python_condition attribute <Empty>
     And Fragment with obj_id of 0x0100000000000950 has python_outcome attribute $ maeve.met_already = True
