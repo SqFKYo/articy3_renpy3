@@ -48,7 +48,11 @@ class Fragment:
 @dataclass
 class Menu(Fragment):
     def __repr__(self):
-        return f"    menu:\n" f'        {self.speaker} "{self.text}"\n\n'
+        returnable = f"    menu:\n        "
+        if self.speaker:
+            returnable += f"{self.speaker} "
+        returnable += f'"{self.text}"\n\n'
+        return returnable
 
 
 @dataclass
@@ -235,7 +239,7 @@ class Converter:
                 # Need to keep tabs on what was the last written, so we can check parent if needed
                 previous = None
                 for frag in sorted_frags:
-                    # ToDo: Check if output is a Dialogue instead of waiting for KeyError!
+                    # ToDo: Check if output is a Dialogue instead of waiting for KeyError !
                     try:
                         f.write(str(self.fragments[frag]))
                         previous = self.fragments[frag]
@@ -276,7 +280,7 @@ class Converter:
             # Branching back produces duplicates, need to not add the nodes already in deque
             children = [c for c in raw_children if c not in d]
             # We're only interested in connections to other fragments
-            children = [c for c in children if c not in self.dialogues]
+            # children = [c for c in children if c not in self.dialogues]
             # children = (c for c in children if c in self.fragments)
             d.extend(sorted((c for c in children), key=self.ordinals.get))
             yield next_out
