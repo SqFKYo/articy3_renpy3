@@ -288,10 +288,6 @@ class Converter:
         If there's menu, ordinal decides the order
         The choices either point to a jump or get all back to the same new Fragmentg files.
         """
-        # Making sure we don't end up crashing on accident
-        if len(sortable_elements) == 1:
-            return sortable_elements
-
         e_graph = nx.DiGraph()
 
         for e in sortable_elements:
