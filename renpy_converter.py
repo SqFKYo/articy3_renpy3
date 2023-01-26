@@ -38,7 +38,7 @@ class Fragment:
     parent: str
     speaker_id: str
     text: str
-    stage_directions: str
+    scene: str
     output_pins: List[str]
     speaker: str = ""
 
