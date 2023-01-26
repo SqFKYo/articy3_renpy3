@@ -19,6 +19,7 @@ class ParseableTypes:
     CHARACTER = "Ren_py_character"
     DIALOGUE = "Dialogue"
     FRAGMENT = "DialogueFragment"
+    INJECTED_FRAGMENT = "Injected_Fragment"
     MENU_ITEM = "Menu_option"
     MENU = "Menu"
 
@@ -46,6 +47,12 @@ class Fragment:
 
 
 @dataclass
+class InjectedFragment(Fragment):
+    python_condition: str = ""
+    python_outcome: str = ""
+
+
+@dataclass
 class Menu(Fragment):
     def __repr__(self):
         returnable = f"    menu:\n        "
@@ -56,10 +63,8 @@ class Menu(Fragment):
 
 
 @dataclass
-class MenuItem(Fragment):
+class MenuItem(InjectedFragment):
     ordinal: int = 0
-    python_condition: str = ""
-    python_outcome: str = ""
     selected_text: str = ""
 
     def __repr__(self):
@@ -105,6 +110,7 @@ class Converter:
     @property
     def dialogues(self):
         return {diag.obj_id: diag for diag in self._dialogues}
+
     @property
     def fragments(self):
         return {frag.obj_id: frag for frag in self._fragments}
@@ -146,6 +152,15 @@ class Converter:
                 props["StageDirections"],
                 get_outputs(props["OutputPins"]),
             ]
+
+        def parse_injected(obj) -> InjectedFragment:
+            cond = obj["Template"]["Python_injections"]["python_condition"]
+            output = obj["Template"]["Python_injections"]["python_outcome"]
+            return InjectedFragment(
+                *parse_basic_fragment(obj["Properties"]),
+                python_condition=cond,
+                python_outcome=output,
+            )
 
         def parse_fragment(props) -> Fragment:
             return Fragment(
@@ -197,6 +212,8 @@ class Converter:
                         self._dialogues.append(parse_dialogue(obj["Properties"]))
                     case ParseableTypes.FRAGMENT:
                         self._fragments.append(parse_fragment(obj["Properties"]))
+                    case ParseableTypes.INJECTED_FRAGMENT:
+                        self._fragments.append(parse_injected(obj))
                     case ParseableTypes.MENU:
                         self._fragments.append(parse_menu(obj["Properties"]))
                     case ParseableTypes.MENU_ITEM:
@@ -231,9 +248,7 @@ class Converter:
                     continue
                 f.write(f"label {dialogue.label}:\n")
                 dumpable_frags = [
-                    frag
-                    for frag in self._fragments
-                    if dialogue.obj_id == frag.parent
+                    frag for frag in self._fragments if dialogue.obj_id == frag.parent
                 ]
                 sorted_frags = self.sort_elements(dumpable_frags)
                 # Need to keep tabs on what was the last written, so we can check parent if needed
