@@ -265,20 +265,18 @@ class Converter:
                 ]
                 sorted_frags = self.sort_elements(dumpable_frags)
                 # Need to keep tabs on what was the last written, so we can check parent if needed
-                previous = None
                 for frag in sorted_frags:
-                    # ToDo: Check if output is a Dialogue instead of waiting for KeyError !
                     try:
                         f.write(str(self.fragments[frag]))
-                        previous = self.fragments[frag]
                     except KeyError:
-                        # Fragment leads to Dialogue instead
-                        # Since this Fragment leads either to next dialogue *or* parent, jump is to target Dialogue
-                        # or to the next dialogue instead.
-                        leads_to = self.dialogues[frag]
-                        if leads_to == self.dialogues[previous.parent]:
-                            leads_to = self.dialogues[leads_to.output_pins[0]]
-                        f.write(f"\n    jump {leads_to.label}\n")
+                        # Fragment leads to Jump or its own parent instead
+                        try:
+                            # Regular flowing dialogues case
+                            next_diag = self.dialogues[self.dialogues[frag].output_pins[0]]
+                        except KeyError:
+                            # ToDo It's jump instead
+                            pass
+                        f.write(f"\n    jump {next_diag.label}\n")
 
     def sort_elements(self, sortable_elements: list) -> Iterator:
         """
