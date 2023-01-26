@@ -20,6 +20,7 @@ class ParseableTypes:
     DIALOGUE = "Dialogue"
     FRAGMENT = "DialogueFragment"
     INJECTED_FRAGMENT = "Injected_Fragment"
+    JUMP = "Jump"
     MENU_ITEM = "Menu_option"
     MENU = "Menu"
 
@@ -64,6 +65,11 @@ class InjectedFragment(Fragment):
         returnable += f"    {self.python_outcome}\n"
         return returnable
 
+@dataclass
+class Jump:
+    obj_id: str
+    parent: str
+    target: str
 
 @dataclass
 class Menu(Fragment):
@@ -118,7 +124,11 @@ class Converter:
 
     def _initialize_speakers(self):
         for f in self._fragments:
-            f.speaker = self.char_map[f.speaker_id]
+            try:
+                f.speaker = self.char_map[f.speaker_id]
+            except AttributeError:
+                # e.g. Jump
+                pass
 
     @property
     def dialogues(self):
@@ -166,6 +176,11 @@ class Converter:
                 get_outputs(props["OutputPins"]),
             ]
 
+        def parse_fragment(props) -> Fragment:
+            return Fragment(
+                *parse_basic_fragment(props),
+            )
+
         def parse_injected(obj) -> InjectedFragment:
             cond = obj["Template"]["Python_injections"]["python_condition"]
             output = obj["Template"]["Python_injections"]["python_outcome"]
@@ -175,9 +190,11 @@ class Converter:
                 python_outcome=output,
             )
 
-        def parse_fragment(props) -> Fragment:
-            return Fragment(
-                *parse_basic_fragment(props),
+        def parse_jump(props) -> Jump:
+            return Jump(
+                props["Id"],
+                props["Parent"],
+                props["Target"],
             )
 
         def parse_menu(props) -> Menu:
@@ -227,6 +244,8 @@ class Converter:
                         self._fragments.append(parse_fragment(obj["Properties"]))
                     case ParseableTypes.INJECTED_FRAGMENT:
                         self._fragments.append(parse_injected(obj))
+                    case ParseableTypes.JUMP:
+                        self._fragments.append(parse_jump(obj["Properties"]))
                     case ParseableTypes.MENU:
                         self._fragments.append(parse_menu(obj["Properties"]))
                     case ParseableTypes.MENU_ITEM:
@@ -269,13 +288,9 @@ class Converter:
                     try:
                         f.write(str(self.fragments[frag]))
                     except KeyError:
-                        # Fragment leads to Jump or its own parent instead
-                        try:
-                            # Regular flowing dialogues case
-                            next_diag = self.dialogues[self.dialogues[frag].output_pins[0]]
-                        except KeyError:
-                            # ToDo It's jump instead
-                            pass
+                        # Fragment leads its own parent (Dialogue to Dialogue connection)
+                        # Regular flowing dialogues case
+                        next_diag = self.dialogues[self.dialogues[frag].output_pins[0]]
                         f.write(f"\n    jump {next_diag.label}\n")
 
     def sort_elements(self, sortable_elements: list) -> Iterator:
