@@ -45,7 +45,7 @@ class Fragment:
     def __repr__(self):
         returnable = ""
         if self.scene:
-            returnable += f"scene {self.scene}\n"
+            returnable += f"    scene {self.scene}\n"
         returnable += f'    {self.speaker} "{self.text}"\n'
         return returnable
 
@@ -61,7 +61,7 @@ class InjectedFragment(Fragment):
         if self.python_condition:
             returnable.rstrip()
             returnable += f" {self.python_condition}\n"
-        returnable += f"{self.python_outcome}\n"
+        returnable += f"    {self.python_outcome}\n"
         return returnable
 
 
