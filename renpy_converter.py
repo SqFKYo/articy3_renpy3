@@ -71,6 +71,9 @@ class Jump:
     parent: str
     target: str
 
+    def __repr__(self):
+        return "    jump {0}\n"
+
 @dataclass
 class Menu(Fragment):
     def __repr__(self):
@@ -286,7 +289,10 @@ class Converter:
                 # Need to keep tabs on what was the last written, so we can check parent if needed
                 for frag in sorted_frags:
                     try:
-                        f.write(str(self.fragments[frag]))
+                        to_write = str(self.fragments[frag])
+                        if to_write.startswith("    jump"):
+                            to_write.format(self.dialogues[self.fragments[frag].target].label)
+                        f.write(to_write)
                     except KeyError:
                         # Fragment leads its own parent (Dialogue to Dialogue connection)
                         # Regular flowing dialogues case
