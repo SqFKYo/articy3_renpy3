@@ -43,13 +43,26 @@ class Fragment:
     speaker: str = ""
 
     def __repr__(self):
-        return f'    {self.speaker} "{self.text}"\n'
+        returnable = ""
+        if self.scene:
+            returnable += f"scene {self.scene}\n"
+        returnable += f'    {self.speaker} "{self.text}"\n'
+        return returnable
 
 
 @dataclass
 class InjectedFragment(Fragment):
     python_condition: str = ""
     python_outcome: str = ""
+
+    def __repr__(self):
+        returnable = super().__repr__()
+        # If there's condition, we need to start from the previous line
+        if self.python_condition:
+            returnable.rstrip()
+            returnable += f" {self.python_condition}\n"
+        returnable += f"{self.python_outcome}\n"
+        return returnable
 
 
 @dataclass
