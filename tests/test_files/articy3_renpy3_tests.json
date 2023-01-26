@@ -2687,7 +2687,7 @@
             "Id": "0x0100000000000939",
             "Parent": "0x01000000000004BA",
             "Attachments": [],
-            "DisplayName": "label meet_maeve",
+            "DisplayName": "meet_maeve",
             "PreviewImage": {
               "ViewBox": {
                 "x": 0.0,
@@ -2751,7 +2751,7 @@
             "Id": "0x0100000000000947",
             "Parent": "0x01000000000004BA",
             "Attachments": [],
-            "DisplayName": "label meet_faye",
+            "DisplayName": "meet_faye",
             "PreviewImage": {
               "ViewBox": {
                 "x": 0.0,
@@ -3798,7 +3798,7 @@
           },
           "Template": {
             "Menu_option": {
-              "python_condition": "$ meet_again or not maeve.met_already",
+              "python_condition": "if flags.meet_again or not maeve.met_already",
               "python_outcome": "",
               "option_selected_text": "",
               "ordinal_number": 1.0
@@ -3862,7 +3862,7 @@
           },
           "Template": {
             "Menu_option": {
-              "python_condition": "$ meet_again or not faye.met_already",
+              "python_condition": "if flags.meet_again or not faye.met_already",
               "python_outcome": "",
               "option_selected_text": "",
               "ordinal_number": 2.0
