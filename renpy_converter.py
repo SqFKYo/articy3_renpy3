@@ -325,5 +325,5 @@ class Converter:
             # We're only interested in connections to other fragments
             # children = [c for c in children if c not in self.dialogues]
             # children = (c for c in children if c in self.fragments)
-            d.extend(sorted((c for c in children), key=self.ordinals.get))
+            d.extendleft(sorted((c for c in children), key=self.ordinals.get, reverse=True))
             yield next_out
