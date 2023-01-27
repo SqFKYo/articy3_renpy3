@@ -10,7 +10,8 @@ label meet_select:
 
         "I'm done with meeting characters.":
             "Meeting testing is over, let's wrap this up!"
-            jump game_end
+
+    jump game_end
 
 label meet_maeve:
     scene meet_maeve

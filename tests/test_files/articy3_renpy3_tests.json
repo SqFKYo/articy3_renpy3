@@ -3076,62 +3076,6 @@
           }
         },
         {
-          "Type": "DialogueFragment",
-          "Properties": {
-            "TechnicalName": "DFr_4458BD2C",
-            "Id": "0x01000000000004F6",
-            "Parent": "0x01000000000004BA",
-            "MenuText": "",
-            "StageDirections": "",
-            "Speaker": "0x010000000000010F",
-            "SplitHeight": 64.0,
-            "Color": {
-              "r": 0.577580452,
-              "g": 0.7605245,
-              "b": 0.7991027
-            },
-            "Text": "Meeting testing is over, let's wrap this up!",
-            "ExternalId": "",
-            "Position": {
-              "x": 2000.0,
-              "y": 525.0
-            },
-            "ZIndex": 4.0,
-            "Size": {
-              "w": 225.0,
-              "h": 200.0
-            },
-            "ShortId": 1146666284,
-            "InputPins": [
-              {
-                "Text": "",
-                "Id": "0x01000000000004F9",
-                "Owner": "0x01000000000004F6"
-              }
-            ],
-            "OutputPins": [
-              {
-                "Text": "",
-                "Id": "0x01000000000004FA",
-                "Owner": "0x01000000000004F6",
-                "Connections": [
-                  {
-                    "Color": {
-                      "a": 1.0,
-                      "r": 0.577580452,
-                      "g": 0.7605245,
-                      "b": 0.7991027
-                    },
-                    "Label": "",
-                    "TargetPin": "0x01000000000004BE",
-                    "Target": "0x01000000000004BA"
-                  }
-                ]
-              }
-            ]
-          }
-        },
-        {
           "Type": "Menu",
           "Properties": {
             "TechnicalName": "DFr_929A91C8",
@@ -3695,7 +3639,7 @@
             "Text": "I'm done with meeting characters.",
             "ExternalId": "",
             "Position": {
-              "x": 1325.0,
+              "x": 1475.0,
               "y": 525.0
             },
             "ZIndex": 3.0,
@@ -3720,13 +3664,13 @@
                   {
                     "Color": {
                       "a": 1.0,
-                      "r": 0.577580452,
-                      "g": 0.7605245,
-                      "b": 0.7991027
+                      "r": 0.5764706,
+                      "g": 0.75686276,
+                      "b": 0.8
                     },
                     "Label": "",
-                    "TargetPin": "0x01000000000004F9",
-                    "Target": "0x01000000000004F6"
+                    "TargetPin": "0x01000000000004BE",
+                    "Target": "0x01000000000004BA"
                   }
                 ]
               }
@@ -3736,7 +3680,7 @@
             "Menu_option": {
               "python_condition": "",
               "python_outcome": "",
-              "option_selected_text": "",
+              "option_selected_text": "Meeting testing is over, let's wrap this up!",
               "ordinal_number": 3.0
             }
           }
@@ -4511,11 +4455,6 @@
                     "Type": "Jump"
                   }
                 ]
-              },
-              {
-                "Id": "0x01000000000004F6",
-                "TechnicalName": "DFr_4458BD2C",
-                "Type": "DialogueFragment"
               }
             ]
           },
