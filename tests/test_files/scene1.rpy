@@ -24,3 +24,4 @@ label meet_faye:
     faye "Hey I'm Faye, the main LI of this game."
     $ faye.met_already = True
     jump meet_select
+
