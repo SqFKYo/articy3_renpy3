@@ -77,10 +77,10 @@ class Jump:
 @dataclass
 class Menu(Fragment):
     def __repr__(self):
-        returnable = f"    menu:\n        "
+        returnable = f"\n    menu:\n        "
         if self.speaker:
             returnable += f"{self.speaker} "
-        returnable += f'"{self.text}"\n\n'
+        returnable += f'"{self.text}"\n'
         return returnable
 
 
@@ -99,7 +99,7 @@ class MenuItem(InjectedFragment):
         if self.selected_text:
             returnable += "            "
             if self.speaker:
-                returnable += f"            {self.speaker} "
+                returnable += f"{self.speaker} "
             returnable += f'"{self.selected_text}"\n'
         return returnable
 
@@ -332,8 +332,10 @@ class Converter:
             raw_children = (n for n in e_graph.successors(next_out))
             # Branching back produces duplicates, need to not add the nodes already in deque
             children = [c for c in raw_children if c not in d]
-            # We're only interested in connections to other fragments
-            # children = [c for c in children if c not in self.dialogues]
-            # children = (c for c in children if c in self.fragments)
-            d.extendleft(sorted((c for c in children), key=self.ordinals.get, reverse=True))
+            if any(isinstance(c, Jump) for c in children):
+                # If we have Jumps, we need to write them right after the MenuItem
+                d.extendleft(sorted((c for c in children), key=self.ordinals.get, reverse=True))
+            else:
+                # Otherwise, just put them in order
+                d.extend(sorted((c for c in children), key=self.ordinals.get))
             yield next_out
