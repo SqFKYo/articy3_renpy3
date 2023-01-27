@@ -285,14 +285,16 @@ class Converter:
                     frag for frag in self._fragments if dialogue.obj_id == frag.parent
                 ]
                 sorted_frags = self.sort_elements(dumpable_frags)
+                previous = None
                 # Need to keep tabs on what was the last written, so we can check parent if needed
                 for frag in sorted_frags:
                     try:
                         to_write = str(self.fragments[frag])
                         if to_write.startswith("    jump"):
+                            # ToDo: If previous was menu, we need way more indentation
                             to_write = to_write.format(self.dialogues[self.fragments[frag].target].label)
-                            # Need to "waste" one item from the iterator since it's unnecessary after the jump
-                            next(sorted_frags)
+                            if isinstance(self.fragments[previous], MenuItem):
+                                to_write = "        " + to_write
                         f.write(to_write)
                     except KeyError:
                         # Fragment leads its own parent (Dialogue to Dialogue connection) or new Dialogue
@@ -304,6 +306,8 @@ class Converter:
                             # No output_pins, link to new Dialogue directly, only used with MenuItems
                             next_diag = self.dialogues[frag]
                             f.write(f"            jump {next_diag.label}\n\n")
+                    finally:
+                        previous = frag
 
     def sort_elements(self, sortable_elements: list) -> Iterator:
         """
@@ -329,21 +333,30 @@ class Converter:
 
         while d:
             next_out = d.popleft()
-            raw_children = (n for n in e_graph.successors(next_out))
-            # Branching back produces duplicates, need to not add the nodes already in deque
-            children = [c for c in raw_children if c not in d]
-            try:
-                is_jump = isinstance(self.fragments[children[0]], Jump)
-            except KeyError:
-                is_jump = False
-            except IndexError:
-                # No further targets
-                is_jump = False
-            if is_jump:
-                d.appendleft(children[0])
-            else:
-                d.extend(sorted((c for c in children), key=self.ordinals.get))
 
-            # d.extendleft(sorted((c for c in children), key=self.ordinals.get, reverse=True))
+            try:
+                # If this one is jump, we just return it without handling the child
+                if isinstance(self.fragments[next_out], Jump):
+                    next_is_jump = True
+                else:
+                    next_is_jump = False
+            except KeyError:
+                next_is_jump = False
+
+            if not next_is_jump:
+                raw_children = (n for n in e_graph.successors(next_out))
+                # Branching back produces duplicates, need to not add the nodes already in deque
+                children = [c for c in raw_children if c not in d]
+                try:
+                    child_is_jump = isinstance(self.fragments[children[0]], Jump)
+                except KeyError:
+                    child_is_jump = False
+                except IndexError:
+                    # No further targets
+                    child_is_jump = False
+                if child_is_jump:
+                    d.appendleft(children[0])
+                else:
+                    d.extend(sorted((c for c in children), key=self.ordinals.get))
 
             yield next_out

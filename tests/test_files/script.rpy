@@ -18,8 +18,9 @@ label start:
             $ flags.meet_again = False
         "No I'm happy with my choice.":
             $ ...
-         "No, and I wish to finish the testing.":
+        "No, and I wish to finish the testing.":
             jump game_end
+
     faye "Testing will commence now."
 
     jump meet_select
