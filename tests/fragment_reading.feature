@@ -37,5 +37,6 @@ Feature: Reading all the different Fragments in
     And Fragment with obj_id of 0x0100000000000950 has python_condition attribute <Empty>
     And Fragment with obj_id of 0x0100000000000950 has python_outcome attribute $ maeve.met_already = True
     And Fragment with obj_id of 0x010000000000029D has output_pins attribute 0x01000000000008FF
+    And Fragment with obj_id of 0x0100000000000AF6 has target attribute 0x0100000000000286
     And Fragment with obj_id of 0x01000000000008FF has target attribute 0x01000000000004BA
     And Fragment with obj_id of 0x01000000000008FF has parent attribute 0x0100000000000947
