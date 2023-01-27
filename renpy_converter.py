@@ -72,7 +72,7 @@ class Jump:
     target: str
 
     def __repr__(self):
-        return "    jump {0}\n"
+        return "    jump {0}\n\n"
 
 @dataclass
 class Menu(Fragment):
@@ -290,7 +290,9 @@ class Converter:
                     try:
                         to_write = str(self.fragments[frag])
                         if to_write.startswith("    jump"):
-                            to_write.format(self.dialogues[self.fragments[frag].target].label)
+                            to_write = to_write.format(self.dialogues[self.fragments[frag].target].label)
+                            # Need to "waste" one item from the iterator since it's unnecessary after the jump
+                            next(sorted_frags)
                         f.write(to_write)
                     except KeyError:
                         # Fragment leads its own parent (Dialogue to Dialogue connection) or new Dialogue
