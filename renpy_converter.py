@@ -291,7 +291,7 @@ class Converter:
                     try:
                         to_write = str(self.fragments[frag])
                         if to_write.startswith("    jump"):
-                            # ToDo: If previous was menu, we need way more indentation
+                            # If we got here through Menu, we need way more indentation
                             to_write = to_write.format(self.dialogues[self.fragments[frag].target].label)
                             if isinstance(self.fragments[previous], MenuItem):
                                 to_write = "        " + to_write
@@ -347,14 +347,17 @@ class Converter:
                 raw_children = (n for n in e_graph.successors(next_out))
                 # Branching back produces duplicates, need to not add the nodes already in deque
                 children = [c for c in raw_children if c not in d]
+                immediate_handling = False
                 try:
-                    child_is_jump = isinstance(self.fragments[children[0]], Jump)
+                    immediate_handling = isinstance(self.fragments[children[0]], Jump)
                 except KeyError:
-                    child_is_jump = False
+                    # Is the child Dialogue that is not the parent?
+                    if self.dialogues[children[0]] != self.dialogues[self.fragments[next_out].parent]:
+                        immediate_handling = True
                 except IndexError:
                     # No further targets
-                    child_is_jump = False
-                if child_is_jump:
+                    pass
+                if immediate_handling:
                     d.appendleft(children[0])
                 else:
                     d.extend(sorted((c for c in children), key=self.ordinals.get))
