@@ -80,7 +80,7 @@ class Menu(Fragment):
         returnable = f"    menu:\n        "
         if self.speaker:
             returnable += f"{self.speaker} "
-        returnable += f'"{self.text}"\n'
+        returnable += f'"{self.text}"\n\n'
         return returnable
 
 
