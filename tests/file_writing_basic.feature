@@ -16,7 +16,3 @@ Feature: Writing the character definitions
   Scenario: Simple scene file with one label
     When Scene file scene2.rpy is written to .\output_folder\scene2.rpy
     Then Written file is equal to .\test_files\scene2.rpy
-
-  Scenario: More complex scene with single label encapsulating multiple choices and variable changes
-    When Scene file script.rpy is written to .\output_folder\script.rpy
-    Then Written file is equal to .\test_files\script.rpy

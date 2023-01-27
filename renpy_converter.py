@@ -332,10 +332,18 @@ class Converter:
             raw_children = (n for n in e_graph.successors(next_out))
             # Branching back produces duplicates, need to not add the nodes already in deque
             children = [c for c in raw_children if c not in d]
-            if any(isinstance(c, Jump) for c in children):
-                # If we have Jumps, we need to write them right after the MenuItem
-                d.extendleft(sorted((c for c in children), key=self.ordinals.get, reverse=True))
+            try:
+                is_jump = isinstance(self.fragments[children[0]], Jump)
+            except KeyError:
+                is_jump = False
+            except IndexError:
+                # No further targets
+                is_jump = False
+            if is_jump:
+                d.appendleft(children[0])
             else:
-                # Otherwise, just put them in order
                 d.extend(sorted((c for c in children), key=self.ordinals.get))
+
+            # d.extendleft(sorted((c for c in children), key=self.ordinals.get, reverse=True))
+
             yield next_out

@@ -2,4 +2,4 @@
 
 from pytest_bdd import scenarios
 
-scenarios("file_writing_basic.feature")
+scenarios("file_writing_medium.feature")
