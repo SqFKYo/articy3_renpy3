@@ -3215,6 +3215,17 @@
                     "Label": "",
                     "TargetPin": "0x01000000000007BB",
                     "Target": "0x01000000000007B8"
+                  },
+                  {
+                    "Color": {
+                      "a": 1.0,
+                      "r": 0.5764706,
+                      "g": 0.75686276,
+                      "b": 0.8
+                    },
+                    "Label": "",
+                    "TargetPin": "0x0100000000000AF2",
+                    "Target": "0x0100000000000AEF"
                   }
                 ]
               }
@@ -3688,6 +3699,70 @@
         {
           "Type": "Menu_option",
           "Properties": {
+            "TechnicalName": "DFr_A7EFF5D4",
+            "Id": "0x0100000000000AEF",
+            "Parent": "0x010000000000026F",
+            "MenuText": "",
+            "StageDirections": "",
+            "Speaker": "0x010000000000049F",
+            "SplitHeight": 64.0,
+            "Color": {
+              "r": 0.5764706,
+              "g": 0.75686276,
+              "b": 0.8
+            },
+            "Text": "No, and I wish to finish the testing.",
+            "ExternalId": "",
+            "Position": {
+              "x": 1675.0,
+              "y": 975.0
+            },
+            "ZIndex": 22.0,
+            "Size": {
+              "w": 225.0,
+              "h": 200.0
+            },
+            "ShortId": 2817521108,
+            "InputPins": [
+              {
+                "Text": "",
+                "Id": "0x0100000000000AF2",
+                "Owner": "0x0100000000000AEF"
+              }
+            ],
+            "OutputPins": [
+              {
+                "Text": "",
+                "Id": "0x0100000000000AF3",
+                "Owner": "0x0100000000000AEF",
+                "Connections": [
+                  {
+                    "Color": {
+                      "a": 1.0,
+                      "r": 0.5764706,
+                      "g": 0.75686276,
+                      "b": 0.8
+                    },
+                    "Label": "",
+                    "TargetPin": "0x0100000000000AF9",
+                    "Target": "0x0100000000000AF6"
+                  }
+                ]
+              }
+            ]
+          },
+          "Template": {
+            "Menu_option": {
+              "python_condition": "",
+              "python_outcome": "",
+              "option_selected_text": "",
+              "ordinal_number": 4.0
+            }
+          }
+        },
+        {
+          "Type": "Menu_option",
+          "Properties": {
             "TechnicalName": "DFr_F7586E41",
             "Id": "0x0100000000000914",
             "Parent": "0x01000000000004BA",
@@ -4001,6 +4076,40 @@
                 "Text": "",
                 "Id": "0x0100000000000902",
                 "Owner": "0x01000000000008FF"
+              }
+            ]
+          }
+        },
+        {
+          "Type": "Jump",
+          "Properties": {
+            "TechnicalName": "Jmp_D7A1D039",
+            "Id": "0x0100000000000AF6",
+            "Parent": "0x010000000000026F",
+            "Target": "0x0100000000000286",
+            "TargetPin": "0x0100000000000289",
+            "Color": {
+              "r": 0.5764706,
+              "g": 0.75686276,
+              "b": 0.8
+            },
+            "Text": "",
+            "ExternalId": "",
+            "Position": {
+              "x": 2050.0,
+              "y": 1000.0
+            },
+            "ZIndex": 24.0,
+            "Size": {
+              "w": 175.0,
+              "h": 150.0
+            },
+            "ShortId": 3617706041,
+            "InputPins": [
+              {
+                "Text": "",
+                "Id": "0x0100000000000AF9",
+                "Owner": "0x0100000000000AF6"
               }
             ]
           }
@@ -4391,9 +4500,19 @@
                 "Type": "DialogueFragment"
               },
               {
+                "Id": "0x0100000000000AEF",
+                "TechnicalName": "DFr_A7EFF5D4",
+                "Type": "DialogueFragment"
+              },
+              {
                 "Id": "0x01000000000002CC",
                 "TechnicalName": "DFr_EAA403E1",
                 "Type": "DialogueFragment"
+              },
+              {
+                "Id": "0x0100000000000AF6",
+                "TechnicalName": "Jmp_D7A1D039",
+                "Type": "Jump"
               }
             ]
           },
