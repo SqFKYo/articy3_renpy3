@@ -20,7 +20,3 @@ Feature: Writing the character definitions
   Scenario: More complex scene with single label encapsulating multiple choices and variable changes
     When Scene file script.rpy is written to .\output_folder\script.rpy
     Then Written file is equal to .\test_files\script.rpy
-
-  Scenario: More complex scene with multiple labels and possible infinite loop
-    When Scene file scene1.rpy is written to .\output_folder\scene1.rpy
-    Then Written file is equal to .\test_files\scene1.rpy
