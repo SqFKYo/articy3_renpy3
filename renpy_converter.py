@@ -99,9 +99,8 @@ class MenuItem(InjectedFragment):
         if self.selected_text:
             returnable += "            "
             if self.speaker:
-                returnable += f"{self.speaker} "
+                returnable += f"            {self.speaker} "
             returnable += f'"{self.selected_text}"\n'
-        returnable += f"\n"
         return returnable
 
 
@@ -294,10 +293,15 @@ class Converter:
                             to_write.format(self.dialogues[self.fragments[frag].target].label)
                         f.write(to_write)
                     except KeyError:
-                        # Fragment leads its own parent (Dialogue to Dialogue connection)
+                        # Fragment leads its own parent (Dialogue to Dialogue connection) or new Dialogue
                         # Regular flowing dialogues case
-                        next_diag = self.dialogues[self.dialogues[frag].output_pins[0]]
-                        f.write(f"\n    jump {next_diag.label}\n")
+                        try:
+                            next_diag = self.dialogues[self.dialogues[frag].output_pins[0]]
+                            f.write(f"    jump {next_diag.label}\n\n")
+                        except IndexError:
+                            # No output_pins, link to new Dialogue directly, only used with MenuItems
+                            next_diag = self.dialogues[frag]
+                            f.write(f"            jump {next_diag.label}\n\n")
 
     def sort_elements(self, sortable_elements: list) -> Iterator:
         """
