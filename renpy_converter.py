@@ -77,7 +77,7 @@ class Jump:
 @dataclass
 class Menu(Fragment):
     def __repr__(self):
-        returnable = f"\n    menu:\n        "
+        returnable = f"    menu:\n        "
         if self.speaker:
             returnable += f"{self.speaker} "
         returnable += f'"{self.text}"\n'
