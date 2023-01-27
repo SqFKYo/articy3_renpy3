@@ -297,7 +297,7 @@ class Converter:
                         # Regular flowing dialogues case
                         try:
                             next_diag = self.dialogues[self.dialogues[frag].output_pins[0]]
-                            f.write(f"    jump {next_diag.label}\n\n")
+                            f.write(f"\n    jump {next_diag.label}\n\n")
                         except IndexError:
                             # No output_pins, link to new Dialogue directly, only used with MenuItems
                             next_diag = self.dialogues[frag]
@@ -314,9 +314,13 @@ class Converter:
         e_graph = nx.DiGraph()
 
         for e in sortable_elements:
-            e_graph.add_edges_from(
-                [e.obj_id, output_pin] for output_pin in e.output_pins
-            )
+            try:
+                e_graph.add_edges_from(
+                    [e.obj_id, output_pin] for output_pin in e.output_pins
+                )
+            except AttributeError:
+                # Jumps don't have output_pins, but target
+                e_graph.add_edges_from([(e.obj_id, e.target)])
         root = next(n for n in e_graph.nodes if not set(e_graph.predecessors(n)))
 
         d = deque([root])
