@@ -3045,7 +3045,7 @@
             "Text": "We are at the end of the demonstration.",
             "ExternalId": "",
             "Position": {
-              "x": -50.0,
+              "x": -500.0,
               "y": 325.0
             },
             "ZIndex": 2.0,
@@ -3070,13 +3070,24 @@
                   {
                     "Color": {
                       "a": 1.0,
-                      "r": 0.577580452,
-                      "g": 0.7605245,
-                      "b": 0.7991027
+                      "r": 0.5764706,
+                      "g": 0.75686276,
+                      "b": 0.8
                     },
                     "Label": "",
-                    "TargetPin": "0x01000000000002D7",
-                    "Target": "0x01000000000002D4"
+                    "TargetPin": "0x0100000000000D3D",
+                    "Target": "0x0100000000000D3A"
+                  },
+                  {
+                    "Color": {
+                      "a": 1.0,
+                      "r": 0.5764706,
+                      "g": 0.75686276,
+                      "b": 0.8
+                    },
+                    "Label": "",
+                    "TargetPin": "0x0100000000000D43",
+                    "Target": "0x0100000000000D40"
                   }
                 ]
               }
@@ -4039,6 +4050,130 @@
           }
         },
         {
+          "Type": "InjectedFragment",
+          "Properties": {
+            "TechnicalName": "DFr_DCF6530B",
+            "Id": "0x0100000000000D3A",
+            "Parent": "0x0100000000000286",
+            "MenuText": "",
+            "StageDirections": "",
+            "Speaker": "0x010000000000010F",
+            "SplitHeight": 64.0,
+            "Color": {
+              "r": 0.5764706,
+              "g": 0.75686276,
+              "b": 0.8
+            },
+            "Text": "It seems you didn't want to meet the characters again. Maybe next time?",
+            "ExternalId": "",
+            "Position": {
+              "x": -100.0,
+              "y": 200.0
+            },
+            "ZIndex": 6.0,
+            "Size": {
+              "w": 225.0,
+              "h": 200.0
+            },
+            "ShortId": 3707130635,
+            "InputPins": [
+              {
+                "Text": "flags.meet_again == false",
+                "Id": "0x0100000000000D3D",
+                "Owner": "0x0100000000000D3A"
+              }
+            ],
+            "OutputPins": [
+              {
+                "Text": "",
+                "Id": "0x0100000000000D3E",
+                "Owner": "0x0100000000000D3A",
+                "Connections": [
+                  {
+                    "Color": {
+                      "a": 1.0,
+                      "r": 0.5764706,
+                      "g": 0.75686276,
+                      "b": 0.8
+                    },
+                    "Label": "",
+                    "TargetPin": "0x01000000000002D7",
+                    "Target": "0x01000000000002D4"
+                  }
+                ]
+              }
+            ]
+          },
+          "Template": {
+            "PythonInjections": {
+              "PythonCondition": "if not flags.meet_again",
+              "PythonOutcome": ""
+            }
+          }
+        },
+        {
+          "Type": "InjectedFragment",
+          "Properties": {
+            "TechnicalName": "DFr_98FF765F",
+            "Id": "0x0100000000000D40",
+            "Parent": "0x0100000000000286",
+            "MenuText": "",
+            "StageDirections": "",
+            "Speaker": "0x010000000000010F",
+            "SplitHeight": 64.0,
+            "Color": {
+              "r": 0.5764706,
+              "g": 0.75686276,
+              "b": 0.8
+            },
+            "Text": "You really enjoyed yourself and wanted to meet the character over an over again. Great!",
+            "ExternalId": "",
+            "Position": {
+              "x": -100.0,
+              "y": 425.0
+            },
+            "ZIndex": 7.0,
+            "Size": {
+              "w": 225.0,
+              "h": 200.0
+            },
+            "ShortId": 2566878815,
+            "InputPins": [
+              {
+                "Text": "flags.meet_again == true",
+                "Id": "0x0100000000000D43",
+                "Owner": "0x0100000000000D40"
+              }
+            ],
+            "OutputPins": [
+              {
+                "Text": "",
+                "Id": "0x0100000000000D44",
+                "Owner": "0x0100000000000D40",
+                "Connections": [
+                  {
+                    "Color": {
+                      "a": 1.0,
+                      "r": 0.5764706,
+                      "g": 0.75686276,
+                      "b": 0.8
+                    },
+                    "Label": "",
+                    "TargetPin": "0x01000000000002D7",
+                    "Target": "0x01000000000002D4"
+                  }
+                ]
+              }
+            ]
+          },
+          "Template": {
+            "PythonInjections": {
+              "PythonCondition": "if flags.meet_again",
+              "PythonOutcome": ""
+            }
+          }
+        },
+        {
           "Type": "Jump",
           "Properties": {
             "TechnicalName": "Jmp_D7A1D039",
@@ -4611,6 +4746,16 @@
               {
                 "Id": "0x01000000000002D9",
                 "TechnicalName": "DFr_AD82BC43",
+                "Type": "DialogueFragment"
+              },
+              {
+                "Id": "0x0100000000000D3A",
+                "TechnicalName": "DFr_DCF6530B",
+                "Type": "DialogueFragment"
+              },
+              {
+                "Id": "0x0100000000000D40",
+                "TechnicalName": "DFr_98FF765F",
                 "Type": "DialogueFragment"
               },
               {

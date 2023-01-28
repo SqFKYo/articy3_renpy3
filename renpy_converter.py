@@ -58,11 +58,11 @@ class InjectedFragment(Fragment):
 
     def __repr__(self):
         returnable = super().__repr__()
-        # If there's condition, we need to start from the previous line
+        if self.python_outcome:
+            returnable += f"    {self.python_outcome}\n"
+        # If there's condition, we need to start from the previous line and put everything else within that block
         if self.python_condition:
-            returnable.rstrip()
-            returnable += f" {self.python_condition}\n"
-        returnable += f"    {self.python_outcome}\n"
+            returnable = f"    {self.python_condition}:\n" + returnable.replace(" "*4, " "*8)
         return returnable
 
 @dataclass
