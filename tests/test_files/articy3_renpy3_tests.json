@@ -622,29 +622,29 @@
             "DisplayName": "Menu item",
             "Properties": [
               {
-                "Property": "python_condition",
+                "Property": "PythonCondition",
                 "Type": "string",
                 "DisplayName": "Python condition"
               },
               {
-                "Property": "python_outcome",
+                "Property": "PythonOutcome",
                 "Type": "string",
                 "DisplayName": "Python outcome"
               },
               {
-                "Property": "option_selected_text",
+                "Property": "OptionSelectedText",
                 "Type": "string",
                 "DisplayName": "Option selected text"
               },
               {
-                "Property": "ordinal_number",
+                "Property": "OrdinalNumber",
                 "Type": "Float",
                 "DisplayName": "Ordinal number"
               }
             ],
             "Constraints": [
               {
-                "Property": "python_condition",
+                "Property": "PythonCondition",
                 "Type": "Text",
                 "MaxLength": "2048",
                 "PlaceholderValue": "",
@@ -652,7 +652,7 @@
                 "AllowsLinebreaks": "True"
               },
               {
-                "Property": "python_outcome",
+                "Property": "PythonOutcome",
                 "Type": "Text",
                 "MaxLength": "2048",
                 "PlaceholderValue": "",
@@ -660,7 +660,7 @@
                 "AllowsLinebreaks": "True"
               },
               {
-                "Property": "option_selected_text",
+                "Property": "OptionSelectedText",
                 "Type": "Text",
                 "MaxLength": "2048",
                 "PlaceholderValue": "",
@@ -668,7 +668,7 @@
                 "AllowsLinebreaks": "True"
               },
               {
-                "Property": "ordinal_number",
+                "Property": "OrdinalNumber",
                 "Type": "Number",
                 "MinValue": "-3.40282346638529E+38",
                 "MaxValue": "3.40282346638529E+38",
@@ -695,19 +695,19 @@
             "DisplayName": "Python injections",
             "Properties": [
               {
-                "Property": "python_condition",
+                "Property": "PythonCondition",
                 "Type": "string",
                 "DisplayName": "Python condition"
               },
               {
-                "Property": "python_outcome",
+                "Property": "PythonOutcome",
                 "Type": "string",
                 "DisplayName": "Python outcome"
               }
             ],
             "Constraints": [
               {
-                "Property": "python_condition",
+                "Property": "PythonCondition",
                 "Type": "Text",
                 "MaxLength": "2048",
                 "PlaceholderValue": "",
@@ -715,7 +715,7 @@
                 "AllowsLinebreaks": "True"
               },
               {
-                "Property": "python_outcome",
+                "Property": "PythonOutcome",
                 "Type": "Text",
                 "MaxLength": "2048",
                 "PlaceholderValue": "",
@@ -1414,7 +1414,7 @@
                 "DisplayName": "Personality"
               },
               {
-                "Property": "Met_already",
+                "Property": "MetAlready",
                 "Type": "Bool",
                 "DisplayName": "Met already"
               }
@@ -1424,7 +1424,7 @@
                 "Property": "Age",
                 "Type": "Number",
                 "MinValue": "18",
-                "MaxValue": "99",
+                "MaxValue": "10000",
                 "Precision": "0",
                 "MinPrecision": "0",
                 "MaxPrecision": "0",
@@ -1447,7 +1447,7 @@
                 "AllowsLinebreaks": "True"
               },
               {
-                "Property": "Met_already",
+                "Property": "MetAlready",
                 "Type": "Boolean",
                 "DisplayAsCombobox": "False"
               }
@@ -3369,10 +3369,10 @@
           },
           "Template": {
             "MenuItem": {
-              "python_condition": "",
-              "python_outcome": "$ flags.meet_again = True",
-              "option_selected_text": "You have selected that you want to have the option to meet characters multiple times.",
-              "ordinal_number": 1.0
+              "PythonCondition": "",
+              "PythonOutcome": "$ flags.meet_again = True",
+              "OptionSelectedText": "You have selected that you want to have the option to meet characters multiple times.",
+              "OrdinalNumber": 1.0
             }
           }
         },
@@ -3433,10 +3433,10 @@
           },
           "Template": {
             "MenuItem": {
-              "python_condition": "",
-              "python_outcome": "$ flags.meet_again = False",
-              "option_selected_text": "You have selected that you do not want to have the option to meet characters multiple times.",
-              "ordinal_number": 2.0
+              "PythonCondition": "",
+              "PythonOutcome": "$ flags.meet_again = False",
+              "OptionSelectedText": "You have selected that you do not want to have the option to meet characters multiple times.",
+              "OrdinalNumber": 2.0
             }
           }
         },
@@ -3497,10 +3497,10 @@
           },
           "Template": {
             "MenuItem": {
-              "python_condition": "",
-              "python_outcome": "$ ...",
-              "option_selected_text": "",
-              "ordinal_number": 3.0
+              "PythonCondition": "",
+              "PythonOutcome": "$ ...",
+              "OptionSelectedText": "",
+              "OrdinalNumber": 3.0
             }
           }
         },
@@ -3561,10 +3561,10 @@
           },
           "Template": {
             "MenuItem": {
-              "python_condition": "if not flags.meet_again",
-              "python_outcome": "$ flags.meet_again = True",
-              "option_selected_text": "",
-              "ordinal_number": 1.0
+              "PythonCondition": "if not flags.meet_again",
+              "PythonOutcome": "$ flags.meet_again = True",
+              "OptionSelectedText": "",
+              "OrdinalNumber": 1.0
             }
           }
         },
@@ -3625,10 +3625,10 @@
           },
           "Template": {
             "MenuItem": {
-              "python_condition": "if flags.meet_again",
-              "python_outcome": "$ flags.meet_again = False",
-              "option_selected_text": "",
-              "ordinal_number": 2.0
+              "PythonCondition": "if flags.meet_again",
+              "PythonOutcome": "$ flags.meet_again = False",
+              "OptionSelectedText": "",
+              "OrdinalNumber": 2.0
             }
           }
         },
@@ -3689,10 +3689,10 @@
           },
           "Template": {
             "MenuItem": {
-              "python_condition": "",
-              "python_outcome": "",
-              "option_selected_text": "",
-              "ordinal_number": 4.0
+              "PythonCondition": "",
+              "PythonOutcome": "",
+              "OptionSelectedText": "",
+              "OrdinalNumber": 4.0
             }
           }
         },
@@ -3753,10 +3753,10 @@
           },
           "Template": {
             "MenuItem": {
-              "python_condition": "",
-              "python_outcome": "",
-              "option_selected_text": "Meeting testing is over, let's wrap this up!",
-              "ordinal_number": 3.0
+              "PythonCondition": "",
+              "PythonOutcome": "",
+              "OptionSelectedText": "Meeting testing is over, let's wrap this up!",
+              "OrdinalNumber": 3.0
             }
           }
         },
@@ -3817,10 +3817,10 @@
           },
           "Template": {
             "MenuItem": {
-              "python_condition": "if flags.meet_again or not maeve.met_already",
-              "python_outcome": "",
-              "option_selected_text": "",
-              "ordinal_number": 1.0
+              "PythonCondition": "if flags.meet_again or not maeve.met_already",
+              "PythonOutcome": "",
+              "OptionSelectedText": "",
+              "OrdinalNumber": 1.0
             }
           }
         },
@@ -3881,10 +3881,10 @@
           },
           "Template": {
             "MenuItem": {
-              "python_condition": "if flags.meet_again or not faye.met_already",
-              "python_outcome": "",
-              "option_selected_text": "",
-              "ordinal_number": 2.0
+              "PythonCondition": "if flags.meet_again or not faye.met_already",
+              "PythonOutcome": "",
+              "OptionSelectedText": "",
+              "OrdinalNumber": 2.0
             }
           }
         },
@@ -3945,8 +3945,8 @@
           },
           "Template": {
             "PythonInjections": {
-              "python_condition": "",
-              "python_outcome": "$ maeve.met_already = True"
+              "PythonCondition": "",
+              "PythonOutcome": "$ maeve.met_already = True"
             }
           }
         },
@@ -4007,8 +4007,8 @@
           },
           "Template": {
             "PythonInjections": {
-              "python_condition": "",
-              "python_outcome": "$ faye.met_already = True"
+              "PythonCondition": "",
+              "PythonOutcome": "$ faye.met_already = True"
             }
           }
         },
@@ -4252,7 +4252,7 @@
               "Age": 28.0,
               "Color": "#FF7F50",
               "Personality": "",
-              "Met_already": false
+              "MetAlready": false
             }
           }
         },
@@ -4305,7 +4305,7 @@
               "Age": 23.0,
               "Color": "#007a7a",
               "Personality": "",
-              "Met_already": false
+              "MetAlready": false
             }
           }
         },

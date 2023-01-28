@@ -184,8 +184,8 @@ class Converter:
             )
 
         def parse_injected(obj) -> InjectedFragment:
-            cond = obj["Template"]["PythonInjections"]["python_condition"]
-            output = obj["Template"]["PythonInjections"]["python_outcome"]
+            cond = obj["Template"]["PythonInjections"]["PythonCondition"]
+            output = obj["Template"]["PythonInjections"]["PythonOutcome"]
             return InjectedFragment(
                 *parse_basic_fragment(obj["Properties"]),
                 python_condition=cond,
@@ -205,10 +205,10 @@ class Converter:
             )
 
         def parse_menu_item(obj) -> MenuItem:
-            cond = obj["Template"]["MenuItem"]["python_condition"]
-            output = obj["Template"]["MenuItem"]["python_outcome"]
-            selected_text = obj["Template"]["MenuItem"]["option_selected_text"]
-            ordinal = int(obj["Template"]["MenuItem"]["ordinal_number"])
+            cond = obj["Template"]["MenuItem"]["PythonCondition"]
+            output = obj["Template"]["MenuItem"]["PythonOutcome"]
+            selected_text = obj["Template"]["MenuItem"]["OptionSelectedText"]
+            ordinal = int(obj["Template"]["MenuItem"]["OrdinalNumber"])
             return MenuItem(
                 *parse_basic_fragment(obj["Properties"]),
                 ordinal=ordinal,
