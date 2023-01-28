@@ -152,7 +152,7 @@ class Converter:
             char_name = raw_char["Properties"]["DisplayName"]
             char_speaker = raw_char["Properties"]["Id"]
             try:
-                char_color = raw_char["Template"]["Ren_py_character_properties"][
+                char_color = raw_char["Template"]["RenCharProps"][
                     "Color"
                 ]
             except IndexError:
@@ -184,8 +184,8 @@ class Converter:
             )
 
         def parse_injected(obj) -> InjectedFragment:
-            cond = obj["Template"]["Python_injections"]["python_condition"]
-            output = obj["Template"]["Python_injections"]["python_outcome"]
+            cond = obj["Template"]["PythonInjections"]["python_condition"]
+            output = obj["Template"]["PythonInjections"]["python_outcome"]
             return InjectedFragment(
                 *parse_basic_fragment(obj["Properties"]),
                 python_condition=cond,

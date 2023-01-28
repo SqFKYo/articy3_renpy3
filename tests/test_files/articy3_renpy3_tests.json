@@ -691,7 +691,7 @@
         "DisplayName": "Injected Fragment",
         "Features": [
           {
-            "TechnicalName": "Python_injections",
+            "TechnicalName": "PythonInjections",
             "DisplayName": "Python injections",
             "Properties": [
               {
@@ -1395,7 +1395,7 @@
             ]
           },
           {
-            "TechnicalName": "Ren_py_character_properties",
+            "TechnicalName": "RenCharProps",
             "DisplayName": "Ren'py character basic properties",
             "Properties": [
               {
@@ -3944,7 +3944,7 @@
             ]
           },
           "Template": {
-            "Python_injections": {
+            "PythonInjections": {
               "python_condition": "",
               "python_outcome": "$ maeve.met_already = True"
             }
@@ -4006,7 +4006,7 @@
             ]
           },
           "Template": {
-            "Python_injections": {
+            "PythonInjections": {
               "python_condition": "",
               "python_outcome": "$ faye.met_already = True"
             }
@@ -4248,7 +4248,7 @@
               "Habits": "",
               "FurtherDetails": ""
             },
-            "Ren_py_character_properties": {
+            "RenCharProps": {
               "Age": 28.0,
               "Color": "#FF7F50",
               "Personality": "",
@@ -4301,7 +4301,7 @@
               "Habits": "",
               "FurtherDetails": ""
             },
-            "Ren_py_character_properties": {
+            "RenCharProps": {
               "Age": 23.0,
               "Color": "#007a7a",
               "Personality": "",
@@ -4684,12 +4684,12 @@
               },
               {
                 "Id": "0x0100000000000A94",
-                "TechnicalName": "Python_injections",
+                "TechnicalName": "PythonInjections",
                 "Type": "Feature"
               },
               {
                 "Id": "0x0100000000000164",
-                "TechnicalName": "Ren_py_character_properties",
+                "TechnicalName": "RenCharProps",
                 "Type": "Feature"
               }
             ]
