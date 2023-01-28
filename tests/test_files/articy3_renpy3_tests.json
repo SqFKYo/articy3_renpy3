@@ -600,16 +600,26 @@
       ]
     },
     {
-      "Type": "Menu_option",
+      "Type": "Menu",
       "Class": "DialogueFragment",
       "InheritsFrom": "DialogueFragment",
       "Template": {
-        "TechnicalName": "Menu_option",
-        "DisplayName": "Menu option",
+        "TechnicalName": "Menu",
+        "DisplayName": "Menu",
+        "Features": []
+      }
+    },
+    {
+      "Type": "MenuItem",
+      "Class": "DialogueFragment",
+      "InheritsFrom": "DialogueFragment",
+      "Template": {
+        "TechnicalName": "MenuItem",
+        "DisplayName": "Menu item",
         "Features": [
           {
-            "TechnicalName": "Menu_option",
-            "DisplayName": "Menu option",
+            "TechnicalName": "MenuItem",
+            "DisplayName": "Menu item",
             "Properties": [
               {
                 "Property": "python_condition",
@@ -673,21 +683,11 @@
       }
     },
     {
-      "Type": "Menu",
+      "Type": "InjectedFragment",
       "Class": "DialogueFragment",
       "InheritsFrom": "DialogueFragment",
       "Template": {
-        "TechnicalName": "Menu",
-        "DisplayName": "Menu",
-        "Features": []
-      }
-    },
-    {
-      "Type": "Injected_Fragment",
-      "Class": "DialogueFragment",
-      "InheritsFrom": "DialogueFragment",
-      "Template": {
-        "TechnicalName": "Injected_Fragment",
+        "TechnicalName": "InjectedFragment",
         "DisplayName": "Injected Fragment",
         "Features": [
           {
@@ -3219,9 +3219,9 @@
                   {
                     "Color": {
                       "a": 1.0,
-                      "r": 0.5764706,
-                      "g": 0.75686276,
-                      "b": 0.8
+                      "r": 0.577580452,
+                      "g": 0.7605245,
+                      "b": 0.7991027
                     },
                     "Label": "",
                     "TargetPin": "0x0100000000000AF2",
@@ -3313,7 +3313,7 @@
           "Template": {}
         },
         {
-          "Type": "Menu_option",
+          "Type": "MenuItem",
           "Properties": {
             "TechnicalName": "DFr_D28110FC",
             "Id": "0x01000000000004A3",
@@ -3368,7 +3368,7 @@
             ]
           },
           "Template": {
-            "Menu_option": {
+            "MenuItem": {
               "python_condition": "",
               "python_outcome": "$ flags.meet_again = True",
               "option_selected_text": "You have selected that you want to have the option to meet characters multiple times.",
@@ -3377,7 +3377,7 @@
           }
         },
         {
-          "Type": "Menu_option",
+          "Type": "MenuItem",
           "Properties": {
             "TechnicalName": "DFr_DFFD313D",
             "Id": "0x01000000000004A9",
@@ -3432,7 +3432,7 @@
             ]
           },
           "Template": {
-            "Menu_option": {
+            "MenuItem": {
               "python_condition": "",
               "python_outcome": "$ flags.meet_again = False",
               "option_selected_text": "You have selected that you do not want to have the option to meet characters multiple times.",
@@ -3441,7 +3441,7 @@
           }
         },
         {
-          "Type": "Menu_option",
+          "Type": "MenuItem",
           "Properties": {
             "TechnicalName": "DFr_07E2A397",
             "Id": "0x01000000000007B8",
@@ -3496,7 +3496,7 @@
             ]
           },
           "Template": {
-            "Menu_option": {
+            "MenuItem": {
               "python_condition": "",
               "python_outcome": "$ ...",
               "option_selected_text": "",
@@ -3505,7 +3505,7 @@
           }
         },
         {
-          "Type": "Menu_option",
+          "Type": "MenuItem",
           "Properties": {
             "TechnicalName": "DFr_52A9BC06",
             "Id": "0x01000000000007C3",
@@ -3560,7 +3560,7 @@
             ]
           },
           "Template": {
-            "Menu_option": {
+            "MenuItem": {
               "python_condition": "if not flags.meet_again",
               "python_outcome": "$ flags.meet_again = True",
               "option_selected_text": "",
@@ -3569,7 +3569,7 @@
           }
         },
         {
-          "Type": "Menu_option",
+          "Type": "MenuItem",
           "Properties": {
             "TechnicalName": "DFr_D1E5F07D",
             "Id": "0x01000000000007C9",
@@ -3624,7 +3624,7 @@
             ]
           },
           "Template": {
-            "Menu_option": {
+            "MenuItem": {
               "python_condition": "if flags.meet_again",
               "python_outcome": "$ flags.meet_again = False",
               "option_selected_text": "",
@@ -3633,7 +3633,71 @@
           }
         },
         {
-          "Type": "Menu_option",
+          "Type": "MenuItem",
+          "Properties": {
+            "TechnicalName": "DFr_A7EFF5D4",
+            "Id": "0x0100000000000AEF",
+            "Parent": "0x010000000000026F",
+            "MenuText": "",
+            "StageDirections": "",
+            "Speaker": "0x010000000000049F",
+            "SplitHeight": 64.0,
+            "Color": {
+              "r": 0.577580452,
+              "g": 0.7605245,
+              "b": 0.7991027
+            },
+            "Text": "No, and I wish to finish the testing.",
+            "ExternalId": "",
+            "Position": {
+              "x": 1675.0,
+              "y": 975.0
+            },
+            "ZIndex": 22.0,
+            "Size": {
+              "w": 225.0,
+              "h": 200.0
+            },
+            "ShortId": 2817521108,
+            "InputPins": [
+              {
+                "Text": "",
+                "Id": "0x0100000000000AF2",
+                "Owner": "0x0100000000000AEF"
+              }
+            ],
+            "OutputPins": [
+              {
+                "Text": "",
+                "Id": "0x0100000000000AF3",
+                "Owner": "0x0100000000000AEF",
+                "Connections": [
+                  {
+                    "Color": {
+                      "a": 1.0,
+                      "r": 0.577580452,
+                      "g": 0.7605245,
+                      "b": 0.7991027
+                    },
+                    "Label": "",
+                    "TargetPin": "0x0100000000000AF9",
+                    "Target": "0x0100000000000AF6"
+                  }
+                ]
+              }
+            ]
+          },
+          "Template": {
+            "MenuItem": {
+              "python_condition": "",
+              "python_outcome": "",
+              "option_selected_text": "",
+              "ordinal_number": 4.0
+            }
+          }
+        },
+        {
+          "Type": "MenuItem",
           "Properties": {
             "TechnicalName": "DFr_A9030A08",
             "Id": "0x01000000000004EF",
@@ -3675,9 +3739,9 @@
                   {
                     "Color": {
                       "a": 1.0,
-                      "r": 0.5764706,
-                      "g": 0.75686276,
-                      "b": 0.8
+                      "r": 0.577580452,
+                      "g": 0.7605245,
+                      "b": 0.7991027
                     },
                     "Label": "",
                     "TargetPin": "0x01000000000004BE",
@@ -3688,7 +3752,7 @@
             ]
           },
           "Template": {
-            "Menu_option": {
+            "MenuItem": {
               "python_condition": "",
               "python_outcome": "",
               "option_selected_text": "Meeting testing is over, let's wrap this up!",
@@ -3697,71 +3761,7 @@
           }
         },
         {
-          "Type": "Menu_option",
-          "Properties": {
-            "TechnicalName": "DFr_A7EFF5D4",
-            "Id": "0x0100000000000AEF",
-            "Parent": "0x010000000000026F",
-            "MenuText": "",
-            "StageDirections": "",
-            "Speaker": "0x010000000000049F",
-            "SplitHeight": 64.0,
-            "Color": {
-              "r": 0.5764706,
-              "g": 0.75686276,
-              "b": 0.8
-            },
-            "Text": "No, and I wish to finish the testing.",
-            "ExternalId": "",
-            "Position": {
-              "x": 1675.0,
-              "y": 975.0
-            },
-            "ZIndex": 22.0,
-            "Size": {
-              "w": 225.0,
-              "h": 200.0
-            },
-            "ShortId": 2817521108,
-            "InputPins": [
-              {
-                "Text": "",
-                "Id": "0x0100000000000AF2",
-                "Owner": "0x0100000000000AEF"
-              }
-            ],
-            "OutputPins": [
-              {
-                "Text": "",
-                "Id": "0x0100000000000AF3",
-                "Owner": "0x0100000000000AEF",
-                "Connections": [
-                  {
-                    "Color": {
-                      "a": 1.0,
-                      "r": 0.5764706,
-                      "g": 0.75686276,
-                      "b": 0.8
-                    },
-                    "Label": "",
-                    "TargetPin": "0x0100000000000AF9",
-                    "Target": "0x0100000000000AF6"
-                  }
-                ]
-              }
-            ]
-          },
-          "Template": {
-            "Menu_option": {
-              "python_condition": "",
-              "python_outcome": "",
-              "option_selected_text": "",
-              "ordinal_number": 4.0
-            }
-          }
-        },
-        {
-          "Type": "Menu_option",
+          "Type": "MenuItem",
           "Properties": {
             "TechnicalName": "DFr_F7586E41",
             "Id": "0x0100000000000914",
@@ -3816,7 +3816,7 @@
             ]
           },
           "Template": {
-            "Menu_option": {
+            "MenuItem": {
               "python_condition": "if flags.meet_again or not maeve.met_already",
               "python_outcome": "",
               "option_selected_text": "",
@@ -3825,7 +3825,7 @@
           }
         },
         {
-          "Type": "Menu_option",
+          "Type": "MenuItem",
           "Properties": {
             "TechnicalName": "DFr_E913EAAF",
             "Id": "0x010000000000091A",
@@ -3880,7 +3880,7 @@
             ]
           },
           "Template": {
-            "Menu_option": {
+            "MenuItem": {
               "python_condition": "if flags.meet_again or not faye.met_already",
               "python_outcome": "",
               "option_selected_text": "",
@@ -3889,7 +3889,7 @@
           }
         },
         {
-          "Type": "Injected_Fragment",
+          "Type": "InjectedFragment",
           "Properties": {
             "TechnicalName": "DFr_B51C4C7D",
             "Id": "0x0100000000000950",
@@ -3951,7 +3951,7 @@
           }
         },
         {
-          "Type": "Injected_Fragment",
+          "Type": "InjectedFragment",
           "Properties": {
             "TechnicalName": "DFr_61646464",
             "Id": "0x010000000000029D",
@@ -4010,6 +4010,40 @@
               "python_condition": "",
               "python_outcome": "$ faye.met_already = True"
             }
+          }
+        },
+        {
+          "Type": "Jump",
+          "Properties": {
+            "TechnicalName": "Jmp_D7A1D039",
+            "Id": "0x0100000000000AF6",
+            "Parent": "0x010000000000026F",
+            "Target": "0x0100000000000286",
+            "TargetPin": "0x0100000000000289",
+            "Color": {
+              "r": 0.577580452,
+              "g": 0.7605245,
+              "b": 0.7991027
+            },
+            "Text": "",
+            "ExternalId": "",
+            "Position": {
+              "x": 2050.0,
+              "y": 1000.0
+            },
+            "ZIndex": 24.0,
+            "Size": {
+              "w": 175.0,
+              "h": 150.0
+            },
+            "ShortId": 3617706041,
+            "InputPins": [
+              {
+                "Text": "",
+                "Id": "0x0100000000000AF9",
+                "Owner": "0x0100000000000AF6"
+              }
+            ]
           }
         },
         {
@@ -4076,40 +4110,6 @@
                 "Text": "",
                 "Id": "0x0100000000000902",
                 "Owner": "0x01000000000008FF"
-              }
-            ]
-          }
-        },
-        {
-          "Type": "Jump",
-          "Properties": {
-            "TechnicalName": "Jmp_D7A1D039",
-            "Id": "0x0100000000000AF6",
-            "Parent": "0x010000000000026F",
-            "Target": "0x0100000000000286",
-            "TargetPin": "0x0100000000000289",
-            "Color": {
-              "r": 0.5764706,
-              "g": 0.75686276,
-              "b": 0.8
-            },
-            "Text": "",
-            "ExternalId": "",
-            "Position": {
-              "x": 2050.0,
-              "y": 1000.0
-            },
-            "ZIndex": 24.0,
-            "Size": {
-              "w": 175.0,
-              "h": 150.0
-            },
-            "ShortId": 3617706041,
-            "InputPins": [
-              {
-                "Text": "",
-                "Id": "0x0100000000000AF9",
-                "Owner": "0x0100000000000AF6"
               }
             ]
           }
@@ -4679,7 +4679,7 @@
               },
               {
                 "Id": "0x010000000000086D",
-                "TechnicalName": "Menu_option",
+                "TechnicalName": "MenuItem",
                 "Type": "Feature"
               },
               {
@@ -4753,7 +4753,7 @@
                 "Children": [
                   {
                     "Id": "0x0100000000000AC0",
-                    "TechnicalName": "Injected_Fragment",
+                    "TechnicalName": "InjectedFragment",
                     "Type": "Template"
                   },
                   {
@@ -4763,7 +4763,7 @@
                   },
                   {
                     "Id": "0x0100000000000899",
-                    "TechnicalName": "Menu_option",
+                    "TechnicalName": "MenuItem",
                     "Type": "Template"
                   }
                 ]

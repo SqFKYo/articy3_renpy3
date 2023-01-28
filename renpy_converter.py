@@ -19,9 +19,9 @@ class ParseableTypes:
     CHARACTER = "Ren_py_character"
     DIALOGUE = "Dialogue"
     FRAGMENT = "DialogueFragment"
-    INJECTED_FRAGMENT = "Injected_Fragment"
+    INJECTED_FRAGMENT = "InjectedFragment"
     JUMP = "Jump"
-    MENU_ITEM = "Menu_option"
+    MENU_ITEM = "MenuItem"
     MENU = "Menu"
 
 
@@ -205,10 +205,10 @@ class Converter:
             )
 
         def parse_menu_item(obj) -> MenuItem:
-            cond = obj["Template"]["Menu_option"]["python_condition"]
-            output = obj["Template"]["Menu_option"]["python_outcome"]
-            selected_text = obj["Template"]["Menu_option"]["option_selected_text"]
-            ordinal = int(obj["Template"]["Menu_option"]["ordinal_number"])
+            cond = obj["Template"]["MenuItem"]["python_condition"]
+            output = obj["Template"]["MenuItem"]["python_outcome"]
+            selected_text = obj["Template"]["MenuItem"]["option_selected_text"]
+            ordinal = int(obj["Template"]["MenuItem"]["ordinal_number"])
             return MenuItem(
                 *parse_basic_fragment(obj["Properties"]),
                 ordinal=ordinal,
