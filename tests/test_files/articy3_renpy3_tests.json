@@ -610,79 +610,6 @@
       }
     },
     {
-      "Type": "MenuItem",
-      "Class": "DialogueFragment",
-      "InheritsFrom": "DialogueFragment",
-      "Template": {
-        "TechnicalName": "MenuItem",
-        "DisplayName": "Menu item",
-        "Features": [
-          {
-            "TechnicalName": "MenuItem",
-            "DisplayName": "Menu item",
-            "Properties": [
-              {
-                "Property": "PythonCondition",
-                "Type": "string",
-                "DisplayName": "Python condition"
-              },
-              {
-                "Property": "PythonOutcome",
-                "Type": "string",
-                "DisplayName": "Python outcome"
-              },
-              {
-                "Property": "OptionSelectedText",
-                "Type": "string",
-                "DisplayName": "Option selected text"
-              },
-              {
-                "Property": "OrdinalNumber",
-                "Type": "Float",
-                "DisplayName": "Ordinal number"
-              }
-            ],
-            "Constraints": [
-              {
-                "Property": "PythonCondition",
-                "Type": "Text",
-                "MaxLength": "2048",
-                "PlaceholderValue": "",
-                "IsLocalized": "False",
-                "AllowsLinebreaks": "True"
-              },
-              {
-                "Property": "PythonOutcome",
-                "Type": "Text",
-                "MaxLength": "2048",
-                "PlaceholderValue": "",
-                "IsLocalized": "False",
-                "AllowsLinebreaks": "True"
-              },
-              {
-                "Property": "OptionSelectedText",
-                "Type": "Text",
-                "MaxLength": "2048",
-                "PlaceholderValue": "",
-                "IsLocalized": "False",
-                "AllowsLinebreaks": "True"
-              },
-              {
-                "Property": "OrdinalNumber",
-                "Type": "Number",
-                "MinValue": "-3.40282346638529E+38",
-                "MaxValue": "3.40282346638529E+38",
-                "Precision": "0",
-                "MinPrecision": "0",
-                "MaxPrecision": "0",
-                "Unit": null
-              }
-            ]
-          }
-        ]
-      }
-    },
-    {
       "Type": "InjectedFragment",
       "Class": "DialogueFragment",
       "InheritsFrom": "DialogueFragment",
@@ -721,6 +648,87 @@
                 "PlaceholderValue": "",
                 "IsLocalized": "False",
                 "AllowsLinebreaks": "True"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "Type": "MenuItem",
+      "Class": "DialogueFragment",
+      "InheritsFrom": "DialogueFragment",
+      "Template": {
+        "TechnicalName": "MenuItem",
+        "DisplayName": "Menu item",
+        "Features": [
+          {
+            "TechnicalName": "PythonInjections",
+            "DisplayName": "Python injections",
+            "Properties": [
+              {
+                "Property": "PythonCondition",
+                "Type": "string",
+                "DisplayName": "Python condition"
+              },
+              {
+                "Property": "PythonOutcome",
+                "Type": "string",
+                "DisplayName": "Python outcome"
+              }
+            ],
+            "Constraints": [
+              {
+                "Property": "PythonCondition",
+                "Type": "Text",
+                "MaxLength": "2048",
+                "PlaceholderValue": "",
+                "IsLocalized": "False",
+                "AllowsLinebreaks": "True"
+              },
+              {
+                "Property": "PythonOutcome",
+                "Type": "Text",
+                "MaxLength": "2048",
+                "PlaceholderValue": "",
+                "IsLocalized": "False",
+                "AllowsLinebreaks": "True"
+              }
+            ]
+          },
+          {
+            "TechnicalName": "MenuItem",
+            "DisplayName": "Menu item",
+            "Properties": [
+              {
+                "Property": "OptionSelectedText",
+                "Type": "string",
+                "DisplayName": "Option selected text"
+              },
+              {
+                "Property": "OrdinalNumber",
+                "Type": "Float",
+                "DisplayName": "Ordinal number"
+              }
+            ],
+            "Constraints": [
+              {
+                "Property": "OptionSelectedText",
+                "Type": "Text",
+                "MaxLength": "2048",
+                "PlaceholderValue": "",
+                "IsLocalized": "False",
+                "AllowsLinebreaks": "True"
+              },
+              {
+                "Property": "OrdinalNumber",
+                "Type": "Number",
+                "MinValue": "-3.40282346638529E+38",
+                "MaxValue": "3.40282346638529E+38",
+                "Precision": "0",
+                "MinPrecision": "0",
+                "MaxPrecision": "0",
+                "Unit": null
               }
             ]
           }
@@ -3368,9 +3376,11 @@
             ]
           },
           "Template": {
-            "MenuItem": {
+            "PythonInjections": {
               "PythonCondition": "",
-              "PythonOutcome": "$ flags.meet_again = True",
+              "PythonOutcome": "$ flags.meet_again = True"
+            },
+            "MenuItem": {
               "OptionSelectedText": "You have selected that you want to have the option to meet characters multiple times.",
               "OrdinalNumber": 1.0
             }
@@ -3432,9 +3442,11 @@
             ]
           },
           "Template": {
-            "MenuItem": {
+            "PythonInjections": {
               "PythonCondition": "",
-              "PythonOutcome": "$ flags.meet_again = False",
+              "PythonOutcome": "$ flags.meet_again = False"
+            },
+            "MenuItem": {
               "OptionSelectedText": "You have selected that you do not want to have the option to meet characters multiple times.",
               "OrdinalNumber": 2.0
             }
@@ -3496,9 +3508,11 @@
             ]
           },
           "Template": {
-            "MenuItem": {
+            "PythonInjections": {
               "PythonCondition": "",
-              "PythonOutcome": "$ ...",
+              "PythonOutcome": "$ ..."
+            },
+            "MenuItem": {
               "OptionSelectedText": "",
               "OrdinalNumber": 3.0
             }
@@ -3560,9 +3574,11 @@
             ]
           },
           "Template": {
-            "MenuItem": {
+            "PythonInjections": {
               "PythonCondition": "if not flags.meet_again",
-              "PythonOutcome": "$ flags.meet_again = True",
+              "PythonOutcome": "$ flags.meet_again = True"
+            },
+            "MenuItem": {
               "OptionSelectedText": "",
               "OrdinalNumber": 1.0
             }
@@ -3624,9 +3640,11 @@
             ]
           },
           "Template": {
-            "MenuItem": {
+            "PythonInjections": {
               "PythonCondition": "if flags.meet_again",
-              "PythonOutcome": "$ flags.meet_again = False",
+              "PythonOutcome": "$ flags.meet_again = False"
+            },
+            "MenuItem": {
               "OptionSelectedText": "",
               "OrdinalNumber": 2.0
             }
@@ -3688,9 +3706,11 @@
             ]
           },
           "Template": {
-            "MenuItem": {
+            "PythonInjections": {
               "PythonCondition": "",
-              "PythonOutcome": "",
+              "PythonOutcome": ""
+            },
+            "MenuItem": {
               "OptionSelectedText": "",
               "OrdinalNumber": 4.0
             }
@@ -3752,9 +3772,11 @@
             ]
           },
           "Template": {
-            "MenuItem": {
+            "PythonInjections": {
               "PythonCondition": "",
-              "PythonOutcome": "",
+              "PythonOutcome": ""
+            },
+            "MenuItem": {
               "OptionSelectedText": "Meeting testing is over, let's wrap this up!",
               "OrdinalNumber": 3.0
             }
@@ -3816,9 +3838,11 @@
             ]
           },
           "Template": {
-            "MenuItem": {
+            "PythonInjections": {
               "PythonCondition": "if flags.meet_again or not maeve.met_already",
-              "PythonOutcome": "",
+              "PythonOutcome": ""
+            },
+            "MenuItem": {
               "OptionSelectedText": "",
               "OrdinalNumber": 1.0
             }
@@ -3880,9 +3904,11 @@
             ]
           },
           "Template": {
-            "MenuItem": {
+            "PythonInjections": {
               "PythonCondition": "if flags.meet_again or not faye.met_already",
-              "PythonOutcome": "",
+              "PythonOutcome": ""
+            },
+            "MenuItem": {
               "OptionSelectedText": "",
               "OrdinalNumber": 2.0
             }

@@ -205,8 +205,8 @@ class Converter:
             )
 
         def parse_menu_item(obj) -> MenuItem:
-            cond = obj["Template"]["MenuItem"]["PythonCondition"]
-            output = obj["Template"]["MenuItem"]["PythonOutcome"]
+            cond = obj["Template"]["PythonInjections"]["PythonCondition"]
+            output = obj["Template"]["PythonInjections"]["PythonOutcome"]
             selected_text = obj["Template"]["MenuItem"]["OptionSelectedText"]
             ordinal = int(obj["Template"]["MenuItem"]["OrdinalNumber"])
             return MenuItem(
