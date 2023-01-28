@@ -16,7 +16,7 @@ Variable = namedtuple("Variable", "name_space name type value description")
 
 
 class ParseableTypes:
-    CHARACTER = "Ren_py_character"
+    CHARACTER = "RenCharacter"
     DIALOGUE = "Dialogue"
     FRAGMENT = "DialogueFragment"
     INJECTED_FRAGMENT = "InjectedFragment"

@@ -1301,11 +1301,11 @@
       }
     },
     {
-      "Type": "Ren_py_character",
+      "Type": "RenCharacter",
       "Class": "Entity",
       "InheritsFrom": "Entity",
       "Template": {
-        "TechnicalName": "Ren_py_character",
+        "TechnicalName": "RenCharacter",
         "DisplayName": "Ren'py character",
         "Features": [
           {
@@ -4204,7 +4204,7 @@
           }
         },
         {
-          "Type": "Ren_py_character",
+          "Type": "RenCharacter",
           "Properties": {
             "TechnicalName": "Maeve",
             "Id": "0x010000000000010F",
@@ -4257,7 +4257,7 @@
           }
         },
         {
-          "Type": "Ren_py_character",
+          "Type": "RenCharacter",
           "Properties": {
             "TechnicalName": "Faye",
             "Id": "0x0100000000000113",
@@ -4790,7 +4790,7 @@
                   },
                   {
                     "Id": "0x0100000000000117",
-                    "TechnicalName": "Ren_py_character",
+                    "TechnicalName": "RenCharacter",
                     "Type": "Template"
                   },
                   {
