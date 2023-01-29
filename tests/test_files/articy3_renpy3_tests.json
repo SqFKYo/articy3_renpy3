@@ -620,6 +620,11 @@
                 "Property": "PythonOutcome",
                 "Type": "string",
                 "DisplayName": "Python outcome"
+              },
+              {
+                "Property": "OrdinalNumber",
+                "Type": "Float",
+                "DisplayName": "Ordinal number"
               }
             ],
             "Constraints": [
@@ -638,6 +643,16 @@
                 "PlaceholderValue": "",
                 "IsLocalized": "False",
                 "AllowsLinebreaks": "True"
+              },
+              {
+                "Property": "OrdinalNumber",
+                "Type": "Number",
+                "MinValue": "-3.40282346638529E+38",
+                "MaxValue": "3.40282346638529E+38",
+                "Precision": "0",
+                "MinPrecision": "0",
+                "MaxPrecision": "0",
+                "Unit": null
               }
             ]
           },
@@ -711,6 +726,11 @@
                 "Property": "PythonOutcome",
                 "Type": "string",
                 "DisplayName": "Python outcome"
+              },
+              {
+                "Property": "OrdinalNumber",
+                "Type": "Float",
+                "DisplayName": "Ordinal number"
               }
             ],
             "Constraints": [
@@ -729,6 +749,16 @@
                 "PlaceholderValue": "",
                 "IsLocalized": "False",
                 "AllowsLinebreaks": "True"
+              },
+              {
+                "Property": "OrdinalNumber",
+                "Type": "Number",
+                "MinValue": "-3.40282346638529E+38",
+                "MaxValue": "3.40282346638529E+38",
+                "Precision": "0",
+                "MinPrecision": "0",
+                "MaxPrecision": "0",
+                "Unit": null
               }
             ]
           }
@@ -3092,9 +3122,9 @@
                   {
                     "Color": {
                       "a": 1.0,
-                      "r": 0.5764706,
-                      "g": 0.75686276,
-                      "b": 0.8
+                      "r": 0.577580452,
+                      "g": 0.7605245,
+                      "b": 0.7991027
                     },
                     "Label": "",
                     "TargetPin": "0x0100000000000D50",
@@ -3103,9 +3133,9 @@
                   {
                     "Color": {
                       "a": 1.0,
-                      "r": 0.5764706,
-                      "g": 0.75686276,
-                      "b": 0.8
+                      "r": 0.577580452,
+                      "g": 0.7605245,
+                      "b": 0.7991027
                     },
                     "Label": "",
                     "TargetPin": "0x0100000000000D56",
@@ -3411,7 +3441,8 @@
           "Template": {
             "PythonInjections": {
               "PythonCondition": "",
-              "PythonOutcome": "$ flags.meet_again = True"
+              "PythonOutcome": "$ flags.meet_again = True",
+              "OrdinalNumber": 1.0
             },
             "MenuItem": {
               "OptionSelectedText": "You have selected that you want to have the option to meet characters multiple times.",
@@ -3477,7 +3508,8 @@
           "Template": {
             "PythonInjections": {
               "PythonCondition": "",
-              "PythonOutcome": "$ flags.meet_again = False"
+              "PythonOutcome": "$ flags.meet_again = False",
+              "OrdinalNumber": 2.0
             },
             "MenuItem": {
               "OptionSelectedText": "You have selected that you do not want to have the option to meet characters multiple times.",
@@ -3543,7 +3575,8 @@
           "Template": {
             "PythonInjections": {
               "PythonCondition": "",
-              "PythonOutcome": "$ ..."
+              "PythonOutcome": "$ ...",
+              "OrdinalNumber": 3.0
             },
             "MenuItem": {
               "OptionSelectedText": "",
@@ -3609,7 +3642,8 @@
           "Template": {
             "PythonInjections": {
               "PythonCondition": "if not flags.meet_again",
-              "PythonOutcome": "$ flags.meet_again = True"
+              "PythonOutcome": "$ flags.meet_again = True",
+              "OrdinalNumber": 1.0
             },
             "MenuItem": {
               "OptionSelectedText": "",
@@ -3675,7 +3709,8 @@
           "Template": {
             "PythonInjections": {
               "PythonCondition": "if flags.meet_again",
-              "PythonOutcome": "$ flags.meet_again = False"
+              "PythonOutcome": "$ flags.meet_again = False",
+              "OrdinalNumber": 2.0
             },
             "MenuItem": {
               "OptionSelectedText": "",
@@ -3741,7 +3776,8 @@
           "Template": {
             "PythonInjections": {
               "PythonCondition": "",
-              "PythonOutcome": ""
+              "PythonOutcome": "",
+              "OrdinalNumber": 4.0
             },
             "MenuItem": {
               "OptionSelectedText": "",
@@ -3807,7 +3843,8 @@
           "Template": {
             "PythonInjections": {
               "PythonCondition": "",
-              "PythonOutcome": ""
+              "PythonOutcome": "",
+              "OrdinalNumber": 3.0
             },
             "MenuItem": {
               "OptionSelectedText": "Meeting testing is over, let's wrap this up!",
@@ -3873,7 +3910,8 @@
           "Template": {
             "PythonInjections": {
               "PythonCondition": "if flags.meet_again or not maeve.met_already",
-              "PythonOutcome": ""
+              "PythonOutcome": "",
+              "OrdinalNumber": 1.0
             },
             "MenuItem": {
               "OptionSelectedText": "",
@@ -3939,7 +3977,8 @@
           "Template": {
             "PythonInjections": {
               "PythonCondition": "if flags.meet_again or not faye.met_already",
-              "PythonOutcome": ""
+              "PythonOutcome": "",
+              "OrdinalNumber": 2.0
             },
             "MenuItem": {
               "OptionSelectedText": "",
@@ -4005,7 +4044,8 @@
           "Template": {
             "PythonInjections": {
               "PythonCondition": "if maeve.met_already and not faye.met_already",
-              "PythonOutcome": ""
+              "PythonOutcome": "",
+              "OrdinalNumber": 1.0
             }
           }
         },
@@ -4067,7 +4107,134 @@
           "Template": {
             "PythonInjections": {
               "PythonCondition": "elif faye.met_already and not maeve.met_already",
-              "PythonOutcome": ""
+              "PythonOutcome": "",
+              "OrdinalNumber": 2.0
+            }
+          }
+        },
+        {
+          "Type": "InjectedFragment",
+          "Properties": {
+            "TechnicalName": "DFr_BB633C8A",
+            "Id": "0x0100000000000D4D",
+            "Parent": "0x0100000000000286",
+            "MenuText": "",
+            "StageDirections": "",
+            "Speaker": "0x0000000000000000",
+            "SplitHeight": 64.0,
+            "Color": {
+              "r": 0.577580452,
+              "g": 0.7605245,
+              "b": 0.7991027
+            },
+            "Text": "Huh, you didn't meet anyone? What's the point?",
+            "ExternalId": "",
+            "Position": {
+              "x": -100.0,
+              "y": 675.0
+            },
+            "ZIndex": 11.0,
+            "Size": {
+              "w": 225.0,
+              "h": 200.0
+            },
+            "ShortId": 3143842954,
+            "InputPins": [
+              {
+                "Text": "",
+                "Id": "0x0100000000000D50",
+                "Owner": "0x0100000000000D4D"
+              }
+            ],
+            "OutputPins": [
+              {
+                "Text": "",
+                "Id": "0x0100000000000D51",
+                "Owner": "0x0100000000000D4D",
+                "Connections": [
+                  {
+                    "Color": {
+                      "a": 1.0,
+                      "r": 0.577580452,
+                      "g": 0.7605245,
+                      "b": 0.7991027
+                    },
+                    "Label": "",
+                    "TargetPin": "0x01000000000002D7",
+                    "Target": "0x01000000000002D4"
+                  }
+                ]
+              }
+            ]
+          },
+          "Template": {
+            "PythonInjections": {
+              "PythonCondition": "else",
+              "PythonOutcome": "",
+              "OrdinalNumber": 4.0
+            }
+          }
+        },
+        {
+          "Type": "InjectedFragment",
+          "Properties": {
+            "TechnicalName": "DFr_3B19D0F3",
+            "Id": "0x0100000000000D53",
+            "Parent": "0x0100000000000286",
+            "MenuText": "",
+            "StageDirections": "",
+            "Speaker": "0x010000000000010F",
+            "SplitHeight": 64.0,
+            "Color": {
+              "r": 0.577580452,
+              "g": 0.7605245,
+              "b": 0.7991027
+            },
+            "Text": "Cool, you met both girls!",
+            "ExternalId": "",
+            "Position": {
+              "x": -100.0,
+              "y": 450.0
+            },
+            "ZIndex": 13.0,
+            "Size": {
+              "w": 225.0,
+              "h": 200.0
+            },
+            "ShortId": 991547635,
+            "InputPins": [
+              {
+                "Text": "",
+                "Id": "0x0100000000000D56",
+                "Owner": "0x0100000000000D53"
+              }
+            ],
+            "OutputPins": [
+              {
+                "Text": "",
+                "Id": "0x0100000000000D57",
+                "Owner": "0x0100000000000D53",
+                "Connections": [
+                  {
+                    "Color": {
+                      "a": 1.0,
+                      "r": 0.577580452,
+                      "g": 0.7605245,
+                      "b": 0.7991027
+                    },
+                    "Label": "",
+                    "TargetPin": "0x01000000000002D7",
+                    "Target": "0x01000000000002D4"
+                  }
+                ]
+              }
+            ]
+          },
+          "Template": {
+            "PythonInjections": {
+              "PythonCondition": "elif maeve.met_already and faye.met_already",
+              "PythonOutcome": "",
+              "OrdinalNumber": 3.0
             }
           }
         },
@@ -4129,7 +4296,8 @@
           "Template": {
             "PythonInjections": {
               "PythonCondition": "",
-              "PythonOutcome": "$ maeve.met_already = True"
+              "PythonOutcome": "$ maeve.met_already = True",
+              "OrdinalNumber": 0.0
             }
           }
         },
@@ -4191,131 +4359,8 @@
           "Template": {
             "PythonInjections": {
               "PythonCondition": "",
-              "PythonOutcome": "$ faye.met_already = True"
-            }
-          }
-        },
-        {
-          "Type": "InjectedFragment",
-          "Properties": {
-            "TechnicalName": "DFr_BB633C8A",
-            "Id": "0x0100000000000D4D",
-            "Parent": "0x0100000000000286",
-            "MenuText": "",
-            "StageDirections": "",
-            "Speaker": "0x0000000000000000",
-            "SplitHeight": 64.0,
-            "Color": {
-              "r": 0.5764706,
-              "g": 0.75686276,
-              "b": 0.8
-            },
-            "Text": "Huh, you didn't meet anyone? What's the point?",
-            "ExternalId": "",
-            "Position": {
-              "x": -100.0,
-              "y": 675.0
-            },
-            "ZIndex": 11.0,
-            "Size": {
-              "w": 225.0,
-              "h": 200.0
-            },
-            "ShortId": 3143842954,
-            "InputPins": [
-              {
-                "Text": "",
-                "Id": "0x0100000000000D50",
-                "Owner": "0x0100000000000D4D"
-              }
-            ],
-            "OutputPins": [
-              {
-                "Text": "",
-                "Id": "0x0100000000000D51",
-                "Owner": "0x0100000000000D4D",
-                "Connections": [
-                  {
-                    "Color": {
-                      "a": 1.0,
-                      "r": 0.5764706,
-                      "g": 0.75686276,
-                      "b": 0.8
-                    },
-                    "Label": "",
-                    "TargetPin": "0x01000000000002D7",
-                    "Target": "0x01000000000002D4"
-                  }
-                ]
-              }
-            ]
-          },
-          "Template": {
-            "PythonInjections": {
-              "PythonCondition": "else",
-              "PythonOutcome": ""
-            }
-          }
-        },
-        {
-          "Type": "InjectedFragment",
-          "Properties": {
-            "TechnicalName": "DFr_3B19D0F3",
-            "Id": "0x0100000000000D53",
-            "Parent": "0x0100000000000286",
-            "MenuText": "",
-            "StageDirections": "",
-            "Speaker": "0x010000000000010F",
-            "SplitHeight": 64.0,
-            "Color": {
-              "r": 0.5764706,
-              "g": 0.75686276,
-              "b": 0.8
-            },
-            "Text": "Cool, you met both girls!",
-            "ExternalId": "",
-            "Position": {
-              "x": -100.0,
-              "y": 450.0
-            },
-            "ZIndex": 13.0,
-            "Size": {
-              "w": 225.0,
-              "h": 200.0
-            },
-            "ShortId": 991547635,
-            "InputPins": [
-              {
-                "Text": "",
-                "Id": "0x0100000000000D56",
-                "Owner": "0x0100000000000D53"
-              }
-            ],
-            "OutputPins": [
-              {
-                "Text": "",
-                "Id": "0x0100000000000D57",
-                "Owner": "0x0100000000000D53",
-                "Connections": [
-                  {
-                    "Color": {
-                      "a": 1.0,
-                      "r": 0.5764706,
-                      "g": 0.75686276,
-                      "b": 0.8
-                    },
-                    "Label": "",
-                    "TargetPin": "0x01000000000002D7",
-                    "Target": "0x01000000000002D4"
-                  }
-                ]
-              }
-            ]
-          },
-          "Template": {
-            "PythonInjections": {
-              "PythonCondition": "elif maeve.met_already and faye.met_already",
-              "PythonOutcome": ""
+              "PythonOutcome": "$ faye.met_already = True",
+              "OrdinalNumber": 0.0
             }
           }
         },

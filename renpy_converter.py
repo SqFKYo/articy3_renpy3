@@ -47,12 +47,16 @@ class Fragment:
         returnable = ""
         if self.scene:
             returnable += f"    scene {self.scene}\n"
-        returnable += f'    {self.speaker} "{self.text}"\n'
+        returnable += "    "
+        if self.speaker:
+            returnable += f"{self.speaker} "
+        returnable += f'"{self.text}"\n'
         return returnable
 
 
 @dataclass
 class InjectedFragment(Fragment):
+    ordinal: int = 0
     python_condition: str = ""
     python_outcome: str = ""
 
@@ -186,8 +190,10 @@ class Converter:
         def parse_injected(obj) -> InjectedFragment:
             cond = obj["Template"]["PythonInjections"]["PythonCondition"]
             output = obj["Template"]["PythonInjections"]["PythonOutcome"]
+            ordinal = int(obj["Template"]["PythonInjections"]["OrdinalNumber"])
             return InjectedFragment(
                 *parse_basic_fragment(obj["Properties"]),
+                ordinal=ordinal,
                 python_condition=cond,
                 python_outcome=output,
             )
