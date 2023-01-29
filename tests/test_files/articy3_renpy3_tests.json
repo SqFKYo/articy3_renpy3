@@ -664,11 +664,6 @@
                 "Property": "OptionSelectedText",
                 "Type": "string",
                 "DisplayName": "Option selected text"
-              },
-              {
-                "Property": "OrdinalNumber",
-                "Type": "Float",
-                "DisplayName": "Ordinal number"
               }
             ],
             "Constraints": [
@@ -679,16 +674,6 @@
                 "PlaceholderValue": "",
                 "IsLocalized": "False",
                 "AllowsLinebreaks": "True"
-              },
-              {
-                "Property": "OrdinalNumber",
-                "Type": "Number",
-                "MinValue": "-3.40282346638529E+38",
-                "MaxValue": "3.40282346638529E+38",
-                "Precision": "0",
-                "MinPrecision": "0",
-                "MaxPrecision": "0",
-                "Unit": null
               }
             ]
           }
@@ -3445,8 +3430,7 @@
               "OrdinalNumber": 1.0
             },
             "MenuItem": {
-              "OptionSelectedText": "You have selected that you want to have the option to meet characters multiple times.",
-              "OrdinalNumber": 1.0
+              "OptionSelectedText": "You have selected that you want to have the option to meet characters multiple times."
             }
           }
         },
@@ -3512,8 +3496,7 @@
               "OrdinalNumber": 2.0
             },
             "MenuItem": {
-              "OptionSelectedText": "You have selected that you do not want to have the option to meet characters multiple times.",
-              "OrdinalNumber": 2.0
+              "OptionSelectedText": "You have selected that you do not want to have the option to meet characters multiple times."
             }
           }
         },
@@ -3579,8 +3562,7 @@
               "OrdinalNumber": 3.0
             },
             "MenuItem": {
-              "OptionSelectedText": "",
-              "OrdinalNumber": 3.0
+              "OptionSelectedText": ""
             }
           }
         },
@@ -3646,8 +3628,7 @@
               "OrdinalNumber": 1.0
             },
             "MenuItem": {
-              "OptionSelectedText": "",
-              "OrdinalNumber": 1.0
+              "OptionSelectedText": ""
             }
           }
         },
@@ -3713,8 +3694,7 @@
               "OrdinalNumber": 2.0
             },
             "MenuItem": {
-              "OptionSelectedText": "",
-              "OrdinalNumber": 2.0
+              "OptionSelectedText": ""
             }
           }
         },
@@ -3780,8 +3760,7 @@
               "OrdinalNumber": 4.0
             },
             "MenuItem": {
-              "OptionSelectedText": "",
-              "OrdinalNumber": 4.0
+              "OptionSelectedText": ""
             }
           }
         },
@@ -3847,8 +3826,7 @@
               "OrdinalNumber": 3.0
             },
             "MenuItem": {
-              "OptionSelectedText": "Meeting testing is over, let's wrap this up!",
-              "OrdinalNumber": 3.0
+              "OptionSelectedText": "Meeting testing is over, let's wrap this up!"
             }
           }
         },
@@ -3914,8 +3892,7 @@
               "OrdinalNumber": 1.0
             },
             "MenuItem": {
-              "OptionSelectedText": "",
-              "OrdinalNumber": 1.0
+              "OptionSelectedText": ""
             }
           }
         },
@@ -3981,8 +3958,7 @@
               "OrdinalNumber": 2.0
             },
             "MenuItem": {
-              "OptionSelectedText": "",
-              "OrdinalNumber": 2.0
+              "OptionSelectedText": ""
             }
           }
         },
