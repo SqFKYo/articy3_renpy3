@@ -266,7 +266,7 @@ class Converter:
                 )
                 for c in self._characters:
                     f.write(
-                        f'define {c.name.lower()} = {CHARACTER_CLASS}("{c.name}", color="{c.color}")\n'
+                        f'default {c.name.lower()} = {CHARACTER_CLASS}("{c.name}", color="{c.color}")\n'
                     )
             elif file_type.lower() == "variable":
                 f.write("# Declarations of global variables\n\n")
