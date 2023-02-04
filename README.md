@@ -14,6 +14,13 @@ and concentrate your work on what actually makes your game unique!
 ## Table of contents
 - [Overview of an example project](#overview-of-an-example-project)
 - [Flow conversion](#flow-conversion)
+  - [Setup the Dialogue Fragment Templates](#setup-of-the-dialogue-fragment-templates)
+    - [Creating a Feature](#creating-a-feature)
+    - [Python injections Feature](#python-injections-feature)
+    - [Menu item Feature](#menu-item-feature)
+    - [Injected fragment Template](#injected-fragment-template)
+    - [Menu Template](#menu-template)
+    - [Menu item Template](#menu-item-template)
   - [Dialogue](#dialogue)
   - [Dialogue Fragment](#dialogue-fragment)
   - [Injected Fragment](#injected-fragment)
@@ -24,6 +31,7 @@ and concentrate your work on what actually makes your game unique!
   - [Python expectations](#python-expectations)
   - [Articy expectations](#articy-expectations)
 - [Variable conversion](#variable-conversion)
+- [How to run the tool](#how-to-run-the-tool)
 
 ## Overview of an example project
 
@@ -56,8 +64,55 @@ in articy will *NOT* transfer. Read more especially [Injected fragment](#injecte
 
 ## Flow conversion
 ### Setup of the Dialogue Fragment Templates
+Background: articy needs you *first* to setup Features, which you can then use in Templates,
+which are prototypes for each element, like Classes in Python.
+#### Creating a Feature
+![Creating feature](./imgs/creating_feature.png)
+Create a Feature through right clicking Template Design -> Features -> New -> Feature and
+naming your new Feature. Remember to match the "Technical name" with the one given in this guide.
+Now select the newly created Feature and click the "Edit" button the upper right corner.
+![Selecting edit](./imgs/edit_feature.png)
+Finally you get a window where you can drag'n'drop different property types, name them, 
+set their parameters etc. For the purpose of this tool, the "Technical name" is the one that
+matters the most.
+![Adding properties](./imgs/adding_properties.png)
 
+#### Python injections Feature
+![Python injections](./imgs/feature_python_injections.png)
+Create a new Feature with Technical name "PythonInjections".
+Add the following fields to it:
+- Medium text field called "PythonCondition" 
+- Medium text field called "PythonOutcome"
+- Number field called "OrdinalNumber"
 
+#### Menu item Feature
+![Menu item](./imgs/feature_menu_item.png)
+Create a new Feature with Technical name "MenuItem".
+Add the following field to it:
+- Medium text field called "OptionSelectedText"
+
+#### Creating a Dialogue Fragment Template
+Creating a Template is similar to creating Features, and is done through Templates ->
+Dialogue Fragments -> Right click -> New -> Template
+![Creating Template](./imgs/creating_template.png)
+After creating and naming your new Template, edit it the same way you did with Features,
+but this time instead of basic fields you're constructing your Template out of Features
+you defined before. Technical name is again critical here.
+
+#### Injected Fragment Template
+Create a Template named "InjectedFragment" containing Feature:
+- Python injections
+![Template Injected Fragment](./imgs/template_injected_fragment.png)
+
+#### Menu Template
+Create an empty Template named "Menu".
+![Template Menu](./imgs/template_menu.png)
+
+#### Menu Item Template
+Create a Template named "MenuItem" cotaining Features:
+- Menu item
+- Python injections
+![Template Menu item](./imgs/template_menu_item.png)
 
 ### Dialogue
 Dialogue maps to label and its contents in Ren'py. If you want new label, create a new Dialogue.
