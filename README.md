@@ -20,6 +20,47 @@ and concentrate your work on what actually makes your game unique!
 
 ## Flow conversion
 
+### Overview of example project
+
+This section shows how the example project is constructed and what kind of cases it should
+be able to handle. If you have a commonly used case you would like to see featured, please
+submit a patch or an issue. No promises on delivering any updates, but I'd love to see 
+this tool helping multiple creators.
+
+Overview of the test project. Simple chained Dialogue objects assuming linear progression.
+![Overview](./imgs/overview_test_project.png)
+
+start label contents, including menus, menu items and an explicit jump.
+![start](./imgs/project_start_label.png)
+
+meet_select label contents, including implicit jumps.
+![meet_select](./imgs/project_meet_select.png)
+
+meet_maeve label contents, very short piece with explicit jump.
+![meet_maeve](./imgs/project_meet_maeve.png)
+
+meet_faye label contents, very short piece with explicit jump.
+![meet_faye](./imgs/project_meet_faye.png)
+
+game_end label contents, including if-elif-else structure using Injected fragments.
+![game_end](./imgs/project_game_end.png)
+
+Note: This tool does *NOT* do any conversion of scripts, so writing conditions etc. to pins
+in articy will *NOT* transfer. Read more especially [Injected fragment](#injected-fragment) and
+[Menu item](#menu-item) portions to learn more about how to achieve this.
+
+### Dialogue
+
+### Dialogue Fragment
+
+### Injected Fragment
+
+### Menu
+
+### Menu Item
+
+### Jump
+
 Current the tool assumes the following structure:
 1. Main dialogue level named according to the labels. Target filenames are in text field.
 2. Dialogue fragments have speakers with lines. Any scene commands etc. are assumed to be in "stage direction" portion of the dialogue frament.
