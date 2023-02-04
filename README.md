@@ -32,6 +32,8 @@ and concentrate your work on what actually makes your game unique!
   - [Articy expectations](#articy-expectations)
 - [Variable conversion](#variable-conversion)
 - [How to run the tool](#how-to-run-the-tool)
+  - [Exporting the data](#exporting-the-data)
+  - [Example code](#example-code)
 
 ## Overview of an example project
 
@@ -210,10 +212,20 @@ you can add any variables.
 ![Example of global variable definition.](./imgs/global_variables.png)
 
 ## How to run the tool
-1. Create a Converter entity
-2. Read the data in
-3. Write the output(s) you're interested in
-Example code:
+1. Export the data from articy 
+2. Create a Converter entity
+3. Read the data in
+4. Write the output(s) you're interested in
+
+### Exporting the data
+Go to upper left corner of articy with two character button, press it and then select
+"Export".
+![Exporting data](./imgs/export_data.png)
+
+Select Technical export -> .json, and select to export everything -> OK.
+![Export options](./imgs/export_options.png)
+
+### Example code
 ```python
 from pathlib import Path
 
