@@ -321,7 +321,7 @@ class Converter:
         We assume that more complex returning paths will be handled with jumps to other labels, so graph is acyclic.
         If there's no menu, there is no branching
         If there's menu, ordinal decides the order
-        The choices either point to a jump or get all back to the same new Fragmentg files.
+        The choices either point to a jump or get all back to the same new Fragment.
         """
         e_graph = nx.DiGraph()
 
