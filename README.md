@@ -37,3 +37,4 @@ are *NOT* converted in anyway.
 
 
 ![Example of global variable definition.](./imgs/global_variables.png)
+Image 1 - Example of global variable definition.
