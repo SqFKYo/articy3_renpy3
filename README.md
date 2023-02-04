@@ -12,15 +12,20 @@ hard work needed to make the edge cases work. Feel free to dump the grunt work o
 and concentrate your work on what actually makes your game unique!
 
 ## Table of contents
+- [Overview of an example project](#overview-of-an-example-project)
 - [Flow conversion](#flow-conversion)
+  - [Dialogue](#dialogue)
+  - [Dialogue Fragment](#dialogue-fragment)
+  - [Injected Fragment](#injected-fragment)
+  - [Menu](#menu)
+  - [Menu Item](#menu-item)
+  - [Jump](#jump)
 - [Character conversion](#character-conversion)
   - [Python expectations](#python-expectations)
   - [Articy expectations](#articy-expectations)
 - [Variable conversion](#variable-conversion)
 
-## Flow conversion
-
-### Overview of example project
+## Overview of an example project
 
 This section shows how the example project is constructed and what kind of cases it should
 be able to handle. If you have a commonly used case you would like to see featured, please
@@ -49,21 +54,53 @@ Note: This tool does *NOT* do any conversion of scripts, so writing conditions e
 in articy will *NOT* transfer. Read more especially [Injected fragment](#injected-fragment) and
 [Menu item](#menu-item) portions to learn more about how to achieve this.
 
+## Flow conversion
+### Setup of the Dialogue Fragment Templates
+
+
+
 ### Dialogue
+Dialogue maps to label and its contents in Ren'py. If you want new label, create a new Dialogue.
+These do not need any Template setup and work out of the box.
+
+The name of the Dialogue (e.g. "start") tells the tool the label name. Description 
+field tells the tool which Dialogues to search for when writing the files, so the 
+Dialogues you want to write into the same file should have the same Description.
+In this project I used the target filenames as descriptions. 
+
+jump is created when a Dialogue is targeted by one the following scenarios:
+- Explicit Jump object links directly to it
+- Menu Item links directly to it
+- When Dialogue links to another Dialogue, the last Fragment creates a jump
 
 ### Dialogue Fragment
+Literally a single line of text in the story. Anything put into "Stage directions" is
+written *before* the text with "scene" prefix, so use this for loading images. The text
+itself goes into the "Description" box. If you want to omit the speaker, assign a proxy Entity
+that doesn't have the correct RenCharacter template selected. In these examples I've used
+"Narrator" as this type of proxy entity.
+These do not need any Template setup and work out of the box.
 
 ### Injected Fragment
+If you want to only show this piece only under certain conditions or do something
+*after* the player goes through this test, this is the correct piece you need.
+
+"Python condition" defines when this piece is shown and "Python outcome" what happens
+after we go through this. You can use either one or both of these.
+"Ordinal number" is for more complex situations such as in game_end, where we have
+if-elif-elif-else struture. Since the tool can't know what is the correct order,
+you need to tell it the correct order by assigning the numbers 1-2-3-4 accordingly.
 
 ### Menu
+Menu is a glorified Dialogue Fragment. It has no special functionality, but it starts
+a "menu:" in Ren'py and is always followed by one or multiple Menu Items.
 
 ### Menu Item
+Identical to Injected Fragment except you can set "Option selected text" which is
+shown *after* the player select this particular option. Only used after Menu.
 
 ### Jump
-
-Current the tool assumes the following structure:
-1. Main dialogue level named according to the labels. Target filenames are in text field.
-2. Dialogue fragments have speakers with lines. Any scene commands etc. are assumed to be in "stage direction" portion of the dialogue frament.
+Jumps to targeted Dialogue. Can only target Dialogues.
 
 ## Character conversion
 
@@ -116,3 +153,30 @@ you can add any variables.
 ![Creating namespace](./imgs/creating_namespace.png)
 
 ![Example of global variable definition.](./imgs/global_variables.png)
+
+## How to run the tool
+1. Create a Converter entity
+2. Read the data in
+3. Write the output(s) you're interested in
+Example code:
+```python
+from pathlib import Path
+
+file_in = Path(r"C:\Temp\file_in.json")
+char_out = Path(r"C:\Temp\chars.rpy")
+vars_out = Path(r"C:\Temp\vars.rpy")
+script_out = Path(r"C:\Temp\script.rpy")
+scene_1_out = Path(r"C:\Temp\scene_1_out.rpy")
+scene_2_out = Path(r"C:\Temp\scene_2_out.rpy")
+
+c = Converter(input_file=file_in)
+c.read_input()
+# Write character and variable data
+c.write_init_rpy(file_type='character', output_path=char_out)
+c.write_init_rpy(file_type='variable', output_path=vars_out)
+
+# Write all three target files
+c.write_scene_rpy(target_file="script.rpy", output_path=script_out)
+c.write_scene_rpy(target_file="scene1.rpy", output_path=scene_1_out)
+c.write_scene_rpy(target_file="scene2.rpy", output_path=scene_2_out)
+```
