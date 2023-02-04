@@ -36,5 +36,4 @@ namespace flags will be defined as flags.x. Please note that the names and defau
 are *NOT* converted in anyway.
 
 
-![Example of global variable definition.](.\imgs\global_variables.png)
-
+![Example of global variable definition.](./imgs/global_variables.png)
