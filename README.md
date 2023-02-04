@@ -31,8 +31,8 @@ and Python:
 You have defined a Ren'py Character compatible class of your own that includes any and all
 possible customizations and in addition forwards the calls to linked char. Example code:
 
-``python
-
+```python
+init -1 python:
     class RenCharacter:
         def __init__(self, name, color, met_already=False, **kwargs):
             self.char = Character(name, color=color, **kwargs)
@@ -40,7 +40,7 @@ possible customizations and in addition forwards the calls to linked char. Examp
 
         def __call__(self, *args, **kwargs):
             self.char.__call__(*args, **kwargs)
-``
+```
 
 ### Articy expectations
 
