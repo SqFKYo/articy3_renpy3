@@ -10,13 +10,16 @@ The tool can also convert character and variable definitions into Ren'Py readabl
 The tool handles only the most common use cases, and isn't meant to replace the actual
 hard work needed to make the edge cases work.
 
+## Table of contents
+- [Flow conversion](#flow-conversion)
+- [Character conversion](#character-conversion)
+- [Variable conversion](#variable-conversion)
+
 ## Flow conversion
 
 Current the tool assumes the following structure:
 1. Main dialogue level named according to the labels. Target filenames are in text field.
 2. Dialogue fragments have speakers with lines. Any scene commands etc. are assumed to be in "stage direction" portion of the dialogue frament.
-
-
 
 ## Character conversion
 
