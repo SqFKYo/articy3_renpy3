@@ -7,10 +7,10 @@
     "ExportVersion": "1.0"
   },
   "Project": {
-    "Name": "Communing with Faye",
+    "Name": "Bridge Features CwF",
     "DetailName": "",
-    "Guid": "c849456c-06c7-473e-97e7-5312693417d9",
-    "TechnicalName": "Communing_With_Faye"
+    "Guid": "3d8fa487-ec65-497b-8963-4df44b4c12ad",
+    "TechnicalName": "Communing_With_Faye_Feature"
   },
   "GlobalVariables": [
     {
@@ -3977,7 +3977,7 @@
               "g": 0.7605245,
               "b": 0.7991027
             },
-            "Text": "Yay, you met me! Next time, you could should out Faye too.",
+            "Text": "Yay, you met me! Next time, you should check out Faye too.",
             "ExternalId": "",
             "Position": {
               "x": -100.0,
@@ -4040,7 +4040,7 @@
               "g": 0.7605245,
               "b": 0.7991027
             },
-            "Text": "Yay, you met me! Next time, you could should out Maeve too.",
+            "Text": "Yay, you met me! Next time, you should check out Maeve too.",
             "ExternalId": "",
             "Position": {
               "x": -100.0,
@@ -4735,7 +4735,7 @@
   "ScriptMethods": [],
   "Hierarchy": {
     "Id": "0x0100000000000001",
-    "TechnicalName": "Communing_With_Faye",
+    "TechnicalName": "Communing_With_Faye_Feature",
     "Type": "Project",
     "Children": [
       {
