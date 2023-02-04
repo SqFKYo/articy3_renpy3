@@ -23,7 +23,28 @@ Current the tool assumes the following structure:
 
 ## Character conversion
 
-To get the characters to export correctly, you need to set the CHARACTER_ENTITY 
+To get the characters to export correctly, you need to set up the structure in articy and/or
+Python code to match each other first. The default setup assumes the following setup in articy
+and Python:
+
+### Python expectations
+You have defined a Ren'py Character compatible class of your own that includes any and all
+possible customizations and in addition forwards the calls to linked char. Example code:
+
+``python
+
+    class RenCharacter:
+        def __init__(self, name, color, met_already=False, **kwargs):
+            self.char = Character(name, color=color, **kwargs)
+            self.met_already = met_already
+
+        def __call__(self, *args, **kwargs):
+            self.char.__call__(*args, **kwargs)
+``
+
+### Articy expectations
+
+the CHARACTER_ENTITY 
 to match the value of the Ren'Py character entity you've created in articy.
 My default technical name is "RenCharacter".
 
