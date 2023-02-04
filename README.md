@@ -8,11 +8,14 @@ This should make it easier to refactor the game and see how everything affects e
 The tool can also convert character and variable definitions into Ren'Py readable format.
 
 The tool handles only the most common use cases, and isn't meant to replace the actual
-hard work needed to make the edge cases work.
+hard work needed to make the edge cases work. Feel free to dump the grunt work onto the tool
+and concentrate your work on what actually makes your game unique!
 
 ## Table of contents
 - [Flow conversion](#flow-conversion)
 - [Character conversion](#character-conversion)
+  - [Python expectations](#python-expectations)
+  - [Articy expectations](#articy-expectations)
 - [Variable conversion](#variable-conversion)
 
 ## Flow conversion
@@ -29,7 +32,9 @@ and Python:
 
 ### Python expectations
 You have defined a Ren'py Character compatible class of your own that includes any and all
-possible customizations and in addition forwards the calls to linked char. Example code:
+possible customizations and in addition forwards the calls to linked char. The default
+implementation assumes this class's name is `RenCharacter` and supports only `Color` extra
+attribute defined in articy. Example code:
 
 ```python
 init -1 python:
@@ -43,14 +48,20 @@ init -1 python:
 ```
 
 ### Articy expectations
+To support the custom values, you need to define a feature called RenCharProps in articy.
+![RenCharProps](./imgs/rencharprops_location.png)
 
-the CHARACTER_ENTITY 
-to match the value of the Ren'Py character entity you've created in articy.
-My default technical name is "RenCharacter".
+After creating template, you need to define entity called RenCharacter under the Entities
+menu:
+![RenCharacter](./imgs/rencharacter_location.png)
 
-If you want the converter to support color for the character, the current
-code assumes the Ren'Py character has Template named 
-"RenCharProps", which then has field named "Color".
+Finally you can define the characters in articy by right clicking the Entities menu and
+selecting the correct Template:
+![CreatingEntity](./imgs/creating_entities.png)
+
+You will see the chose template and can change the parameters via the Template tab of the
+Entity:
+![CharacterTemplate](./imgs/character_template.png)
 
 ## Variable conversion
 
@@ -62,7 +73,5 @@ are *NOT* converted in anyway.
 Note you need to first create a new variable set under Global Variables in articy before 
 you can add any variables.
 ![Creating namespace](./imgs/creating_namespace.png)
-Image 1 - Creating namespace (variable set)
 
 ![Example of global variable definition.](./imgs/global_variables.png)
-Image 2 - Example of global variable definition.
