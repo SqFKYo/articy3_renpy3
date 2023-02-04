@@ -35,6 +35,10 @@ these namespaces and converts them to python definitions verbatim so that variab
 namespace flags will be defined as flags.x. Please note that the names and default values
 are *NOT* converted in anyway.
 
+Note you need to first create a new variable set under Global Variables in articy before 
+you can add any variables.
+![Creating namespace](./imgs/creating_namespace.png)
+Image 1 - Creating namespace (variable set)
 
 ![Example of global variable definition.](./imgs/global_variables.png)
-Image 1 - Example of global variable definition.
+Image 2 - Example of global variable definition.
